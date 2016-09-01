@@ -1,0 +1,28 @@
+body *{
+	font-family: '微软雅黑',YaHei,tahoma,arial,"Hiragino Sans GB";  
+} 
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td 
+{ margin:0; padding:0; }  
+ul{
+	display:inline-block;
+ 	margin:0px; 
+ 	padding:0px;
+}
+ul>li{
+	display: inline-block;
+}
+.w{
+	width: 1200px;
+	margin:0 auto;
+} 
+.btn{ 
+	display: inline-block;
+	width:100px;
+	background-color: #e8594b;
+	border-radius: 4px;
+	text-align: center;
+	color:white;
+	line-height: 30px;
+	cursor: pointer;
+	vertical-align: top;
+}

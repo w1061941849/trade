@@ -1,0 +1,27 @@
+<nav class="header1  navbar navbar-default"> 
+	<img   src="../../images/common/logoHead.png" style="margin:20px 20px 0 20px;height:40px;">  
+	<ul class="  " style="display:inline-block;vertical-align: bottom;padding:10px 0px;">
+        <li ><a href="../../index.html">首页<span class="sr-only">(current)</span></a></li>
+		<li><a href="../../vrindex.html">VR/AR大厅</a></li>
+		<li><a href="../../mindex.html">影视制作大厅</a></li>
+        <li><a href="../../teamhall.html">团队大厅</a></li>
+		<li ><a   href="../../serhall.html">服务大厅</a></li>
+		<li  ><a href="../../toolhall.html" >工具大厅</a></li> 
+     </ul>   
+     <ul class="nav navbar-nav navbar-right">  
+        <li class="dropdown afterLogin"  style="margin-top:18px;">
+			<a href="./information_basicInfo.html" style="display:inline-block;padding:0px;"><img class="headIcon"  src="<%= session.imageSmall%>"  style="width:36px;height:36px;border-radius:100%;"></a>
+			<a style="display:inline-block;" id="nickName" href="./information_basicInfo.html"  class="dropdown-toggle"><%=  session.nickname%> </a> 
+			<ul class="dropdown-menu"  style="display:none">
+				<li><a href="./makeProject.html"><i class="icon-edit"></i>发布项目</a></li>
+				<li><a href="./buildProjects.html"><i class=" icon-file-alt"></i>我发布的项目</a></li>
+				<li><a href="./joinProjects.html"><i class=" icon-file-alt"></i>我参加的项目</a></li>
+				<li><a href="./authentication.html"><i class=" icon-credit-card"></i>认证管理</a></li>
+				<li><a href="./information_basicInfo.html"><i class=" icon-cogs"></i>基本资料</a></li>
+				<li><a href="./makeWork.html"><i class="icon-picture"></i>发布作品</a></li>
+				<li><a href="./myWork.html"><i class=" icon-book"></i>作品中心</a></li>
+				<li><a  href="/logout"><i class="icon-off" ></i>退出</a></li> 
+			</ul>  
+        </li>
+      </ul>  
+</nav>
