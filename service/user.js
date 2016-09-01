@@ -4,7 +4,7 @@ exports.login = function (req, res, next) {
     res.render('login');
 
 }; 
-exports.logput = function (req, res, next) {  
+exports.logout = function (req, res, next) {  
     res.locals.session="" ;
     res.render('login');
 }; 

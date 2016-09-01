@@ -12,8 +12,7 @@ exports.get=function (options,callback) {
              "Content-Type": 'application/json',  
         }  
     }     
-    var body = '';
-
+    var body = ''; 
     var req = http.request(opt, function(res) {
        	console.log("Got response: " + res.statusCode);  
         if (res.statusCode == 200) {   
@@ -31,8 +30,7 @@ exports.get=function (options,callback) {
     }).on('error', function(e) {
         console.log("Got error: " + e.message);
         return callback(null, JSON.stringify(e.message));
-    }) 
-    console.log(3); 
+    })  
     req.end(); 
 } 
 exports.post=function (params,options,callback) {   

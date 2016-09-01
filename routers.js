@@ -1,3 +1,5 @@
+var async= require('async')
+var httpUtil=require('./utils/http.js') 
 var user=require('./service/user.js')
 var project=require('./service/project.js') 
 var category=require('./service/category.js')
@@ -10,8 +12,10 @@ var version=require('./service/version.js')
 var note=require('./service/note.js')
 var message=require('./service/message.js')
 var authen=require('./service/authen.js') 
-var async= require('async')
-var httpUtil=require('./utils/http.js') 
+
+
+var index=require('./service/index.js') 
+
 module.exports = function (app) { 
 app.get("*",function(req,res,next){
     if(req.session.user){ 
@@ -70,11 +74,8 @@ app.get("*",function(req,res,next){
     }
     next();
 })   
-app.get('/', function(req, res, next) {  
-
-    
-    res.render('index') 
-}); 
+ 
+app.get('/',index.showHtml);  
 //user
 app.post('/login',user.create);     
 app.put('/changepwd',user.changepwd); 
