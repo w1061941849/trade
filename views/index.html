@@ -11,11 +11,14 @@
 <style>   
 header{
 	border-bottom: 2px solid #e8594b;
+	background-color: white;
 }
 header .logo, header .search{
  	display: inline-block;
 }
-
+header .nav-head-items{
+	width:100%;
+}
 header .nav-head-items>li{
   	text-align: center;
   	width:100px;
@@ -42,7 +45,7 @@ header .nav-head-items>li>a{
 }
 .categorys>li>ul { 
 	display: none;
-	height: 548px;
+	min-height: 548px;
 	background-color: white;
 	text-align: left;
 	border:1px solid #e8594b;
@@ -51,13 +54,14 @@ header .nav-head-items>li>a{
 .categorys>li>ul>li{
 	padding:4px 0;
 	margin:0 20px;
-	border-bottom: 1px dashed red;
+	border-bottom: 1px dashed #e0e0e0;
 }
 .categorys>li>ul span{ 
 	color:#e8594b;
 	display: inline-block;width: 150px;
 	text-align: right;
 	padding-right: 4px;
+	vertical-align: top
 
 }
 .categorys>li>ul .categorys-sons  { 
@@ -68,25 +72,28 @@ header .nav-head-items>li>a{
 	color:#999999;
 	cursor: pointer;
 	display: inline-block;
-	padding:4px;
+	padding:0 4px 4px 0;
+	font-size: 14px;
 }
 .categorys>li:hover .drop-meanu{ 
 	display: block;
+	position:absolute;top:0px;
+	left:250px;z-index:900;
 }
 .banner .banner-slide{
 	width:950px;
-	height:350px; 
+	height:400px; 
 	margin-left: 250px;
 	position: relative;
 
 }  
 .banner .banner-bottom-imgs{
-	float:left;width:950px;height:200px; 
+	float:left;width:950px;height:150px; 
 	//overflow: hidden;
 }
 .banner .banner-bottom-imgs img{
 	width:230px;
-	height:190px;
+	height:140px;
 	padding:10px 10px 0 0px; 
 	float: left;
 }
@@ -97,6 +104,7 @@ header .nav-head-items>li>a{
 }
 .hotspot{
 	height:120px;border:1px solid #e0e0e0;margin:20px auto;
+	background-color: white;    border-radius: 8px;
 }
 .hotspot .hotspotSign{
 	font-size:24px;display:block;float:left;width:100px; text-align:center;padding-top:30px;
@@ -121,8 +129,13 @@ section>h2{
 	float: left;
 	width:600px;
 	height:400px; 
-	background-color:white;
+	background-color:white; 
 
+}
+.recommend-block:hover{
+	box-shadow: 0 0 38px rgba(0,0,0,.08) inset;  
+    -webkit-transition: all .15s ease;
+    transition: all .15s ease;
 }
 
 .recommend-block>h4{
@@ -130,7 +143,7 @@ section>h2{
  	border-bottom: 1px solid #e0e0e0;
 }
 .recommend-block img{
-	width:150px;height:300px;  
+	width:230px;height:300px;  
 }
 
 .recommend-block .list{
@@ -153,16 +166,22 @@ section>h2{
 	display: inline-block; 
 	font-size: 14px;
 }
+.teamPic img{
+	width:200px;height:200px; 
+	display: block;
+	float: left;
+}
+
 /* 轮播css */ 
 .slideBox .hd{ height:15px;   position: absolute;bottom:20px;left:45%; }
 .slideBox .hd ul{ overflow:hidden;  }
 .slideBox .hd ul li{display:inline-block;width:14px; height:14px;margin-top:10px;  margin:0 4px;background-color:white; border-radius:8px; cursor:pointer; }
 .slideBox .hd ul li.on{ background-color:#e8594b; border-radius:7px;} 
-.slideBox .bd img{width:100%; height:350px;    } 
+.slideBox .bd img{width:100%; height:400px;    } 
 .slideBox .bd li{display:inline-block;  } 
 </style>  
 </head>
-<body style="overflow-X:hidden;">   
+<body style="overflow-X:hidden; background:#ededed" >   
 <header>
 	<div class="w">
 		<div class="logo">
@@ -183,23 +202,52 @@ section>h2{
 			<li><a>团队大厅</a></li> 
 			<li><a>服务大厅</a></li>
 			<li><a>工具大厅</a></li>
+			<li style="float:right;text-align:right;" ><a  href="/login">登入</a>  |  <a  href="/regist">注册</a></li>
 		</ul>
 	</div>
 	<div style="clear:both;"></div>
 </header>
 <div class="banner">
-	<div class="w" style="position:relative;"> 
-		<ul class="categorys">
-			<li>影视制作 
-				<ul class="drop-meanu" style=" position:absolute;top:0px;left:250px;z-index:900;">
-					<li>
-						<span>aaaa</span>
-						<div class="categorys-sons"><a>a1</a><a>a1</a></div>
-					</li>
-				</ul>
-			</li>
-			<li>VR制作 </li>
-		</ul> 
+	<div class="w" style="position:relative;">  
+		 <ul class="categorys"> 
+			<%if(results['categorylist']){%>
+				<%for(var i in results['categorylist']['data']){%> 
+					<%if(results['categorylist']['data'][i]['id']==results['categorylist']['data'][i]['parentid']){%>
+						<li><%= results['categorylist']['data'][i]['name']%>
+							<ul class="drop-meanu"  > 
+								<%for(var j in results['categorylist']['data']){%>
+									<%if(results['categorylist']['data'][i]['id']==results['categorylist']['data'][j]['parentid']){%>
+									<li>
+									<span><%= results['categorylist']['data'][j]['name']%></span>
+									<div class="categorys-sons">
+										<ul>
+										<%for(var k in results['categorylist']['data']){%>
+											<%if(results['categorylist']['data'][j]['id']==results['categorylist']['data'][k]['parentid']){%>
+												 <a><%= results['categorylist']['data'][k]['name']%></a> 
+											<%}%> 
+										<%}%> 
+										</ul>
+									</div>
+									</li>
+									<%}%>  
+								<%}%>  
+							</ul>
+						</li>
+					<%}%> 
+				<%}%> 
+			<%}%>
+		</ul>   
+	<!-- 	<ul class="categorys">
+		<li>影视制作 
+			<ul class="drop-meanu"  >
+				<li>
+					<span>aaaa</span>
+					<div class="categorys-sons"><a>a1</a><a>a1</a></div>
+				</li>
+			</ul>
+		</li>
+		<li>VR制作 </li>
+	</ul>    -->
 		<div class="banner-slide slideBox"> 
 			<div class="hd ">
 				<ul><li></li><li></li><li></li></ul>
@@ -236,13 +284,13 @@ section>h2{
 <div class="w  fashion">
 	<div>
 		<img src="/images/common/fashion.jpg">
-		<img style="height:260px;width:1000px;background-color:#e0e0e0;">
+		<img src="/test/abous_pic3.jpg" style="height:260px;width:1000px; ">
 		<div style="clear:both"></div> 
 	</div> 
 	</br>
 	<div >
 		<img src="/images/common/fashion.jpg">
-		<img style="height:260px;width:1000px;background-color:#e0e0e0;">
+		<img src="/test/abous_pic3.jpg" style="height:260px;width:1000px; ">
 		<div style="clear:both"></div> 
 	</div> 
 	 
@@ -251,6 +299,16 @@ section>h2{
 <section class="w">
 	<h2>VR/AR大厅	</h2>
 	<div class="recommend-block">
+		<h4>VR虚拟现实</h4>
+		<div>	
+			<img src="/test/test.png" >
+			<ul class="list">
+				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
+				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="recommend-block" style="float:right;">
 		<h4>影视制作</h4>
 		<div>	
 			<img src="/test/test.png" >
@@ -270,7 +328,7 @@ section>h2{
 			</ul>
 		</div>
 	</div>
-	<div class="recommend-block">
+	<div class="recommend-block" style="float:right;">
 		<h4>影视制作</h4>
 		<div>	
 			<img src="/test/test.png" >
@@ -280,21 +338,23 @@ section>h2{
 			</ul>
 		</div>
 	</div>
-	<div class="recommend-block">
-		<h4>影视制作</h4>
-		<div>	
-			<img src="/test/test.png" >
-			<ul class="list">
-				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
-				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
-			</ul>
-		</div>
-	</div>
+	<div style="clear:both"></div>
+
 </section>
 <!--影视大厅推荐-->
 <section class="w">
 	<h2>影视大厅</h2>
 	<div class="recommend-block">
+		<h4>VR虚拟现实</h4>
+		<div>	
+			<img src="/test/test.png" >
+			<ul class="list">
+				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
+				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="recommend-block" style="float:right;">
 		<h4>影视制作</h4>
 		<div>	
 			<img src="/test/test.png" >
@@ -314,7 +374,7 @@ section>h2{
 			</ul>
 		</div>
 	</div>
-	<div class="recommend-block">
+	<div class="recommend-block" style="float:right;">
 		<h4>影视制作</h4>
 		<div>	
 			<img src="/test/test.png" >
@@ -324,16 +384,7 @@ section>h2{
 			</ul>
 		</div>
 	</div>
-	<div class="recommend-block">
-		<h4>影视制作</h4>
-		<div>	
-			<img src="/test/test.png" >
-			<ul class="list">
-				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
-				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
-			</ul>
-		</div>
-	</div> 
+	<div style="clear:both"></div>
 </section> 
 <!--团队大厅-->
 <section class="w">
@@ -341,7 +392,23 @@ section>h2{
 	<div class="team">
 		
 	</div>
+	<div class="teamPic">
+		<img src="/test/abous_pic3.jpg">
+		<img src="/test/abous_pic3.jpg">
+		<img src="/test/abous_pic3.jpg">
+		<img src="/test/abous_pic3.jpg">
+		<img src="/test/abous_pic3.jpg">
+		<img src="/test/abous_pic3.jpg">
+		<img src="/test/abous_pic3.jpg">
+		<img src="/test/abous_pic3.jpg">
+		<img src="/test/abous_pic3.jpg">
+		<img src="/test/abous_pic3.jpg">
+		<img src="/test/abous_pic3.jpg">
+		<img src="/test/abous_pic3.jpg">
+		<div style="clear:both"></div>
+	</div>
 </section>
+<% include footer.html %>
 <% include commonScript.html %>
 <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>   
 <script   type="text/javascript">  

@@ -3,6 +3,9 @@ body *{
 } 
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td 
 { margin:0; padding:0; }  
+a{
+	text-decoration:none;
+}
 ul{
 	display:inline-block;
  	margin:0px; 
@@ -23,3 +26,26 @@ ul{
 	cursor: pointer;
 	vertical-align: top;
 }
+
+
+/**footer**/
+footer {
+	border-top: 1px solid #999;
+	margin-top: 50px;
+	text-align: center;
+}
+footer a,footer span{
+	color:#999999;
+	font-size: 14px;
+}
+footer ul {
+	width: 1200px;
+	padding-top:10px; 
+	margin:0 auto ;
+}
+footer ul li{
+	display: inline-block;
+	padding: 0 10px;
+}
+/**footer  end**/
+
