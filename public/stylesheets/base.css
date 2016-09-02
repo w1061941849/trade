@@ -7,10 +7,7 @@ ul{
 	display:inline-block;
  	margin:0px; 
  	padding:0px;
-}
-ul>li{
-	display: inline-block;
-}
+} 
 .w{
 	width: 1200px;
 	margin:0 auto;
