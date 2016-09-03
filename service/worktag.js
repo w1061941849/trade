@@ -4,7 +4,7 @@ exports.create = function (req, res, next) {
         "name":req.body.name
     }
     var options={
-        "path":"worktag"
+        "path":"/worktag"
     }
     console.log(params);
     httpUtil.post(params,options,function(result,err){
@@ -17,7 +17,7 @@ exports.create = function (req, res, next) {
 } 
 exports.worktags = function (req, res, next) {    
     var options={
-        'path':''+req.params.worktagsId+"/worktags" 
+        'path':'/'+req.params.worktagsId+"/worktags" 
     }   
     httpUtil.get(options,function(result,err){
         if(err){ 

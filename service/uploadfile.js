@@ -3,7 +3,7 @@ var formidable = require('formidable');
 var fs = require('fs'); 
 exports.uploadfile = function (req, res, next) {      
     var options={
-        "path":"uploadfile?type="+req.body.type+"&foldername="+req.session.user.id+(req.body.thumbnail ?  "&thumbnail="+req.body.thumbnail : "")
+        "path":"/uploadfile?type="+req.body.type+"&foldername="+req.session.user.id+(req.body.thumbnail ?  "&thumbnail="+req.body.thumbnail : "")
     } 
     console.log(options)
     httpUtil.uploadfile(req,options,function(result,err){

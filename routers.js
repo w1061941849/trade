@@ -17,7 +17,7 @@ var authen=require('./service/authen.js')
 var index=require('./service/index.js') 
 var vrhall=require('./service/vrhall.js') 
 var mhall=require('./service/mhall.js') 
-var projecthall=require('./service/projecthall.js') 
+var projectlist=require('./service/projectlist.js') 
 var projectDetail=require('./service/projectDetail.js') 
 var teamhall=require('./service/teamhall.js') 
 var userDetail=require('./service/userDetail.js') 
@@ -83,13 +83,12 @@ app.get("*",function(req,res,next){
 app.get('/',index.showHtml); 
 app.get('/vrhall',vrhall.showHtml);  
 app.get('/mhall',mhall.showHtml); 
-app.get('/teamhall',teamhall.showHtml); 
-app.get('/projecthall',projecthall.showHtml); 
+app.get('/teamhall',teamhall.showHtml);  
 app.get('/projectDetail',projectDetail.showHtml); 
 app.get('/userDetail',userDetail.showHtml); 
 
 
-app.get('/projectlist/:page',projecthall.projectlist); 
+app.get('/projectlist/:page',projectlist.showHtml); 
  
 app.get('/toolhall', function(req, res, next) {   
     res.render('toolhall') 

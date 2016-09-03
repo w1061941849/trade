@@ -5,7 +5,7 @@ exports.showHtml = function (req, res, next) {
     	  
     async.series({
         categorylist: function(callback){
-            var options={ "path":"categorylist" }  
+            var options={ "path":"/categorylist" }  
 	  		httpUtil.get(options,function(result,err){ 
 		   		if(err){
 		   			callback(err, null);
@@ -15,7 +15,7 @@ exports.showHtml = function (req, res, next) {
 		   	}) 
         },
         list1: function(callback){
-            var options={ "path":"1/recommenditemlist" }  
+            var options={ "path":"/1/recommenditemlist" }  
 	  		httpUtil.get(options,function(result,err){ 
 		   		if(err){
 		   			callback(err, null);
@@ -25,7 +25,7 @@ exports.showHtml = function (req, res, next) {
 		   	}) 
         } , 
         list2: function(callback){
-            var options={ "path":"2/recommenditemlist" }  
+            var options={ "path":"/2/recommenditemlist" }  
 	  		httpUtil.get(options,function(result,err){ 
 		   		if(err){
 		   			callback(err, null);

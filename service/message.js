@@ -6,7 +6,7 @@ exports.addMessage = function (req, res, next) {
         "noteid":parseInt(req.body.noteid)
     }
     var options={
-        "path":"notemessage"
+        "path":"/notemessage"
     }
     console.log(params);
     httpUtil.post(params,options,function(result,err){
@@ -22,7 +22,7 @@ exports.addMessage = function (req, res, next) {
 exports.notemessagelist = function (req, res, next) {  
     //var projectid = URL.parse(req.url, true).query.projectid; 
     var options={
-        'path':''+req.params.noteid+"/notemessagelist"
+        'path':'/'+req.params.noteid+"/notemessagelist"
 
     } 
     httpUtil.get(options,function(result,err){

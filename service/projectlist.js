@@ -3,13 +3,13 @@ var async= require('async');
 var appConfig=require('../appConfig.js');
 var URL = require('url');
 exports.showHtml = function (req, res, next) {    
-    var cid = URL.parse(req.url, true).query.cid,
-    	page=1;
+    var url=req.originalUrl;
+    console.log(url)
 	var resultData={}; 
 	async.waterfall([
 	    function (done) {
 	    	var options={
-		        "path":"projectlist/"+page+"?cid="+cid
+		        "path":url
 		    }   
 		    httpUtil.get(options,function(result,err){  
 		        if(err){
@@ -38,21 +38,14 @@ exports.showHtml = function (req, res, next) {
 	],  
     function(err, results) {   
     	console.log(results)
-    	res.render('projecthall',{"results":resultData}) 	
-    });
+    	res.render('projectlist',{'results':resultData}) 	
+    }); 
  
 }; 
 
 
 exports.projectlist = function (req, res, next) { 
-	console.log(req.originalUrl)
-	var params={
-		"cid":req.query.cid
-	}
-	console.log(params)
-    var cid = URL.parse(req.url, true).query.cid,
-    	page=1;
-	var resultData={}; 
+	
 	 
  
 }; 

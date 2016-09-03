@@ -2,7 +2,7 @@ var httpUtil=require('../utils/http.js')
 var async=require('async');
 exports.usertags = function (req, res, next) {    
     var options={
-        "path":req.session.user.id+"/usertags"
+        "path":"/"+req.session.user.id+"/usertags"
     }
     console.log(options)
     httpUtil.get(options,function(result,err){  
@@ -16,7 +16,7 @@ exports.usertags = function (req, res, next) {
 }
 exports.add = function (req, res, next) {    
     var options={
-        "path":"usertag"
+        "path":"/usertag"
     }
     var params={
         "userid":req.session.user.id,
@@ -33,7 +33,7 @@ exports.add = function (req, res, next) {
 }
 exports.delete = function (req, res, next) {    
     var options={
-        "path":"usertag"
+        "path":"/usertag"
     }
     var params={
         "userid":req.session.user.id,
@@ -50,7 +50,7 @@ exports.delete = function (req, res, next) {
 }
 exports.usertaglist = function (req, res, next) {    
     var options={
-        "path":"search/usertaglist/"+req.params.keyword
+        "path":"/search/usertaglist/"+req.params.keyword
     }
     console.log(options)
     httpUtil.get(options,function(result,err){  

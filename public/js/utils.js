@@ -1,21 +1,22 @@
 ;(function($) {
 	var methods ={
-		"turnPage":function(data){ 
+		"turnPage":function(data,callback){ 
+			callback
 			var obj=$(this);
 			obj.empty();
 			var string='<ul>'; 
 			if(data['total']!=0){
 				if(data['has_prev']){
-					string+='<li><i class="icon-chevron-left" data-pageId="'+data['prev_num']+'" ></i></li>'; 
+					string+='<li><i class="icon-chevron-left"   data-pageId="'+data['prev_num']+'" ></i></li>'; 
 				}else{
-					string+='<li><i class="icon-chevron-left" style="#f4f4f4"></i></li>'; 
+					string+='<li><i class="icon-chevron-left"   style="#f4f4f4"></i></li>'; 
 				} 	 
 		 	 	if(data['pages']<=6) {
 		 	 		for(var  i=1;i<=data['pages'];i++){ 
 		 	 			if(data['page']==i){
-							string+='<li><a class="active"   data-pageId="'+i+'">'+i+'</a></li>';
+							string+='<li><a class="active" data-pageId="'+i+'">'+i+'</a></li>';
 						}else{
-							string+='<li><a class=""  data-pageId="'+i+'">'+i+'</a></li>';
+							string+='<li><a class=""   data-pageId="'+i+'">'+i+'</a></li>';
 						} 
 		 	 		}
 		 	 	}else if(data['pages']>6){
@@ -33,8 +34,8 @@
 								string+='<li><a    data-pageId="1">1</a></li>'+
 		 	 						'<li>...</li>'+
 							        '<li><a    data-pageId="'+(data['page']-2)+'">'+(data['page']-2)+'</a></li>'+
-									'<li><a    data-pageId="'+(data['page']-1)+'">'+(data['page']-1)+'</a></li>'+
-									'<li><a class="active"  data-pageId="'+data['page']+'">'+data['page']+'</a></li>'+
+									'<li><a     data-pageId="'+(data['page']-1)+'">'+(data['page']-1)+'</a></li>'+
+									'<li><a class="active"   data-pageId="'+data['page']+'">'+data['page']+'</a></li>'+
 									'<li><a    data-pageId="'+(data['page']+1)+'">'+(data['page']+1)+'</a></li>'+
 									'<li><a    data-pageId="'+(data['page']+2)+'">'+(data['page']+2)+'</a></li>'+ 
 									'<li>...</li>';   
@@ -54,18 +55,22 @@
 		 	 		} 
 		 	 	} 
 				if(data['has_next']){
-					string+='<li><i class=" icon-chevron-right" data-pageId="'+data['next_num']+'" ></i></li>';
+					string+='<li><i class=" icon-chevron-right"  data-pageId="'+data['next_num']+'" ></i></li>';
 				}else{
-					string+='<li><i class=" icon-chevron-right" style="#f4f4f4"></i></li>'; 
+					string+='<li><i class=" icon-chevron-right"   style="#f4f4f4"></i></li>'; 
 				} 	 
 			} 
+
 			string+='</ul>'; 
 			obj.append(string); 
-		} 
+			obj.find('a').click(callback);
+			obj.find('i').click(callback);
+		}
+
 	} 
-	$.fn.myUtils = function (method) { 
-		if (methods[method]) { 
-            return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+	$.fn.myUtils = function (method,callback) { 
+		if (methods[method]) {  
+            return methods[method].apply(this, Array.prototype.slice.call(arguments, 1),Array.prototype.slice.call(arguments, 2));
 		}
 	} 
 })(jQuery, window, document);

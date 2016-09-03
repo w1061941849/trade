@@ -17,7 +17,7 @@ exports.create = function (req, res, next) {
                 'password':req.body.password
             }
             var options={
-                "path":"login"
+                "path":"/login"
             } 
             httpUtil.post(params,options,function(results,err){ 
                   callback(null,results,err) 
@@ -26,7 +26,7 @@ exports.create = function (req, res, next) {
         function(results, err, callback) {   
             if(results['result']){  
                 var options={
-                    "path":"user/"+results['data']['id']
+                    "path":"/user/"+results['data']['id']
                 }
                 httpUtil.get(options,function(result,err){
                     if(err){
@@ -44,7 +44,7 @@ exports.create = function (req, res, next) {
 } 
 exports.getUserInfo = function (req, res, next) {    
     var options={
-        "path":"user/"+req.session.user.id
+        "path":"/user/"+req.session.user.id
     }
     console.log(options)
     httpUtil.get(options,function(result,err){  
@@ -62,7 +62,7 @@ exports.changepwd = function (req, res, next) {
         'orignalPassword':req.body.orignalPassword, 
     }; 
     var options={
-        "path":"changepwd"
+        "path":"/changepwd"
     }
     console.log(params);
     httpUtil.put(params,options,function(result,err){
@@ -86,7 +86,7 @@ exports.modify = function (req, res, next) {
     } 
     console.log(params);
     var options={
-        "path":"user"
+        "path":"/user"
     }
     httpUtil.put(params,options,function(result,err){
         if(err){

@@ -113,7 +113,7 @@ exports.modifyBankAuthen = function (req, res, next) {
     }
     console.log(params)
     var options={
-        'path':'bankauthen' 
+        'path':'/bankauthen' 
     }
     httpUtil.put(params,options,function(result,err){
         if(err){ 
@@ -129,7 +129,7 @@ exports.delBankAuthen = function (req, res, next) {
     }
     console.log(params)
     var options={
-        'path':'bankauthen' 
+        'path':'/bankauthen' 
     }
     httpUtil.delete(params,options,function(result,err){
         if(err){ 
@@ -149,7 +149,7 @@ exports.manualthen = function (req, res, next) {
     }
     console.log(params)
     var options={
-        'path':'manualthen' 
+        'path':'/manualthen' 
     }
     httpUtil.post(params,options,function(result,err){
         if(err){ 

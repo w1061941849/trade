@@ -2,7 +2,7 @@ var httpUtil=require('../utils/http.js')
 
 exports.bidcount = function (req, res, next) {  
    var options={
-   		"path":""+req.params.projectid+"/bidcount"
+   		"path":"/"+req.params.projectid+"/bidcount"
    }
    console.log(options)
    httpUtil.get(options,function(result,err){

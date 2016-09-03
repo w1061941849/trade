@@ -6,7 +6,7 @@ exports.addNote = function (req, res, next) {
         "title":req.body.title
     }
     var options={
-        "path":"note"
+        "path":"/note"
     } 
     httpUtil.post(params,options,function(result,err){
         if(err){ 
@@ -23,7 +23,7 @@ exports.addNote = function (req, res, next) {
 exports.projectnotes = function (req, res, next) {  
     //var projectid = URL.parse(req.url, true).query.projectid; 
     var options={
-        'path':''+req.params.projectid+"/projectnotes"
+        'path':'/'+req.params.projectid+"/projectnotes"
 
     } 
     httpUtil.get(options,function(result,err){

@@ -2,7 +2,7 @@ var httpUtil=require('../utils/http.js')
 
 exports.categorylist = function (req, res, next) {  
    var options={
-         "path":"categorylist"
+         "path":"/categorylist"
    }
    httpUtil.get(options,function(result,err){
          if(err){
@@ -15,7 +15,7 @@ exports.categorylist = function (req, res, next) {
 }; 
 exports.usercategorys = function (req, res, next) {  
    var options={
-         "path":""+req.session.user.id+"/usercategorys"
+         "path":"/"+req.session.user.id+"/usercategorys"
    }
    console.log(options)
    httpUtil.get(options,function(result,err){

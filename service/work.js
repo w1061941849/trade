@@ -11,7 +11,7 @@ exports.create = function (req, res, next) {
         'tags':req.body.tags
     }
     var options={
-        "path":"work"
+        "path":"/work"
     }
     console.log(params);
     httpUtil.post(params,options,function(result,err){
@@ -27,7 +27,7 @@ exports.delete = function (req, res, next) {
         'id':req.body.id 
     }
     var options={
-        'path':'work' 
+        'path':'/work' 
     } 
     httpUtil.delete(params,options,function(result,err){
         if(err){ 
@@ -39,7 +39,7 @@ exports.delete = function (req, res, next) {
 } 
 exports.userworks = function (req, res, next) {   
     var options={
-        'path':''+req.session.user.id+"/userworks/"+req.params.page
+        'path':'/'+req.session.user.id+"/userworks/"+req.params.page
 
     } 
     httpUtil.get(options,function(result,err){

@@ -8,7 +8,7 @@ exports.showHtml = function (req, res, next) {
 	async.waterfall([
 	    function (done) {
 	    	var options={
-		        "path":"project/"+projectid
+		        "path":"/project/"+projectid
 		    }  
 		    httpUtil.get(options,function(result,err){  
 		        if(err){

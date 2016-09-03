@@ -10,7 +10,7 @@ exports.addVersion = function (req, res, next) {
    
    }
    var options={
-      "path":"version"
+      "path":"/version"
    }
    console.log(params);
    httpUtil.post(params,options,function(result,err){
@@ -24,7 +24,7 @@ exports.addVersion = function (req, res, next) {
 exports.projectversions = function (req, res, next) {   
    var projectid = URL.parse(req.url, true).query.projectid; 
     var options={
-        'path':''+projectid+"/projectversions"
+        'path':'/'+projectid+"/projectversions"
 
     } 
     console.log(options)
