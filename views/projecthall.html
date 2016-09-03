@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html >
+<head> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta name=”renderer” content=”webkit”> 
+<title>项目大厅</title> 
+<link href="/stylesheets/base.css" rel="stylesheet"/>  
+<link href="/stylesheets/font-awesome.css" rel="stylesheet"/>
+<link rel="shortcut icon" href="images/config/favicon.ico" > 
+<style>  
+.fliters{
+	background-color: white;
+	margin:20px 0;
+	border-radius: 4px;
+	padding:0 20px;
+	border-radius: 8px;
+    border: 1px solid rgba(0,0,0,.14);
+    box-shadow: 0 3px 8px -6px rgba(0,0,0,.1); 
+}
+.fliter{
+	border-bottom: 1px solid #e0e0e0;
+	padding:14px;
+}
+.fliter span{
+	font-size: 14px;
+	font-weight: 800;
+}
+.fliter ul>li{
+	display: inline-block; 
+	padding:0 10px;
+} 
+.fliter ul>li>a{
+	color:#999999;
+	font-size: 14px;display: inline-block;
+	cursor: pointer;
+}
+.fliter  .active {
+	color:#e8594b;
+}
+.order{
+	padding:14px;
+}
+.order li{
+	display: block;
+	float: left;
+}
+.order a{
+	display: block;
+	float: left;
+	border:1px solid #e0e0e0;
+	background-color:rgb(244, 244, 244);
+	padding: 4px;
+	color:#666 !important;
+	font-size: 14px;
+	cursor: pointer;
+}
+.project-list{
+	background-color: white;
+	border-radius: 8px;
+    border: 1px solid rgba(0,0,0,.14);
+    box-shadow: 0 3px 8px -6px rgba(0,0,0,.1); 
+	
+}
+.project-list>.project-detail{
+	padding:20px;
+	border-bottom: 1px solid #e0e0e0;
+	position: relative;
+}
+.project-list>.project-detail>.subtitle{
+	color:#999999;
+}
+.project-list>.project-detail .span1{ 
+	font-size: 12px;
+}
+.project-list>.project-detail span{
+	font-size: 14px;
+}
+.project-detail>ul>li{
+	display: inline-block; 
+	width: 250px;
+	text-overflow:ellipsis; white-space:nowrap; overflow:hidden;
+}
+.project-detail>ul>li>i{
+	font-size:18px;
+	display: inline-block;
+	padding-right: 10px;
+}
+.project-list>.project-detail:hover{
+	box-shadow: 0 0 38px rgba(0,0,0,.08) inset;  
+    -webkit-transition: all .15s ease;
+    transition: all .15s ease;
+}
+</style>  
+</head>
+<body style="overflow-X:hidden; background:#f5f5f5" >   
+<% include header.html %> 
+<div class="w">
+	<div class="fliters">
+		<div class="fliter filter1">
+			<span>行业分类：</span>
+			<ul>
+				<li><a class="active" data-value="">不限</a></li>
+				<li><a data-value="1">1</a></li>
+				<li><a data-value="2">32</a></li>
+				<li><a data-value="3">333</a></li>
+			</ul>
+		</div>  
+		<div class="fliter filter2" style="">
+			<span>项目状态：</span>
+			<ul>
+				<li><a class="active" data-value="">不限</a></li>
+				<li><a data-value="1">招标中</a></li>
+				<li><a data-value="2">进行中</a></li>
+				<li><a data-value="3">已结束</a></li>
+			</ul>
+		</div> 
+		<div class=" order filter3" style="border:0px;">  
+			<ul>
+				<li><a>综合</a></li>
+				<li><a>发布时间</a></li>
+				<li><a>赏金</a> </li> 
+				<div style="clear:both"></div>
+			</ul> 
+			
+		</div> 
+	</div>   
+</div>
+<div class="w">
+	<div class="project-list"> 
+		<%for(var i in results['data']){%>
+			<div class="project-detail">
+				<h3><%= results['data'][i]['name']%></h3>
+				<span class="subtitle"><%= results['data'][i]['owner']['nickname']%></span>
+				</br> </br>
+				<ul>
+					<li>
+						<i class="icon-calendar" style="color:#98d859"></i><span class="span1">发布时间：</span>
+						<span style="color:#98d859"><%= results['data'][i]['publishDate']%></span>
+					</li>
+					<li>
+						<i class="icon-time" style="color:#46b8da "></i><span class="span1">周期：</span>
+						<span style="color:#46b8da"><%= results['data'][i]['timespan']%></span>
+					</li>
+					<li>
+						<i class="icon-money" style="color:#fca75b"></i><span class="span1">赏金：</span>
+						<span style="color:#fca75b"><%= results['data'][i]['bonus']%></span> 
+					</li> 
+					<li>
+						<i class="icon-map-marker" style="color:#fca75b"></i><span class="span1">所在地：</span>
+						<span style="color:#fca75b"><%= results['data'][i]['bidderLocationRequire']%></span> 
+					</li>
+				</ul>
+				<div>
+					<span style="font-weight:800;">行业分类：</span><span class="span1" style="color:#999999">asdasd</span>
+				</div>
+				<a class="btn" href="/projectDetail?projectid=<%= results['data'][i]['id']%>" style="border:0px;right:20px;top:30px;position:absolute"> 更多详情 </a>
+			</div> 
+		<%}%> 
+		<!-- <div class="project-detail">
+			<h3>name</h3>
+			<span class="subtitle">username</span>
+			</br> </br>
+			<ul>
+				<li><i class="icon-calendar" style="color:#98d859"></i><span class="span1">发布时间：</span></li>
+				<li><i class="icon-time" style="color:#46b8da "></i><span class="span1">周期：</span></li>
+				<li><i class="icon-money" style="color:#fca75b"></i><span class="span1">赏金：</span></li> 
+				<li><i class="icon-map-marker" style="color:#fca75b"></i><span class="span1">所在地：</span></li>
+				<li><i class="icon-list-alt" style="color:#42d0a0"></i><span class="span1">资质要求：</span></li>
+			</ul>
+			<div>
+				<span style="font-weight:800;">行业分类：</span><span class="span1" style="color:#999999">asdasd</span>
+			</div>
+			<a class="btn" href="/projectDetail" style="border:0px;right:20px;top:30px;position:absolute"> 更多详情 </a>
+		</div> -->
+		<div id="turnPage"></div>
+	</div>
+
+</div>
+<% include footer.html %>
+<% include commonScript.html %> 
+<script   type="text/javascript"> 
+
+$(function(){  
+
+	getProjectList();
+})
+var turnPageData={
+  "has_next": true, 
+  "has_prev": false, 
+  "next_num": 2, 
+  "page": 1, 
+  "pages": 2, 
+  "per_page": 10, 
+  "prev_num": 0, 
+  "total": 17
+} 
+$('#turnPage').myUtils('turnPage',turnPageData)
+
+//全局变量
+var _cid=1,
+	_page=1,
+	_status=1,
+	_desc=1,
+	_keyword="";
+
+//状态筛选
+$('.filter1>ul a').click(function(){
+	$(this).parent().parent('ul').find('a').removeClass('active');
+	$(this).addClass('active'); 
+	_cid=$(this).attr("data-value");
+	console.log(_cid)
+})
+$('.filter2>ul a').click(function(){
+	$(this).parent().parent('ul').find('a').removeClass('active');
+	$(this).addClass('active'); 
+	_status=$(this).attr("data-value");
+	console.log(_status)
+})
+
+function getProjectList(){
+	var url="/projectlist/"+_page+"?cid="+_cid+"&status="+_status+"&desc="+_desc+"&keyword="+_keyword;
+	console.log(url);
+	$.ajax({
+		type: "get",
+		async: false,
+		url: url, 
+		contentType:"application/json",  
+		dataType:'json',
+		success: function(data){  
+			 console.log(data); 
+		},
+		error: function(){
+			alert('fail');
+		} 
+	}); 
+
+}
+
+</script> 
+</body>
+
+</html>

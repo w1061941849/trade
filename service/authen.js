@@ -3,7 +3,7 @@ var URL = require('url');
 exports.userauthen = function (req, res, next) {   
 	var type = URL.parse(req.url, true).query.type; 
    	var options={
-   		"path":"userauthen?userid="+req.session.user.id+"&type="+type
+   		"path":"/userauthen?userid="+req.session.user.id+"&type="+type
    }
    console.log(options)
    httpUtil.get(options,function(result,err){
@@ -24,7 +24,7 @@ exports.privateAuthen = function (req, res, next) {
     }
     console.log(params)
     var options={
-        'path':'privateauthen' 
+        'path':'/privateauthen' 
     }
     httpUtil.post(params,options,function(result,err){
         if(err){ 
@@ -39,7 +39,7 @@ exports.delPrivateAuthen = function (req, res, next) {
         'ownerid':req.session.user.id 
     }
     var options={
-        'path':'privateauthen' 
+        'path':'/privateauthen' 
     }
     httpUtil.delete(params,options,function(result,err){
         if(err){ 
@@ -61,7 +61,7 @@ exports.companyAuthen = function (req, res, next) {
     }
     console.log(params)
     var options={
-        'path':'companyauthen' 
+        'path':'/companyauthen' 
     }
     httpUtil.post(params,options,function(result,err){
         if(err){ 
@@ -76,7 +76,7 @@ exports.delCompanyAuthen = function (req, res, next) {
         'ownerid':req.session.user.id 
     }
     var options={
-        'path':'companyauthen' 
+        'path':'/companyauthen' 
     }
     httpUtil.delete(params,options,function(result,err){
         if(err){ 
@@ -96,7 +96,7 @@ exports.bankAuthen = function (req, res, next) {
     }
     console.log(params)
     var options={
-        'path':'bankauthen' 
+        'path':'/bankauthen' 
     }
     httpUtil.post(params,options,function(result,err){
         if(err){ 

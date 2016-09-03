@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>服务大厅</title> 
+<link href="/stylesheets/base.css" rel="stylesheet"/> 
+<link rel="shortcut icon" href="images/config/favicon.ico" >  
+<style type="text/css">
+.header{
+	    background-color: rgba(0,0,0,0.8);
+	    height: 60px;
+}
+.header>img{
+	padding:14px 20px;
+	display: inline-block;
+}
+.header ul{
+	vertical-align: top;
+	line-height: 60px;
+}
+.header ul li{
+	display: inline-block;
+	padding:0 10px;
+}
+.header ul li a{
+	color:white;
+}
+</style>
+</head> 
+<body style="overflow-x:hidden;">
+<div class="header" style="position:fixed;z-index:900;width:100%">
+	<img src="/images/common/logo.png">
+	<ul> 
+		<li><a href="/">首页</a></li>
+		<li><a href="/vrhall">VR/AR大厅</a></li>
+		<li><a href="/mhall">影视制作大厅</a></li>
+		<li><a href="/teamhall">团队大厅</a></li> 
+		<li><a href="/servicehall">服务大厅</a></li>
+		<li><a href="/toolhall">工具大厅</a></li>
+	</ul>
+</div>
+<div id="dowebok">
+    <div class="section"  >
+    	<div style="position:absolute;top:0px;text-align:center;left:35%;top:40%;">
+    		<h2>法务服务</h2>
+	        <h1 style="color:#0092d4">一站式，法务产品，法律服务</h1>
+	        <p ><font style="color:#999999;font-size:14px;">给您提供专业的法律服务，为您的项目提供全面，准确，快捷的一站式</font>
+	        </br>
+	        <font style="color:#999999;font-size:14px;">法务产品，让您交易无忧！</font></p> 
+    	</div>
+        <img src="/images/common/service01.jpg" width="100%">
+    </div>
+    <div class="section">
+        <img src="/images/common/service02.jpg" width="100%">
+    </div>
+    <div class="section">
+        <img src="/images/common/service03.jpg" width="100%">
+    </div>
+    <div class="section">
+        <img src="/images/common/service04.jpg" width="100%">
+    </div>
+    <div class="section">
+        <img src="/images/common/service05.jpg" width="100%">
+    </div>
+</div>
+</body> 
+<script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script> 
+<script type="text/javascript" src="/js/jquery.fullPage.min.js"></script> 
+<script> 
+$(function(){
+    $('#dowebok').fullpage();
+});
+</script>
+</html>

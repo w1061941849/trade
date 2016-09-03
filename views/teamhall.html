@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html >
+<head> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta name=”renderer” content=”webkit”> 
+<title>团队大厅</title> 
+<link href="/stylesheets/base.css" rel="stylesheet"/>  
+<link rel="shortcut icon" href="images/config/favicon.ico" > 
+<style>  
+.fliters{
+	background-color: white;
+	margin:20px 0;
+	border-radius: 4px;
+	padding:0 20px;
+}
+.fliter{
+	border-bottom: 1px solid #e0e0e0;
+	padding:14px;
+}
+.fliter span{
+	font-size: 14px;
+	font-weight: 800;
+}
+.fliter ul>li{
+	display: inline-block; 
+	padding:0 10px;
+} 
+.fliter ul>li>a{
+	color:#999999;
+	font-size: 14px;display: inline-block;
+	cursor: pointer;
+}
+</style>  
+</head>
+<body style="overflow-X:hidden; background:#f5f5f5" >   
+<% include header.html %> 
+<div class="w">
+	<div class="fliters">
+		<div class="fliter">
+			<span>技能标签：</span>
+			<ul>
+				<li><a>aaaa</a></li>
+			</ul>
+		</div>
+		<div class="fliter">
+			<span>资质认证：</span>
+			<ul>
+				<li><a>个人认证</a></li>
+				<li><a>企业认证</a></li>
+				<li><a>交易认证</a></li>
+			</ul>
+		</div> 
+		<div class="fliter" style="border:0px;">
+			<span>行业分类：</span>
+			<ul>
+				<li><a>1</a></li>
+				<li><a>32</a></li>
+				<li><a>333</a></li>
+			</ul>
+		</div> 
+	</div>   
+</div>
+<div class="w">
+	
+</div>
+<% include footer.html %>
+<% include commonScript.html %> 
+<script   type="text/javascript">  
+ 
+</script> 
+</body>
+
+</html>

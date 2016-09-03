@@ -15,7 +15,12 @@ var authen=require('./service/authen.js')
 
 
 var index=require('./service/index.js') 
-
+var vrhall=require('./service/vrhall.js') 
+var mhall=require('./service/mhall.js') 
+var projecthall=require('./service/projecthall.js') 
+var projectDetail=require('./service/projectDetail.js') 
+var teamhall=require('./service/teamhall.js') 
+var userDetail=require('./service/userDetail.js') 
 module.exports = function (app) { 
 app.get("*",function(req,res,next){
     if(req.session.user){ 
@@ -23,7 +28,7 @@ app.get("*",function(req,res,next){
         res.locals.session =req.session.user;    
 
     }else{
-      /*  res.locals.session={
+       res.locals.session={
                 "authenticationType": 0, 
                 "bankAuthentication": "http://10.0.1.122/api/v1.0/userauthen?userid=15&type=4", 
                 "categorys": "http://10.0.1.122/api/v1.0/15/usercategorys", 
@@ -31,7 +36,7 @@ app.get("*",function(req,res,next){
                 "defaultImage": "2.jpg", 
                 "description": null, 
                 "email": "bob143@qq.com", 
-                "id": 15, 
+                "id": 1, 
                 "imageLarge": "http://10.0.1.122/static/default/img/2.jpg", 
                 "imageMedium": "http://10.0.1.122/static/default/img/2.jpg", 
                 "imageSmall": "http://10.0.1.122/static/default/img/2.jpg", 
@@ -55,7 +60,7 @@ app.get("*",function(req,res,next){
                 "defaultImage": "2.jpg", 
                 "description": null, 
                 "email": "bob143@qq.com", 
-                "id": 15, 
+                "id": 1, 
                 "imageLarge": "http://10.0.1.122/static/default/img/2.jpg", 
                 "imageMedium": "http://10.0.1.122/static/default/img/2.jpg", 
                 "imageSmall": "http://10.0.1.122/static/default/img/2.jpg", 
@@ -70,12 +75,28 @@ app.get("*",function(req,res,next){
                 "status": null, 
                 "tags": "http://10.0.1.122/api/v1.0/15/usertags", 
                 "works": "http://10.0.1.122/api/v1.0/15/userworks/1"
-        }*/
+        }
     }
     next();
 })   
+//大厅
+app.get('/',index.showHtml); 
+app.get('/vrhall',vrhall.showHtml);  
+app.get('/mhall',mhall.showHtml); 
+app.get('/teamhall',teamhall.showHtml); 
+app.get('/projecthall',projecthall.showHtml); 
+app.get('/projectDetail',projectDetail.showHtml); 
+app.get('/userDetail',userDetail.showHtml); 
+
+
+app.get('/projectlist/:page',projecthall.projectlist); 
  
-app.get('/',index.showHtml);  
+app.get('/toolhall', function(req, res, next) {   
+    res.render('toolhall') 
+});
+app.get('/servicehall', function(req, res, next) {   
+    res.render('servicehall') 
+});
 //user
 app.post('/login',user.create);     
 app.put('/changepwd',user.changepwd); 
