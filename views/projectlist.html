@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html >
 <head> 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<meta name=”renderer” content=”webkit”> 
-<title>项目大厅</title> 
-<link href="/stylesheets/base.css" rel="stylesheet"/>  
-<link href="/stylesheets/font-awesome.css" rel="stylesheet"/>
-<link rel="shortcut icon" href="images/config/favicon.ico" > 
+<% include commonHead.html %> 
+<title>项目大厅</title>  
 <style>  
+.categorys{
+	display: none;
+}
+#categorysMenua:hover .categorys{
+	display: block !important; 
+	top:0px;
+}
+.categorys,.categorys>li>ul {  
+	 height: 400px !important;
+}
 .fliters{
 	background-color: white;
 	margin:20px 0;
@@ -44,10 +48,8 @@
 }
 .order li{
 	display: block;
-	float: left;
-}
-.order a{
-	display: block;
+	float: left; 
+	position: relative;
 	float: left;
 	border:1px solid #e0e0e0;
 	background-color:rgb(244, 244, 244);
@@ -55,6 +57,19 @@
 	color:#666 !important;
 	font-size: 14px;
 	cursor: pointer;
+	padding: 4px 14px;
+}
+.order a{
+	
+}
+.order i{
+	position: absolute; 
+	right:2px;
+	top:2px;
+
+}
+.order .active{
+	color:#e8594b !important;
 }
 .project-list{
 	background-color: white;
@@ -98,29 +113,48 @@
 <% include header.html %> 
 <div class="w">
 	<div class="fliters">
-		<div class="fliter filter1">
+		<div class="fliter fliter1"  data-activeCid="<%= results['activeCid']%>">
 			<span>行业分类：</span>
 			<ul>
-				<li><a class="active" data-value="">不限</a></li>
-				<li><a data-value="1">1</a></li>
-				<li><a data-value="2">32</a></li>
-				<li><a data-value="3">333</a></li>
+				<%if(results['activeCid']){%>
+					<li><a   data-value="">不限</a></li>
+					<% for(var i in results['categorylist']['data']){%>
+						<%if(results['categorylist']['data'][i]['id']== results['activeCid']){%>
+							<%for(var j in results['categorylist']['data']){%>
+								<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['parentid'] && results['categorylist']['data'][j]['parentid']!=results['categorylist']['data'][j]['id']){%>
+									
+									<li><a   id="fliter1_<%=results['categorylist']['data'][j]['id']%>" data-value="<%=results['categorylist']['data'][j]['id']%>"><%=results['categorylist']['data'][j]['name']%></a></li>
+								<%}%>
+							<%}%>
+						<%}%>
+					<%}%> 
+				<%}else{%>
+					<li><a class="active" data-value="">不限</a></li>
+				<%}%> 
 			</ul>
 		</div>  
-		<div class="fliter filter2" style="">
+		<div class="fliter fliter2" style="">
 			<span>项目状态：</span>
 			<ul>
-				<li><a class="active" data-value="">不限</a></li>
-				<li><a data-value="1">招标中</a></li>
-				<li><a data-value="2">进行中</a></li>
-				<li><a data-value="3">已结束</a></li>
+				<li><a id="fliter2_" data-value="">不限</a></li>
+				<li><a id="fliter2_1" data-value="1">招标中</a></li>
+				<li><a id="fliter2_2" data-value="2">进行中</a></li>
+				<li><a id="fliter2_3" data-value="3">已结束</a></li>
 			</ul>
 		</div> 
-		<div class=" order filter3" style="border:0px;">  
+		<div class=" order fliter3" style="border:0px;">  
 			<ul>
-				<li><a>综合</a></li>
-				<li><a>发布时间</a></li>
-				<li><a>赏金</a> </li> 
+				<li id="fliter3_0"><a  data-obderby="0">综合</a></li>
+				<li id="fliter3_1">
+					<a  data-obderby="1">发布时间</a>
+					<i id="i_1" class="icon-angle-up" style=""></i>
+					<i id="i_2" class="icon-angle-down" style="top:12px"></i>
+				</li>
+				<li id="fliter3_2">
+					<a  data-obderby="2">赏金</a> 
+					<i id="i_1"  class="icon-angle-up" style=""> </i>
+					<i id="i_2" class="icon-angle-down" style="top:12px"></i>
+				</li> 
 				<div style="clear:both"></div>
 			</ul> 
 			
@@ -128,7 +162,7 @@
 	</div>   
 </div>
 <div class="w">
-	<div class="project-list"> 
+	<div class="project-list"  data-hasnext="<%= results['has_next']%>"  data-hasprev="<%= results['has_prev']%>" data-nextnum="<%= results['next_num']%>" data-page="<%= results['page']%>" data-pages="<%= results['pages']%>" data-perpage="<%= results['per_page']%>"  data-prevnum="<%= results['prev_num']%>"> 
 		<%for(var i in results['data']){%>
 			<div class="project-detail">
 				<h3><%= results['data'][i]['name']%></h3>
@@ -149,11 +183,15 @@
 					</li> 
 					<li>
 						<i class="icon-map-marker" style="color:#fca75b"></i><span class="span1">所在地：</span>
-						<span style="color:#fca75b"><%= results['data'][i]['bidderLocationRequire']%></span> 
+						<span style="color:#fca75b"><%= (results['data'][i]['bidderLocationRequire'] ? results['data'][i]['bidderLocationRequire'] : "未填写")%></span> 
 					</li>
 				</ul>
 				<div>
-					<span style="font-weight:800;">行业分类：</span><span class="span1" style="color:#999999">asdasd</span>
+					<span style="font-weight:800;">行业分类：</span>
+					<%for(var j in results['data'][i]['categorys']['data']){%>
+						<span class="span1" style="color:#999999"><%= results['data'][i]['categorys']['data'][j]['name']%></span>
+					<%}%>
+					
 				</div>
 				<a class="btn" href="/projectDetail?projectid=<%= results['data'][i]['id']%>" style="border:0px;right:20px;top:30px;position:absolute"> 更多详情 </a>
 			</div> 
@@ -182,106 +220,121 @@
 </div>
 <% include footer.html %>
 <% include commonScript.html %> 
-<script   type="text/javascript"> 
+<script   type="text/javascript">  
+$(function(){      
+	console.log($('#fliter3_'+(getUrlParameter('orderby') ? getUrlParameter('orderby') : "")))
+	$('#fliter3_'+(getUrlParameter('orderby') ? getUrlParameter('orderby') : "0")).find('a').addClass('active'); 
+	if(getUrlParameter('orderby')!=0){  
+		$('#fliter3_'+(getUrlParameter('orderby') ? getUrlParameter('orderby') : "0")).find('#i_'+getUrlParameter('desc')).addClass('active'); 
+		 
+	}
+	$('#fliter2_'+(getUrlParameter('status') ? getUrlParameter('status') : "")).addClass('active');
+	$('#fliter1_'+(getUrlParameter('cid') ? getUrlParameter('cid') : "")).addClass('active'); 
 
-$(function(){   
-	/*var data=getProjectList();
-	$('.project-list').empty();
-	$('.project-list').append(projectString(data['data']))
-	$('#turnPage').myUtils('turnPage',data,changePage)*/
+
+	var turnPageData={
+		has_next: $('.project-list').attr('data-hasnext'),
+		has_prev: $('.project-list').attr('data-hasprev'),
+		next_num: $('.project-list').attr('data-nextnum'),
+		page: $('.project-list').attr('data-page'),
+		pages: $('.project-list').attr('data-pages'),
+		per_page: $('.project-list').attr('data-perpage'),
+		prev_num: $('.project-list').attr('data-prevnum'), 
+	}
+	$('#turnPage').myUtils('turnPage',turnPageData,changePage) 
+})  
+//行业筛选
+$('.fliter1>ul a').click(function(){  
+	var cid=$(this).attr("data-value");
+	var url=location.search.toString();
+	if(cid){ 
+		url=replaceParamVal(url,'cid',cid)  
+		url='/projectlist/1'+url; 
+	}else{ 
+		url='/projectlist/1'+removeParameter(url,'cid');
+		 
+	} 
+	location = url 
 }) 
-//全局变量
-var _cid=1,
-	_page=1,
-	_status=4,
-	_desc=0,
-	_keyword="";
-
-//状态筛选
-$('.filter1>ul a').click(function(){
-	_page=1
-	$(this).parent().parent('ul').find('a').removeClass('active');
-	$(this).addClass('active'); 
-	_cid=$(this).attr("data-value"); 
-	var data=getProjectList();
-	$('.project-list').empty();
-	$('.project-list').append(projectString(data['data'])) 
-	$('#turnPage').myUtils('turnPage',data,changePage)
+//项目状态
+$('.fliter2>ul a').click(function(){ 
+	var status=$(this).attr("data-value"); 
+	var url=location.search.toString(); 
+	location = url 
+	if(status){ 
+		url=replaceParamVal(url,'status',status) 
+		url='/projectlist/1'+url;
+		location = url 
+	}else{ 
+		url='/projectlist/1'+removeParameter(url,'status');
+		location = url  
+	} 
 })
-
-$('.filter2>ul a').click(function(){
-	_page=1
-	$(this).parent().parent('ul').find('a').removeClass('active');
-	$(this).addClass('active'); 
-	_status=$(this).attr("data-value"); 
-	var data=getProjectList();
-	$('.project-list').empty();
-	$('.project-list').append(projectString(data['data'])) 
-	$('#turnPage').myUtils('turnPage',data,changePage)
+//排序
+$('.fliter3>ul a').click(function(){ 
+	var orderby=$(this).attr('data-obderby');
+	var url=location.search.toString(); 
+	if(orderby==0){
+		url=replaceParamVal(url,'orderby',0) 
+		url='/projectlist/1'+url;
+	}else{
+		url=replaceParamVal(url,'orderby',orderby)
+		var desc=getUrlParameter('desc') 
+		if(desc==1){
+			url=replaceParamVal(url,'desc',2)
+		}else{
+			url=replaceParamVal(url,'desc',1)
+		}
+		url='/projectlist/1'+url;
+	} 
+	location = url  
 })
-function changePage(){
-	_page=$(this).attr('data-pageid');
-	var data=getProjectList();
-	$('.project-list').empty();
-	$('.project-list').append(projectString(data['data'])) 
-	$('#turnPage').myUtils('turnPage',data,changePage)
+//搜索
+$('.search a').click(function(){
+	var keyword=$('.search input').val();
+	console.log(keyword);
+	var url=location.search.toString();
+	url=replaceParamVal(url,'keyword',keyword)  
+	url='/projectlist/1'+url;
+	location = url 
+}) 
 
-}
-//拼接字符串
-function projectString(data){
-	var string="";
-	for(var i in data){
-		string+='<div class="project-detail">'+
-					'<h3>'+data[i]['name']+'</h3>'+
-					'<span class="subtitle">'+data[i]['owner']['nickname']+'</span></br></br>'+
-					'<ul>'+
-						'<li>'+
-							'<i class="icon-calendar" style="color:#98d859"></i><span class="span1">发布时间：</span>'+
-							'<span style="color:#98d859">'+data[i]['publishDate']+'</span>'+
-						'</li>'+
-						'<li>'+
-							'<i class="icon-time" style="color:#46b8da "></i><span class="span1">周期：</span>'+
-							'<span style="color:#46b8da">'+data[i]['timespan']+'</span>'+
-						'</li>'+
-						'<li>'+
-							'<i class="icon-money" style="color:#fca75b"></i><span class="span1">赏金：</span>'+
-							'<span style="color:#fca75b">'+data[i]['bonus']+'</span> '+
-						'</li>'+
-						'<li>'+
-							'<i class="icon-map-marker" style="color:#fca75b"></i><span class="span1">所在地：</span>'+
-							'<span style="color:#fca75b">'+data[i]['bidderLocationRequire']+'</span> '+
-						'</li>'+
-					'</ul>'+
-					'<div>'+
-						'<span style="font-weight:800;">行业分类：</span><span class="span1" style="color:#999999">asdasd</span>'+
-					'</div>'+
-					'<a class="btn" href="/projectDetail?projectid='+data[i]['id']+'" style="border:0px;right:20px;top:30px;position:absolute"> 更多详情 </a>'+
-				'</div> '; 
-	}  
-	return string;
+//翻页
+function changePage(){ 
+	var url=location.search.toString();
+	url='/projectlist/'+$(this).attr('data-pageid')+url; 
+	location =url 
 	
+} 
+//修改url参数 
+function replaceParamVal(url,paramName,replaceWith) { 
+   	var oUrl=url;
+   	var nUrl="";
+   	if(url.indexOf(paramName)>=0){
+   		var re=eval('/('+ paramName+'=)([^&]*)/gi');
+   		nUrl = oUrl.replace(re,paramName+'='+replaceWith);
+   	}else{
+   		if(url.indexOf("?")>=0){
+   			nUrl = oUrl+'&'+paramName+'='+replaceWith;
+   		}else{
+   			nUrl = oUrl+'?'+paramName+'='+replaceWith;
+   		} 
+   	} 
+    return nUrl
 }
-function getProjectList(){
-	var url="/projectlist/"+_page+"?cid="+_cid+"&status="+_status+"&desc="+_desc+"&keyword="+_keyword;
-	var temp;
-	$.ajax({
-		type: "get",
-		async: false,
-		url: url, 
-		contentType:"application/json",  
-		dataType:'json',
-		success: function(data){ 
-			console.log(data) 
-			 temp=data
-		},
-		error: function(){
-			alert('fail');
-		} 
-	}); 
-	return temp;
-
+//去除url参数
+function removeParameter(url,removeParam) { 
+	var re=eval('/(^\\?|&)'+ removeParam+'=[^&]*(&)?/g');
+	return url.replace(re, function(p0, p1, p2) {
+        return p1 === '?' || p2 ? p1 : '';
+    });  
 }
-
+function getUrlParameter(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
 </script> 
 </body>
 

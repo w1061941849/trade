@@ -4,6 +4,7 @@ body *{
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td 
 { margin:0; padding:0;border:0px; }  
 a{
+	font-size: 14px;
 	text-decoration:none;
 }
 ul{
@@ -44,6 +45,7 @@ header .logo, header .search{
 }
 header .nav-head-items{
 	width:100%;
+	height: 39px;
 }
 header .nav-head-items>li{
   	text-align: center;
@@ -52,11 +54,58 @@ header .nav-head-items>li{
   	display: inline-block;
 }
 header .nav-head-items>li>a{
- 	display: inline-block;
- 	font-size: 14px;
+ 	display: inline-block; 
  	color:black;
- 	padding:10px 0;
- 	  
+ 	padding:10px 0; 
+}
+.nav-head-items .afterLogin{
+
+	float:right;text-align:left;width:200px;position:relative; 
+}
+.nav-head-items .afterLogin img{ 
+	width:38px;height:38px;border-radius:100%;display:inline-block;
+
+}
+.nav-head-items .afterLogin>ul{ 
+	display: none;
+	position:absolute;right:0px;top:40px;z-index:901;  
+	text-align: left;
+	background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+.nav-head-items .afterLogin>ul>li{
+	display:block;
+	padding: 4px 20px 4px 20px;
+}
+.nav-head-items .afterLogin>ul>li>a,.nav-head-items .afterLogin>ul>li>i{ 
+	color:#999999; 
+}
+.nav-head-items .afterLogin>ul>li>a>i{
+	display: inline-block;padding-right: 10px;
+}
+.nav-head-items .afterLogin>ul>li:hover >a,.nav-head-items .afterLogin>ul>li:hover i{ 
+	cursor: pointer;
+	color:#e8594b;
+}
+.nav-head-items .afterLogin:hover ul{
+	display: block;
+}
+.afterLogin .vip1{ 
+	right: -10px;
+    bottom: 0px;
+    background: url('/images/common/vip.png') no-repeat -116px -24px;
+}
+.afterLogin .vip2{ 
+    right: -10px;
+    bottom: 0px;
+    background: url('/images/common/vip.png') no-repeat -92px -24px;
+	
 }
 /**header   end**/ 
 /**category**/
@@ -65,6 +114,9 @@ header .nav-head-items>li>a{
   	height:550px;width:250px;
   	background-color:rgba(0,0,0,0.8);
   	float: left;
+  	z-index: 100;
+  	left:0px;display: block;
+  	top: 2px;
 } 
 .categorys>li{
 	padding:10px 0;
@@ -114,19 +166,17 @@ header .nav-head-items>li>a{
 .recommend-block{
 	display:block;
 	float: left;
-	width:600px;
+	width:590px;
 	height:400px; 
+	margin-top:20px;
 	background-color:white; 
+	border-radius: 8px;
+    border: 1px solid rgba(0,0,0,.14);
+    box-shadow: 0 3px 8px -6px rgba(0,0,0,.1); 
 
-}
-.recommend-block:hover{
-	box-shadow: 0 0 38px rgba(0,0,0,.08) inset;  
-    -webkit-transition: all .15s ease;
-    transition: all .15s ease;
-}
-
+} 
 .recommend-block>h4{
-	padding:10px 0;
+	padding:10px ;
  	border-bottom: 1px solid #e0e0e0;
 }
 .recommend-block img{

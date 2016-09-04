@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html >
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<% include commonHead.html %> 
 <title>团队详情</title> 
-<link href="/stylesheets/base.css" rel="stylesheet"/> 
-<link rel="shortcut icon" href="images/config/favicon.ico" >  
-<link href="/stylesheets/font-awesome.css" rel="stylesheet"/>
+ 
 <style type="text/css">
 .header{
 	    background-color: rgba(0,0,0,0.8);
@@ -43,6 +41,41 @@
 	display: inline-block;
 
 }
+
+.works {
+	-webkit-column-count: 4;
+	-moz-column-count: 4;
+	column-count: 4;
+	-moz-column-gap:20px;
+	-webkit-column-gap:20px;
+	column-gap:20px;
+	padding: 10px;
+}
+.works  .box {
+	padding: 15px;
+	border: solid 2px #eeeeee;
+	border-radius: 4px;
+	margin-bottom: 15px;
+	cursor: pointer;
+	position: relative;
+	background-color: white
+}
+.works  .box img {
+	width: 100%;
+}
+.works  .box p {
+	position: absolute;
+	bottom: 4px;
+	padding:10px 10px; 
+	width: 100%;
+	background-color: rgba(0,0,0,0.8);
+	color:white; 
+	display: none;
+
+}
+.works  .box:hover p{
+	display:block;
+} 
 .tags a{
 	display: inline-block;
 	border-radius: 8px;
@@ -116,9 +149,21 @@
 	</div>  
 </section>
 <h1 style="text-align:center;color:#e8594b;margin:20px 0 100px 0;"><%= results['user']['nickname'] %></h1>	
+
+<!--作品展示-->
 <div class="w"> 
 	<h2 style="text-align:center;color:#e8594b;margin-top:20px;">作品展示</h2>	 	
 	<div class="works"> 
+		<%for(var i in results['works']['data']){%>
+			<div class="box"> 
+				<a style=" display:block;width:100%;height:100%;position:relative;overflow:hidden">
+					<img src="<%= results['works']['data'][i]['image']%>">
+					<p>asdasdsad</p> 
+				</a>
+			</div> 
+		<%}%>
+		
+
 	</div>
 </div>
 <!--参与的项目-->

@@ -131,6 +131,17 @@ input:active{
 	display:inline-block;
 	color:#999999;
 }
+.afterLogin .vip1{ 
+	right: -10px;
+    bottom: -10px;
+    background: url('/images/common/vip.png') no-repeat -116px -24px;
+}
+.afterLogin .vip2{ 
+    right: -10px;
+    bottom:-10px;
+    background: url('/images/common/vip.png') no-repeat -92px -24px;
+	
+}
 @keyframes myfirst
 {
 from {background: transparent;}

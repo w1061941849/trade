@@ -6,6 +6,8 @@ exports.showHtml = function (req, res, next) {
     var url=req.originalUrl;
     console.log(url)
 	var resultData={}; 
+	var cid=req.query.cid ? req.query.cid : ""
+
 	async.waterfall([
 	    function (done) {
 	    	var options={
@@ -21,6 +23,19 @@ exports.showHtml = function (req, res, next) {
 		    }) 
 	    },
 	    function (onearg, done) {   
+	    	 var options={
+		        "path":"/categorylist"
+		    }  
+		    httpUtil.get(options,function(result,err){  
+		        if(err){
+		            done(err, null);
+		        }else{   
+		        	resultData['categorylist']=result; 
+		            done(null, onearg);
+		        }  
+		    })  
+	    } ,
+	    function (onearg, done) {   
 	    	var arr=[];
 	    	for(var i in onearg['data']){
 	    		arr[i]= function(callback) {
@@ -34,23 +49,47 @@ exports.showHtml = function (req, res, next) {
 				}
 			    done(err, resultData) 
 			}); 
+	    } ,
+	    function (onearg, done) {   
+	    	var arr=[];
+	    	for(var i in onearg['data']){
+	    		arr[i]= function(callback) {
+	    			getUserCategorys(onearg['data'][i],callback)
+	    		}
+	    	} 
+	    	async.parallel(arr, 
+			function(err, results) { 
+				for(var i in resultData['data']){
+					resultData['data'][i]['categorys']=results[i]
+				}
+			    done(err, resultData) 
+			}); 
 	    }  
 	],  
     function(err, results) {   
-    	console.log(results)
+    	resultData['activeCid']=cid; 
+    	console.log(resultData)
     	res.render('projectlist',{'results':resultData}) 	
     }); 
  
 }; 
 
-
-exports.projectlist = function (req, res, next) { 
-	
-	 
  
-}; 
 function getUserInfo(params,callback){
 	var path=params['owner'].replace(appConfig.config.proxy.replace,"") 
+    var options={
+        "path":path
+    }  
+    httpUtil.get(options,function(result,err){  
+        if(err){
+            callback(err, null);
+        }else{   
+            callback(null, result);
+        }  
+    })  
+}
+function getUserCategorys(params,callback){
+	var path=params['categorys'].replace(appConfig.config.proxy.replace,"") 
     var options={
         "path":path
     }  

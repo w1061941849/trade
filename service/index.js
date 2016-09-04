@@ -1,8 +1,6 @@
 var httpUtil=require('../utils/http.js')
 var async= require('async');
 exports.showHtml = function (req, res, next) {   
-    	 
-    	  
     async.series({
         categorylist: function(callback){
             var options={ "path":"/categorylist" }  

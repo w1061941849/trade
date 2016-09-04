@@ -25,57 +25,37 @@ module.exports = function (app) {
 app.get("*",function(req,res,next){
     if(req.session.user){ 
         //var session=req.session.user;    
-        res.locals.session =req.session.user;    
+        res.locals.session =req.session.user;   
+        console.log(1); 
 
     }else{
-       res.locals.session={
-                "authenticationType": 0, 
-                "bankAuthentication": "http://10.0.1.122/api/v1.0/userauthen?userid=15&type=4", 
-                "categorys": "http://10.0.1.122/api/v1.0/15/usercategorys", 
-                "companyAuthentication": "http://10.0.1.122/api/v1.0/userauthen?userid=15&type=2", 
-                "defaultImage": "2.jpg", 
-                "description": null, 
-                "email": "bob143@qq.com", 
-                "id": 1, 
-                "imageLarge": "http://10.0.1.122/static/default/img/2.jpg", 
-                "imageMedium": "http://10.0.1.122/static/default/img/2.jpg", 
-                "imageSmall": "http://10.0.1.122/static/default/img/2.jpg", 
-                "location": null, 
-                "manualAuthentication": "http://10.0.1.122/api/v1.0/userauthen?userid=15&type=8", 
-                "nickname": "bob143", 
-                "participateProjects": "http://10.0.1.122/api/v1.0/userParticipateProjects/1?userid=15", 
-                "phone": null, 
-                "privateAuthentication": "http://10.0.1.122/api/v1.0/userauthen?userid=15&type=1", 
-                "publishedProjects": "http://10.0.1.122/api/v1.0/userPublishedProjects/1?userid=15", 
-                "registDate": "2016-08-31T15:54:04", 
-                "status": null, 
-                "tags": "http://10.0.1.122/api/v1.0/15/usertags", 
-                "works": "http://10.0.1.122/api/v1.0/15/userworks/1"
-          }
+        res.locals.session=""
         req.session.user={
               "authenticationType": 0, 
-                "bankAuthentication": "http://10.0.1.122/api/v1.0/userauthen?userid=15&type=4", 
-                "categorys": "http://10.0.1.122/api/v1.0/15/usercategorys", 
-                "companyAuthentication": "http://10.0.1.122/api/v1.0/userauthen?userid=15&type=2", 
+                "bankAuthentication": "http://139.196.183.6/api/v1.0/userauthen?userid=15&type=4", 
+                "categorys": "http://139.196.183.6/api/v1.0/15/usercategorys", 
+                "companyAuthentication": "http://139.196.183.6/api/v1.0/userauthen?userid=15&type=2", 
                 "defaultImage": "2.jpg", 
                 "description": null, 
                 "email": "bob143@qq.com", 
-                "id": 1, 
-                "imageLarge": "http://10.0.1.122/static/default/img/2.jpg", 
-                "imageMedium": "http://10.0.1.122/static/default/img/2.jpg", 
-                "imageSmall": "http://10.0.1.122/static/default/img/2.jpg", 
+                "id": 45, 
+                "imageLarge": "http://139.196.183.6/static/default/img/2.jpg", 
+                "imageMedium": "http://139.196.183.6/static/default/img/2.jpg", 
+                "imageSmall": "http://139.196.183.6/static/default/img/2.jpg", 
                 "location": null, 
-                "manualAuthentication": "http://10.0.1.122/api/v1.0/userauthen?userid=15&type=8", 
+                "manualAuthentication": "http://139.196.183.6/api/v1.0/userauthen?userid=15&type=8", 
                 "nickname": "bob143", 
-                "participateProjects": "http://10.0.1.122/api/v1.0/userParticipateProjects/1?userid=15", 
+                "participateProjects": "http://139.196.183.6/api/v1.0/userParticipateProjects/1?userid=15", 
                 "phone": null, 
-                "privateAuthentication": "http://10.0.1.122/api/v1.0/userauthen?userid=15&type=1", 
-                "publishedProjects": "http://10.0.1.122/api/v1.0/userPublishedProjects/1?userid=15", 
+                "privateAuthentication": "http://139.196.183.6/api/v1.0/userauthen?userid=15&type=1", 
+                "publishedProjects": "http://139.196.183.6/api/v1.0/userPublishedProjects/1?userid=15", 
                 "registDate": "2016-08-31T15:54:04", 
                 "status": null, 
-                "tags": "http://10.0.1.122/api/v1.0/15/usertags", 
-                "works": "http://10.0.1.122/api/v1.0/15/userworks/1"
-        }
+                "tags": "http://139.196.183.6/api/v1.0/15/usertags", 
+                "works": "http://139.196.183.6/api/v1.0/15/userworks/1"
+        }  
+
+        console.log(2); 
     }
     next();
 })   

@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html >
 <head> 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<meta name=”renderer” content=”webkit”> 
-<title>首页</title> 
-<link href="/stylesheets/base.css" rel="stylesheet"/>  
-<link rel="shortcut icon" href="images/config/favicon.ico" > 
+<% include commonHead.html %> 
+<title>首页</title>  
 <style>   
 
 .banner .banner-slide{
@@ -19,6 +14,7 @@
 }  
 .banner .banner-bottom-imgs{
 	float:left;width:950px;height:150px; 
+	margin-left: 250px;
 	//overflow: hidden;
 }
 .banner .banner-bottom-imgs img{
@@ -74,34 +70,7 @@ section>h2{
 <% include header.html %>
 <div class="banner">
 	<div class="w" style="position:relative;">  
-		 <ul class="categorys"> 
-			<%if(results['categorylist']){%>
-				<%for(var i in results['categorylist']['data']){%> 
-					<%if(results['categorylist']['data'][i]['id']==results['categorylist']['data'][i]['parentid']){%>
-						<li><%= results['categorylist']['data'][i]['name']%>
-							<ul class="drop-meanu"  > 
-								<%for(var j in results['categorylist']['data']){%>
-									<%if(results['categorylist']['data'][i]['id']==results['categorylist']['data'][j]['parentid']){%>
-									<li>
-									<span><%= results['categorylist']['data'][j]['name']%></span>
-									<div class="categorys-sons">
-										<ul>
-										<%for(var k in results['categorylist']['data']){%>
-											<%if(results['categorylist']['data'][j]['id']==results['categorylist']['data'][k]['parentid']){%>
-												 <a  href="/projectlist/1?cid=<%=results['categorylist']['data'][k]['id']%>"><%= results['categorylist']['data'][k]['name']%></a> 
-											<%}%> 
-										<%}%> 
-										</ul>
-									</div>
-									</li>
-									<%}%>  
-								<%}%>  
-							</ul>
-						</li>
-					<%}%> 
-				<%}%> 
-			<%}%>
-		</ul>   
+		   
 	<!-- 	<ul class="categorys">
 		<li>影视制作 
 			<ul class="drop-meanu"  >
