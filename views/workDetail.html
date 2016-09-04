@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html >
+<head>
+<% include commonHead.html %> 
+<title>作品详情</title> 
+ 
+<style type="text/css">
+
+.box{
+	background-color: white;
+	border-radius: 8px;
+    border: 1px solid rgba(0,0,0,.14);
+    box-shadow: 0 3px 8px -6px rgba(0,0,0,.1); 
+    width:800px;
+}
+
+.box h4{
+	padding: 10px 0px;
+	margin: 10px 20px;
+	border-bottom: 1px solid #e0e0e0;
+	font-size: 14px;
+	font-weight:500; 
+}
+.box img{
+	max-width: 760px;
+	margin: 20px; 
+}
+.box .bottom{
+	border-top: 1px solid #e0e0e0;
+	margin: 10px 20px;
+	padding:20px 0;
+
+}
+</style>
+</head> 
+<body style="overflow-x:hidden;  background:#f5f5f5">
+<% include header2.html%>
+<h3  style="margin:20px auto;width:1200px;color:#999999">作品详情</h3>
+<div class="w" style="position:relative"> 
+	<div class="box">
+		<h4>作品类型:
+		<%for(var i in results['tags']){%>
+			<span style="color:#999999"><%= results['tags'][i]['name']%>&nbsp;&nbsp;&nbsp;</span>
+		<%}%>
+		</h4>
+		<div style="text-align: center;">
+			<img src="<%= results['work']['image']%>"> 
+		</div>
+		<div class="bottom">
+			<span  >附件：      </span>
+			<%if(results['work']['file']){%>
+				<a  href="<%= results['work']['file']%>" class="btn"><i class="icon-cloud-download"></i>&nbsp;&nbsp;下载</a>
+			<%}else{%>
+				<span  >无  </span>
+			<%}%>
+			
+		</div> 
+	</div>
+	<div class="box" style="width:320px;position:absolute;top:0px;right:0px;padding:10px;">
+		<img src="<%= results['owner']['imageLarge']%>"  style="width:80px;height:80px;border-radius:100%;display:inline-block">
+		<div style="display:inline-block;vertical-align:top;margin:20px 0;">
+			<span style="font-weight:800;font-size:18px;"><%= results['owner']['nickname']%></span></br>
+			<span>发布日期：</span></br><span style="color:#999999;font-size:12px;"><%= results['work']['publishDate']%></span>
+		</div>
+		<div>
+			<img src="http://139.196.183.6/static/Uploads/user/45/work/fashion.jpg">
+		</div>
+	</div>
+	<h3 style="margin:20px 0;color:#999999">相关作品推荐</h3>
+	<div class="box">
+		<img src="/images/common/id-back-small.jpg">
+	</div>
+</div>
+<% include footer.html %>
+</body> 
+<script> 
+</script>
+</html>

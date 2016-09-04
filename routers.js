@@ -19,8 +19,9 @@ var vrhall=require('./service/vrhall.js')
 var mhall=require('./service/mhall.js') 
 var projectlist=require('./service/projectlist.js') 
 var projectDetail=require('./service/projectDetail.js') 
-var teamhall=require('./service/teamhall.js') 
+var userlist=require('./service/userlist.js') 
 var userDetail=require('./service/userDetail.js') 
+var workDetail=require('./service/workDetail.js') 
 module.exports = function (app) { 
 app.get("*",function(req,res,next){
     if(req.session.user){ 
@@ -30,7 +31,7 @@ app.get("*",function(req,res,next){
 
     }else{
         res.locals.session=""
-        req.session.user={
+     /*   req.session.user={
               "authenticationType": 0, 
                 "bankAuthentication": "http://139.196.183.6/api/v1.0/userauthen?userid=15&type=4", 
                 "categorys": "http://139.196.183.6/api/v1.0/15/usercategorys", 
@@ -54,7 +55,7 @@ app.get("*",function(req,res,next){
                 "tags": "http://139.196.183.6/api/v1.0/15/usertags", 
                 "works": "http://139.196.183.6/api/v1.0/15/userworks/1"
         }  
-
+*/
         console.log(2); 
     }
     next();
@@ -63,9 +64,10 @@ app.get("*",function(req,res,next){
 app.get('/',index.showHtml); 
 app.get('/vrhall',vrhall.showHtml);  
 app.get('/mhall',mhall.showHtml); 
-app.get('/teamhall',teamhall.showHtml);  
+app.get('/userlist/:page',userlist.showHtml);  
 app.get('/projectDetail',projectDetail.showHtml); 
 app.get('/userDetail',userDetail.showHtml); 
+app.get('/workDetail',workDetail.showHtml); 
 
 
 app.get('/projectlist/:page',projectlist.showHtml); 

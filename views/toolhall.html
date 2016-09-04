@@ -1,44 +1,14 @@
 <!DOCTYPE html>
 <html >
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>工具大厅</title> 
-<link href="/stylesheets/base.css" rel="stylesheet"/> 
-<link rel="shortcut icon" href="images/config/favicon.ico" >  
+<% include commonHead.html %>  
+<title>工具大厅</title>   
 <style type="text/css">
-.header{
-	    background-color: rgba(0,0,0,0.8);
-	    height: 60px;
-}
-.header>img{
-	padding:14px 20px;
-	display: inline-block;
-}
-.header ul{
-	vertical-align: top;
-	line-height: 60px;
-}
-.header ul li{
-	display: inline-block;
-	padding:0 10px;
-}
-.header ul li a{
-	color:white;
-}
+ 
 </style>
 </head> 
 <body style="overflow-x:hidden;">
-<div class="header">
-	<img src="/images/common/logo.png">
-	<ul> 
-		<li><a href="/">首页</a></li>
-		<li><a href="/vrhall">VR/AR大厅</a></li>
-		<li><a href="/mhall">影视制作大厅</a></li>
-		<li><a href="/teamhall">团队大厅</a></li> 
-		<li><a href="/servicehall">服务大厅</a></li>
-		<li><a href="/toolhall">工具大厅</a></li>
-	</ul>
-</div>
+<% include header2.html%>
 <div>
 	<img src="/images/common/tool_01.jpg" width="100%">
 	<img src="/images/common/tool_02.jpg" width="100%">

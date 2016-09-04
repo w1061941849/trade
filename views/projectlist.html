@@ -222,7 +222,7 @@
 <% include commonScript.html %> 
 <script   type="text/javascript">  
 $(function(){      
-	console.log($('#fliter3_'+(getUrlParameter('orderby') ? getUrlParameter('orderby') : "")))
+	 console.log(1);
 	$('#fliter3_'+(getUrlParameter('orderby') ? getUrlParameter('orderby') : "0")).find('a').addClass('active'); 
 	if(getUrlParameter('orderby')!=0){  
 		$('#fliter3_'+(getUrlParameter('orderby') ? getUrlParameter('orderby') : "0")).find('#i_'+getUrlParameter('desc')).addClass('active'); 

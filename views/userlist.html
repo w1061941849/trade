@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html >
+<head> 
+<% include commonHead.html %> 
+<title>团队大厅</title>  
+<style>  
+.categorys{
+	display: none;
+}
+#categorysMenua:hover .categorys{
+	display: block !important; 
+	top:0px;
+}
+.categorys,.categorys>li>ul {  
+	 height: 400px !important;
+}
+.fliters{
+	background-color: white;
+	margin:20px 0;
+	border-radius: 4px;
+	padding:0 20px;
+}
+.fliter{
+	border-bottom: 1px solid #e0e0e0;
+	padding:14px;
+}
+.fliter span{
+	font-size: 14px;
+	font-weight: 800;
+}
+.fliter ul>li{
+	display: inline-block; 
+	padding:0 10px;
+} 
+.fliter ul>li>a{
+	color:#999999;
+	font-size: 14px;display: inline-block;
+	cursor: pointer;
+} 
+.box-list{
+	background-color: white;
+	border-radius: 8px;
+    border: 1px solid rgba(0,0,0,.14);
+    box-shadow: 0 3px 8px -6px rgba(0,0,0,.1); 
+	
+}
+.box-list>.card-box{
+	padding:20px;
+	border-bottom: 1px solid #e0e0e0;
+	position: relative;
+	vertical-align: top;
+}
+.box-list>.card-box .content{
+	display: inline-block;
+	vertical-align: top;
+	padding:0 20px;
+}
+
+.box-list>.card-box .content>.name{ 
+	font-weight: 800;
+	font-size: 18px;
+}
+.box-list>.card-box .span1{
+	font-size: 14px;
+	color:#999999;
+}
+.box-list>.card-box:hover{
+	box-shadow: 0 0 38px rgba(0,0,0,.08) inset;  
+    -webkit-transition: all .15s ease;
+    transition: all .15s ease;
+}
+</style>  
+</head>
+<body style="overflow-X:hidden; background:#f5f5f5" >   
+<% include header.html %> 
+<div class="w">
+	<div class="fliters">
+		<div class="fliter">
+			<span>技能标签：</span>
+			<ul>
+				<li><a>aaaa</a></li>
+			</ul>
+		</div>
+		<div class="fliter">
+			<span>资质认证：</span>
+			<ul>
+				<li><a>个人认证</a></li>
+				<li><a>企业认证</a></li>
+				<li><a>交易认证</a></li>
+			</ul>
+		</div> 
+		<div class="fliter" style="border:0px;">
+			<span>行业分类：</span>
+			<ul>
+				<li><a>1</a></li>
+				<li><a>32</a></li>
+				<li><a>333</a></li>
+			</ul>
+		</div> 
+	</div>   
+</div>
+<div class="w">
+	<div class="box-list"  data-hasnext="<%= results['has_next']%>"  data-hasprev="<%= results['has_prev']%>" data-nextnum="<%= results['next_num']%>" data-page="<%= results['page']%>" data-pages="<%= results['pages']%>" data-perpage="<%= results['per_page']%>"  data-prevnum="<%= results['prev_num']%>"> 
+		<%for( var i in results['data']){%>
+			<div class="card-box" >   
+		 		<img style="height:100px;width:100px;background-color:red;"   src="<%= results['data'][i]['imageLarge'] %>">
+		 		<div class="content">
+		 			<span class="name"><%= results['data'][i]['nickname'] %></span></br>
+		 			<span class="span1"><%= (results['data'][i]['nickname'] ? results['data'][i]['nickname'] : "未填写") %></span></br></br>
+		 			<span style="width:400px;display:inline-block">联系方式：
+			 			<i class=" icon-envelope-alt" style="color:#98d859"> </i> 
+			 			<span class="span1"><%= (results['data'][i]['email'] ? results['data'][i]['email'] : "未填写") %></span>
+			 		</span>
+			 		<span>认证类型：</span> 
+			 		<%if(results['data'][i]['authenticationType'] & 1){%>
+			 			<span  class="span1">个人认证</span>
+			 		<%}if(results['data'][i]['authenticationType'] & 2){%>
+			 			<span  class="span1">企业认证</span>
+			 		<%}if(results['data'][i]['authenticationType'] & 4){%>
+			 			<span  class="span1">交易认证</span>
+			 		<%}%>
+			 	</div> 
+		 		<div> 
+				 	<span style="font-weight:800">技能标签：</span> 
+				 	<p class="span1" style="display:inline-block">aaaa</p>
+				</div>
+				<a class="btn" href="/userDetail?userid=<%= results['data'][i]['id'] %>" style="border:0px;right:40px;top:50px;position:absolute"> 更多详情 </a>
+			</div> 
+			 		
+
+		<%}%>
+
+
+		<!-- 
+		<div class="card-box" >   
+		 	<img style="height:100px;width:100px;background-color:red;">
+		 	<div class="content">
+		 		<span class="name">name</span></br>
+		 		<span class="span1">location</span></br></br>
+		 		<span style="width:400px;display:inline-block">联系方式：
+		 			<i class=" icon-envelope-alt" style="color:#98d859"> </i> 
+		 			<span class="span1">gongjun@qq.com</span>
+		 		</span>
+		 		<span>认证类型：</span> 
+		 	</div> 
+			 <div> 
+			 	<span style="font-weight:800">技能标签：</span> 
+			 	<p class="span1" style="display:inline-block">aaaa</p>
+			 </div>
+			<a class="btn" href="/projectDetail" style="border:0px;right:40px;top:50px;position:absolute"> 更多详情 </a>
+		</div>  -->
+	</div> 
+	<div id="turnPage"></div>
+</div>
+<% include footer.html %>
+<% include commonScript.html %> 
+<script   type="text/javascript"> 
+// //http://10.0.1.122/api/v1.0/userlist/2?cid=0&tag=&keyword=&authentype=0&orderby=0&desc=0 
+$(function(){
+	var turnPageData={
+		has_next: $('.box-list').attr('data-hasnext'),
+		has_prev: $('.box-list').attr('data-hasprev'),
+		next_num: $('.box-list').attr('data-nextnum'),
+		page: $('.box-list').attr('data-page'),
+		pages: $('.box-list').attr('data-pages'),
+		per_page: $('.box-list').attr('data-perpage'),
+		prev_num: $('.box-list').attr('data-prevnum'), 
+	}
+	$('#turnPage').myUtils('turnPage',turnPageData,changePage) 
+});
+//翻页
+function changePage(){ 
+	var url=location.search.toString();
+	url='/userlist/'+$(this).attr('data-pageid')+url; 
+	location =url 
+	
+} 
+</script> 
+</body>
+
+</html>
