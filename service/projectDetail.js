@@ -19,6 +19,19 @@ exports.showHtml = function (req, res, next) {
 		        }  
 		    }) 
 	    },
+	    function (onearg, done) {   
+	    	 var options={
+		        "path":"/29/recommenditemlist"
+		    };  
+		    httpUtil.get(options,function(result,err){  
+		        if(err){
+		            done(err, null);
+		        }else{   
+		        	resultData['list29']=result; 
+		            done(null, onearg);
+		        }  
+		    })  
+	    },
 	    function (onearg, done) { 
 	    	var path=onearg['owner'].replace(appConfig.config.proxy.replace,"") 
 	        var options={

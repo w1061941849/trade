@@ -6,6 +6,7 @@ exports.showHtml = function (req, res, next) {
      var url=req.originalUrl;
     console.log(url)
 	var resultData={};  
+	var cid=req.query.cid ? req.query.cid : ""
 	async.waterfall([
 	    function (done) {
 	    	var options={
@@ -34,12 +35,17 @@ exports.showHtml = function (req, res, next) {
 		    })  
 	    } , 
 	    function (onearg, done) {   
-	    	var arr=[];
-	    	for(var i in onearg['data']){
-	    		arr[i]= function(callback) {
-	    			getUserCategorys(onearg['data'][i],callback)
-	    		}
-	    	} 
+	    	var arr=[]; 
+	    	async.each(onearg['data'], function(obj, callback) {  
+			    arr.push(function(callback) {
+						getUserCategorys(obj,callback)
+					}) 
+			}, function(err) { 
+			     
+			}); 
+
+
+
 	    	async.parallel(arr, 
 			function(err, results) { 
 				for(var i in resultData['data']){
@@ -49,11 +55,11 @@ exports.showHtml = function (req, res, next) {
 			}); 
 	    }  
 	],  
-    function(err, results) {    
+    function(err, results) {   
+    	resultData['activeCid']=cid;  
     	console.log(resultData)
     	res.render('userlist',{'results':resultData}) 	
-    });  
-	
+    });   
 }; 
 function getUserCategorys(params,callback){
 	var path=params['categorys'].replace(appConfig.config.proxy.replace,"") 

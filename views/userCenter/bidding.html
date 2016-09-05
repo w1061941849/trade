@@ -44,8 +44,7 @@ tbody .status{
 </style>  
 </head>
 <body class="hold-transition skin-blue-light sidebar-mini">
-<div class="wrapper"> 
-
+<div class="wrapper">  
 <% include header.html %>
 <% include nav.html %> 
 <div class="content-wrapper"  > 
@@ -70,30 +69,25 @@ tbody .status{
 											<td><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></td> 
 										</tr>
 									</thead> 
-									<tbody>
-									<% if(result['data']) {%> 
-										<%var flag=false;%> 
-										<% for(var i in result['data']) {%> 
-											<tr data-userId= "<%= result['data'][i]['userid']%>" >
-												<td><span>name</span></td> 
-												<td><span> name</span></td> 
-												<td><span> name</span></td>
-												<td><span> name</span></td>
-											<% if(   result['data'][i]['status']  ==1) {%>
-												<td style="width:100px;"><a class="status"   onclick="chooseBidder(this)">选标</a></td> 
-												<% flag=true;%>
-											<%}else{%>
-												<td style="width:100px;"><a class="status" style="display:block;">中标</a></td>
-											<%}%> 
-											</tr>  
+									<tbody> 
+										<% for(var i in results['data']){%>
+											<tr data-userId="<%= results['data'][i]['user']['id']%>"   data-projectid="<%= results['project']['id']%>">
+												<td><span><%= results['data'][i]['user']['nickname']%></span></td> 
+												<td><span><%= (results['data'][i]['user']['location'] ? results['data'][i]['user']['location'] : "未填写")%></span></td> 
+												<td><span><%= (results['data'][i]['timespan'] ? results['data'][i]['timespan'] : "未填写")%></span></span></td>
+												<td><span><%= (results['data'][i]['price'] ? results['data'][i]['price'] : "未填写")%></span></span></td>
+												<td><a  onclick="showModel(this)" data-description="<%- (results['data'][i]['price'] ? results['data'][i]['description'] : '未填写')%>">查看</a></td>
+												<% if(results['hasBidded']){%>
+													<% if(results['data'][i]['status']==2){%>
+														<td style="width:100px;"><a class="status" style="display:block;">中标</a></td>
+													<%}else {%>
+														<td style="width:100px;"><a class="status" style="display:block;"></a></td>
+													<%}%> 
+												<%}else{%>  
+													<td style="width:100px;"><a class="status  noBidder" onclick="chooseBidder(this)"  >选标</a></td> 
+												<%}%>
+											</tr>
 										<%}%> 
-										<% if(flag){%>
-											<a>aaaa</a>
-											<% function user() { %>
-													console.log(1)
-											 <%} %>
-										<%}%> 
-									<%}%> 
 									</tbody>
 								</table>  
 							</div>
@@ -121,74 +115,13 @@ tbody .status{
 <script   type="text/javascript">  
 $(function () {   
 	//迭代竞标者列表
-		$.ajax({
-			type:"get",   //请求方式
-			url:"/api/v1.0/"+sessionStorage.task_id+"/bidlist",    //请求的url地址
-			dataType:"json",   //返回格式为json
-			async: false,
-			contentType:"application/json;charset=utf-8", 
-			success:function(data){ 
-				console.log(data);
-				var  statusFlag=false
-				for(var i in data['data']){
-					if(data['data'][i]['status']!=1){
-						statusFlag=true;
-					}
-					$('.table tbody').append(	stringbiddingInfo(data['data'][i]));
-				}
-				if(!statusFlag){
-					$(".table tbody").find('tr').mouseover(function(){ 
-						$(this).find('.status').css('display','block'); 
-					}).mouseout(function(){ 
-						$(this).find('.status').css('display','none');
-					}) 
-				}
-				$('.biddersNum').html('竞标人数:'+data['data'].length+"人");
-			},
-			error:function(){
-				alert("请求出错处理");
-			}
+		$(".table tbody").find('tr').mouseover(function(){ 
+			$(this).find('.noBidder').css('display','block'); 
+		}).mouseout(function(){ 
+			$(this).find('.noBidder').css('display','none');
 		}) 
 	 
-});  
-//拼接竞标管理字符串
-function stringbiddingInfo(data){
-	var string=""; 
-	var bidderInfo=getUserInfo(data['user'])  
-	string+='<tr data-userId="'+data['userid']+'">'+ 
-				'<td><span>'+bidderInfo['nickname']+'</span></td> '+ 
-				'<td><span>'+(bidderInfo['location'] ? bidderInfo['location'] : "未填写")+'</span></td> '+ 
-				'<td><span>'+ (bidderInfo['timespan'] ? bidderInfo['timespan'] : "未填写")+'</span></td>'+
-				'<td><span>'+(bidderInfo['price'] ? bidderInfo['price'] : "未填写")+'</span></td>'+
-				'<td><a  onclick="showModel(this)" data-description="'+ (bidderInfo['description'] ? bidderInfo['description'] : "未填写")+'">查看</a></td>';
-		if(data['status']==1){
-			string+='<td style="width:100px;"><a class="status"   onclick="chooseBidder(this)">选标</a></td>';
-		}else if(data['status']==2){
-			string+='<td style="width:100px;"><a class="status" style="display:block;">中标</a></td>';
-			 
-		}   
-		string+='</tr> ';  
-	return string;  
-} 
-//查询owner信息
-function getUserInfo(url){
-	var temp;
-	$.ajax({
-		type:"get",   //请求方式
-		url:url,    //请求的url地址
-		dataType:"json",   //返回格式为json
-		async: false,
-		contentType:"application/json;charset=utf-8", 
-		success:function(data){  
-			temp= data;
-		},
-		error:function(){
-			alert("请求出错处理")
-		}
-	})    	
-	return temp;
-}
- 
+});   
 //显示模态框
 function  showModel(e){
 	$('#myModal').modal('toggle')
@@ -202,12 +135,12 @@ function chooseBidder(e){
 	if(r==true){ 
 		var params={
 			"userid":parseInt($_e.parent().parent().attr('data-userId')),
-			"projectid":parseInt(sessionStorage.task_id)
+			"projectid":parseInt($_e.parent().parent().attr('data-projectid')),
 		}
 		console.log(params); 
 		$.ajax({
 			type:"put",   //请求方式
-			url:"/api/v1.0/bid",    //请求的url地址
+			url:"/bid",    //请求的url地址
 			dataType:"json",   //返回格式为json
 			contentType:"application/json;charset=utf-8",
 			async:false,//请求是否异步，默认为异步，这也是ajax重要特性

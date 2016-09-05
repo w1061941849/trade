@@ -12,7 +12,7 @@
 	top:0px;
 }
 .categorys,.categorys>li>ul {  
-	 height: 400px !important;
+	 height: auto !important;
 }
 .fliters{
 	background-color: white;
@@ -121,7 +121,7 @@
 					<% for(var i in results['categorylist']['data']){%>
 						<%if(results['categorylist']['data'][i]['id']== results['activeCid']){%>
 							<%for(var j in results['categorylist']['data']){%>
-								<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['parentid'] && results['categorylist']['data'][j]['parentid']!=results['categorylist']['data'][j]['id']){%>
+								<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['parentid'] ){%>
 									
 									<li><a   id="fliter1_<%=results['categorylist']['data'][j]['id']%>" data-value="<%=results['categorylist']['data'][j]['id']%>"><%=results['categorylist']['data'][j]['name']%></a></li>
 								<%}%>
@@ -222,7 +222,7 @@
 <% include commonScript.html %> 
 <script   type="text/javascript">  
 $(function(){      
-	 console.log(1);
+	console.log(1);
 	$('#fliter3_'+(getUrlParameter('orderby') ? getUrlParameter('orderby') : "0")).find('a').addClass('active'); 
 	if(getUrlParameter('orderby')!=0){  
 		$('#fliter3_'+(getUrlParameter('orderby') ? getUrlParameter('orderby') : "0")).find('#i_'+getUrlParameter('desc')).addClass('active'); 
@@ -303,38 +303,9 @@ $('.search a').click(function(){
 function changePage(){ 
 	var url=location.search.toString();
 	url='/projectlist/'+$(this).attr('data-pageid')+url; 
-	location =url 
-	
+	location =url  
 } 
-//修改url参数 
-function replaceParamVal(url,paramName,replaceWith) { 
-   	var oUrl=url;
-   	var nUrl="";
-   	if(url.indexOf(paramName)>=0){
-   		var re=eval('/('+ paramName+'=)([^&]*)/gi');
-   		nUrl = oUrl.replace(re,paramName+'='+replaceWith);
-   	}else{
-   		if(url.indexOf("?")>=0){
-   			nUrl = oUrl+'&'+paramName+'='+replaceWith;
-   		}else{
-   			nUrl = oUrl+'?'+paramName+'='+replaceWith;
-   		} 
-   	} 
-    return nUrl
-}
-//去除url参数
-function removeParameter(url,removeParam) { 
-	var re=eval('/(^\\?|&)'+ removeParam+'=[^&]*(&)?/g');
-	return url.replace(re, function(p0, p1, p2) {
-        return p1 === '?' || p2 ? p1 : '';
-    });  
-}
-function getUrlParameter(name)
-{
-     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-     var r = window.location.search.substr(1).match(reg);
-     if(r!=null)return  unescape(r[2]); return null;
-}
+
 </script> 
 </body>
 

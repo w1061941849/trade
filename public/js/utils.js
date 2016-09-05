@@ -73,4 +73,34 @@
             return methods[method].apply(this, Array.prototype.slice.call(arguments, 1),Array.prototype.slice.call(arguments, 2));
 		}
 	} 
-})(jQuery, window, document);
+})(jQuery, window, document); 
+//修改url参数 
+function replaceParamVal(url,paramName,replaceWith) { 
+   	var oUrl=url;
+   	var nUrl="";
+   	if(url.indexOf(paramName)>=0){
+   		var re=eval('/('+ paramName+'=)([^&]*)/gi');
+   		nUrl = oUrl.replace(re,paramName+'='+replaceWith);
+   	}else{
+   		if(url.indexOf("?")>=0){
+   			nUrl = oUrl+'&'+paramName+'='+replaceWith;
+   		}else{
+   			nUrl = oUrl+'?'+paramName+'='+replaceWith;
+   		} 
+   	} 
+    return nUrl
+}
+//去除url参数
+function removeParameter(url,removeParam) { 
+	var re=eval('/(^\\?|&)'+ removeParam+'=[^&]*(&)?/g');
+	return url.replace(re, function(p0, p1, p2) {
+        return p1 === '?' || p2 ? p1 : '';
+    });  
+}
+//获取url参数
+function getUrlParameter(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}

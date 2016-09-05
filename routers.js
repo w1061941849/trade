@@ -22,16 +22,17 @@ var projectDetail=require('./service/projectDetail.js')
 var userlist=require('./service/userlist.js') 
 var userDetail=require('./service/userDetail.js') 
 var workDetail=require('./service/workDetail.js') 
+
+var bidding=require('./service/bidding.js')  
 module.exports = function (app) { 
 app.get("*",function(req,res,next){
     if(req.session.user){ 
         //var session=req.session.user;    
-        res.locals.session =req.session.user;   
-        console.log(1); 
+        res.locals.session =req.session.user;    
 
     }else{
         res.locals.session=""
-     /*   req.session.user={
+       req.session.user={
               "authenticationType": 0, 
                 "bankAuthentication": "http://139.196.183.6/api/v1.0/userauthen?userid=15&type=4", 
                 "categorys": "http://139.196.183.6/api/v1.0/15/usercategorys", 
@@ -55,8 +56,7 @@ app.get("*",function(req,res,next){
                 "tags": "http://139.196.183.6/api/v1.0/15/usertags", 
                 "works": "http://139.196.183.6/api/v1.0/15/userworks/1"
         }  
-*/
-        console.log(2); 
+ 
     }
     next();
 })   
@@ -133,7 +133,11 @@ app.get('/:noteid/notemessagelist', message.notemessagelist)
 app.post('/notemessage', message.addMessage) 
 //bid
 app.get('/:projectid/bidcount',bid.bidcount);
-/*--------------other---start---------*/
+app.put('/bid',bid.put);
+app.post('/bid',bid.bid);
+
+/*--------------个人中心---start---------*/
+app.get('/bidding',bidding.showHtml); 
 
 app.get('/makeProject', function(req, res, next) {   
     res.render('userCenter/makeProject.html') 
@@ -186,36 +190,7 @@ app.get('/versions', function(req, res, next) {
 app.get('/suggections', function(req, res, next) {  
     res.render('userCenter/suggections.html') 
 });   
-app.get('/bidding', function(req, res, next) {    
-    async.waterfall([  
-        function(callback) {
-            var options={
-              "path":""+req.query.projectid+"/bidlist"
-            }
-            httpUtil.get(options,function(results,err){
-              callback(null,results,err) 
-            }) 
-        },
-        function(results, err, callback) {
-            for(var i in results['data']){  
-              var options={
-                "path":"user/"+results['data'][i]['userid']
-              }
-              httpUtil.get(options,function(result,err){
-                if(err){
-                  res.render("error.html")
-                }else{
-                  results['data'][i]['username']=result['nickname']
-                  console.log(results)
-                }
-              })  
-            }
-            callback(null,results,err) 
-        }
-      ],function(results,err,result){  
-     
-    })   
-});  
+ 
  
 /*--------------other---end---------*/
 

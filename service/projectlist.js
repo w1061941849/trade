@@ -25,7 +25,7 @@ exports.showHtml = function (req, res, next) {
 	    function (onearg, done) {   
 	    	 var options={
 		        "path":"/categorylist"
-		    }  
+		    };  
 		    httpUtil.get(options,function(result,err){  
 		        if(err){
 		            done(err, null);
@@ -34,14 +34,16 @@ exports.showHtml = function (req, res, next) {
 		            done(null, onearg);
 		        }  
 		    })  
-	    } ,
+	    }, 
 	    function (onearg, done) {   
-	    	var arr=[];
-	    	for(var i in onearg['data']){
-	    		arr[i]= function(callback) {
-	    			getUserInfo(onearg['data'][i],callback)
-	    		}
-	    	} 
+	    	var arr=[]; 
+	    	async.each(onearg['data'], function(obj, callback) {  
+			    arr.push(function(callback) {
+						getUserInfo(obj,callback)
+					}) 
+			}, function(err) { 
+			     
+			}); 
 	    	async.parallel(arr, 
 			function(err, results) { 
 				for(var i in resultData['data']){
@@ -52,11 +54,15 @@ exports.showHtml = function (req, res, next) {
 	    } ,
 	    function (onearg, done) {   
 	    	var arr=[];
-	    	for(var i in onearg['data']){
-	    		arr[i]= function(callback) {
-	    			getUserCategorys(onearg['data'][i],callback)
-	    		}
-	    	} 
+	    	 
+	    	async.each(onearg['data'], function(obj, callback) {  
+			    arr.push(function(callback) {
+						getUserCategorys(obj,callback)
+					}) 
+			}, function(err) { 
+			     
+			}); 
+
 	    	async.parallel(arr, 
 			function(err, results) { 
 				for(var i in resultData['data']){
@@ -73,8 +79,6 @@ exports.showHtml = function (req, res, next) {
     }); 
  
 }; 
-
- 
 function getUserInfo(params,callback){
 	var path=params['owner'].replace(appConfig.config.proxy.replace,"") 
     var options={

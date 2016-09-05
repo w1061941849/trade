@@ -6,12 +6,31 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
 a,span{
 	font-size: 14px;
 	text-decoration:none;
+	color:black;
 }
 ul{
 	display:inline-block;
  	margin:0px; 
  	padding:0px;
 } 
+.input{
+	display: block; 
+    width: 100%;
+    height: 20px;
+    padding: 6px 0px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
 .w{
 	width: 1200px;
 	margin:0 auto;
@@ -125,8 +144,7 @@ header .nav-head-items>li>a{
 	text-align: center; 
 }
 .categorys>li>ul { 
-	display: none;
-	height: 548px;
+	display: none; 
 	background-color: white;
 	text-align: left;
 	border:1px solid #e8594b;

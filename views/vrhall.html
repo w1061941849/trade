@@ -55,9 +55,9 @@ section>h2{
 			</div>
 			<div class="bd">
 				<ul>
-					<li><a><img  src="/test/abous_pic1.png" /></a></li>
-					<li><a><img  src="/test/abous_pic2.jpg"/></a></li>
-					<li><a><img  src="/test/abous_pic3.jpg" /></a></li>
+					<%for(var i in results['list2']['data']){%>
+						<li><a><img  src="<%= results['list2']['data'][i]['image']%>" /></a></li>
+					<%}%> 
 				</ul>
 			</div>
 		</div> 
@@ -69,41 +69,61 @@ section>h2{
 	<h2>VR/AR大厅	</h2>
 	<div class="recommend-block">
 		<h4>VR实拍</h4>
-		<div>	
-			<img src="/test/test.png" >
+		<div>	 
+			<% for(  var i=0; i<results['list12']['data'].length; i++){%> 
+			 		<%if(i==0){%>
+						<img src="<%= results['list12']['data'][i]['image']%>" > 
+			 		<%}%> 
+			<%}%>
 			<ul class="list">
-				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
-				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
+				<%for(var i in results['list7']['data']){%>
+					<li><span>￥<%= results['list7']['data'][i]['description']%></span><a href="<%= results['list7']['data'][i]['url']%>"><%= results['list7']['data'][i]['title']%></a></li>
+				<%}%>  
 			</ul>
 		</div>
 	</div>
 	<div class="recommend-block" style="float:right;">
 		<h4>VR游戏</h4>
-		<div>	
-			<img src="/test/test.png" >
+		<div>	 
+			<% for(  var i=0; i<results['list12']['data'].length; i++){%> 
+		 		<%if(i==1){%>
+					<img src="<%= results['list12']['data'][i]['image']%>" > 
+		 		<%}%> 
+			 <%}%>
 			<ul class="list">
-				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
-				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
+				<%for(var i in results['list8']['data']){%>
+					<li><span>￥<%= results['list8']['data'][i]['description']%></span><a href="<%= results['list8']['data'][i]['url']%>"><%= results['list8']['data'][i]['title']%></a></li>
+				<%}%> 
 			</ul>
 		</div>
 	</div>
 	<div class="recommend-block">
 		<h4>AR教育</h4>
-		<div>	
-			<img src="/test/test.png" >
+		<div>	 
+			<% for(  var i=0; i<results['list12']['data'].length; i++){%> 
+			 		<%if(i==2){%>
+						<img src="<%= results['list12']['data'][i]['image']%>" > 
+			 		<%}%> 
+			 <%}%>
 			<ul class="list">
-				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
-				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
+				<%for(var i in results['list9']['data']){%>
+					<li><span>￥<%= results['list9']['data'][i]['description']%></span><a href="<%= results['list9']['data'][i]['url']%>"><%= results['list9']['data'][i]['title']%></a></li>
+				<%}%> 
 			</ul>
 		</div>
 	</div>
 	<div class="recommend-block" style="float:right;">
 		<h4>AR游戏</h4>
 		<div>	
-			<img src="/test/test.png" >
+			 <% for(  var i=0; i<results['list12']['data'].length; i++){%> 
+			 		<%if(i==3){%>
+						<img src="<%= results['list12']['data'][i]['image']%>" > 
+			 		<%}%> 
+			 <%}%> 
 			<ul class="list">
-				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
-				<li><span>￥1000</span><a>《绝地大逃亡》</a></li>
+				<%for(var i in results['list10']['data']){%>
+					<li><span>￥<%= results['list10']['data'][i]['description']%></span><a   href="<%= results['list10']['data'][i]['url']%>" ><%= results['list10']['data'][i]['title']%></a></li>
+				<%}%> 
 			</ul>
 		</div>
 	</div>
@@ -116,21 +136,27 @@ section>h2{
 		<img src="/images/common/navigation1.png">
 		<span>V R 游 戏</span>
 		<div class="hotNavItems">
-			<a>aaaaa</a>
+			<%for(var i in results['list20']['data']){%>
+				<a href="<%= results['list20']['data'][i]['url']%>"><%= results['list20']['data'][i]['title']%></a>
+			<%}%> 
 		</div>
 	</div>
 	<div class="hotNavigation">
 		<img src="/images/common/navigation2.png">
 		<span>V R 游 戏</span>
 		<div class="hotNavItems">
-			<a>aaaaa</a>
+			<%for(var i in results['list19']['data']){%>
+				<a href="<%= results['list19']['data'][i]['url']%>"><%= results['list19']['data'][i]['title']%></a>
+			<%}%> 
 		</div>
 	</div>
 	<div class="hotNavigation" style="margin:0px;">
 		<img src="/images/common/navigation3.png">
 		<span>V R 游 戏</span>
 		<div class="hotNavItems">
-			<a>aaaaa</a>
+			<%for(var i in results['list21']['data']){%>
+				<a href="<%= results['list21']['data'][i]['url']%>"><%= results['list21']['data'][i]['title']%></a>
+			<%}%> 
 		</div>
 	</div>
 	<div style="clear:both"></div>
@@ -139,21 +165,27 @@ section>h2{
 		<img src="/images/common/navigation4.png">
 		<span>V R 游 戏</span>
 		<div class="hotNavItems">
-			<a>aaaaa</a>
+			<%for(var i in results['list22']['data']){%>
+				<a href="<%= results['list22']['data'][i]['url']%>"><%= results['list22']['data'][i]['title']%></a>
+			<%}%> 
 		</div>
 	</div>
 	<div class="hotNavigation">
 		<img src="/images/common/navigation5.png">
 		<span>V R 游 戏</span>
 		<div class="hotNavItems">
-			<a>aaaaa</a>
+			<%for(var i in results['list23']['data']){%>
+				<a href="<%= results['list23']['data'][i]['url']%>"><%= results['list23']['data'][i]['title']%></a>
+			<%}%> 
 		</div>
 	</div>
 	<div class="hotNavigation" style="margin:0px;">
 		<img src="/images/common/navigation6.png">
 		<span>V R 游 戏</span>
 		<div class="hotNavItems">
-			<a>aaaaa</a>
+			<%for(var i in results['list24']['data']){%>
+				<a href="<%= results['list24']['data'][i]['url']%>" ><%= results['list24']['data'][i]['title']%></a>
+			<%}%> 
 		</div>
 	</div>
 	<div style="clear:both"></div>
