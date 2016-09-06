@@ -11,7 +11,7 @@
 	border-radius: 8px;
     border: 1px solid rgba(0,0,0,.14);
     box-shadow: 0 3px 8px -6px rgba(0,0,0,.1); 
-    width:800px;
+    width:100%; 
 }
 
 .box h4{
@@ -20,11 +20,33 @@
 	border-bottom: 1px solid #e0e0e0;
 	font-size: 14px;
 	font-weight:500; 
-}
-.box img{
-	max-width: 760px;
+} 
+.box .pic{
+	width: 160px; 
 	margin: 20px; 
+	display: block;
+	float: left;
+	position: relative;
+	overflow: hidden; 
 }
+.box .pic p{
+	position: absolute;
+	bottom: 4px;
+	padding:10px 10px; 
+	width: 100%;
+	background-color: rgba(0,0,0,0.8);
+	color:white; 
+	display: none;
+}
+.box .pic:hover p{
+	display: block;
+
+}
+.box .pic img{
+	width:100%; 
+
+}
+
 .box .bottom{
 	border-top: 1px solid #e0e0e0;
 	margin: 10px 20px;
@@ -37,7 +59,7 @@
 <% include header2.html%>
 <h3  style="margin:20px auto;width:1200px;color:#999999">作品详情</h3>
 <div class="w" style="position:relative"> 
-	<div class="box">
+	<div class="box" style="width:800px;">
 		<h4>作品类型:
 		<%for(var i in results['tags']){%>
 			<span style="color:#999999"><%= results['tags'][i]['name']%>&nbsp;&nbsp;&nbsp;</span>
@@ -56,19 +78,33 @@
 			
 		</div> 
 	</div>
-	<div class="box" style="width:320px;position:absolute;top:0px;right:0px;padding:10px;">
-		<img src="<%= results['owner']['imageLarge']%>"  style="width:80px;height:80px;border-radius:100%;display:inline-block">
-		<div style="display:inline-block;vertical-align:top;margin:20px 0;">
-			<span style="font-weight:800;font-size:18px;"><%= results['owner']['nickname']%></span></br>
-			<span>发布日期：</span></br><span style="color:#999999;font-size:12px;"><%= results['work']['publishDate']%></span>
-		</div>
-		<div>
-			<img src="http://139.196.183.6/static/Uploads/user/45/work/fashion.jpg">
-		</div>
-	</div>
+	<div style="width:320px;position:absolute;top:0px;right:0px;padding:0 10px;">
+		<div class="box" >
+			<img src="<%= results['owner']['imageLarge']%>"  style="width:80px;height:80px;margin-left:20px;margin-top:10px;border-radius:100%;display:inline-block">
+			<div style="display:inline-block;vertical-align:top;margin:20px 0;">
+				<span style="font-weight:800;font-size:18px;"><%= results['owner']['nickname']%></span></br>
+				<span>发布日期：</span></br><span style="color:#999999;font-size:12px;"><%= results['work']['publishDate']%></span>
+			</div> 
+		</div> 
+		<% for(var i=0; i<4;i++){%>
+			<div class="box">
+				<a  href="<%= results['list30']['data'][i]['url']%>" class="pic" style="width:200px;margin:20px auto;float:none;">
+					<img src="<%= results['list30']['data'][i]['image']%>" > 
+					<p><%= results['list30']['data'][i]['title']%></p> 
+				</a>
+				<div style="clear:both;"></div>
+			</div>
+		<%}%> 
+	</div> 
 	<h3 style="margin:20px 0;color:#999999">相关作品推荐</h3>
-	<div class="box">
-		<img src="/images/common/id-back-small.jpg">
+	<div class="box" style="width:800px;">
+		<% for(var i=0; i<4;i++){%>
+			<a  href="<%= results['list30']['data'][i]['url']%>" class="pic"  >
+				<img src="<%= results['list30']['data'][i]['image']%>"> 
+				<p><%= results['list30']['data'][i]['title']%></p>
+			</a>
+		<%}%> 
+		<div style="clear:both;"></div>
 	</div>
 </div>
 <% include footer.html %>

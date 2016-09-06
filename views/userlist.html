@@ -77,11 +77,14 @@
 <body style="overflow-X:hidden; background:#f5f5f5" >   
 <% include header.html %> 
 <div class="w">
-	<div class="fliters">
+	<div class="fliters  ">
 		<div class="fliter fliter1">
 			<span>技能标签：</span>
 			<ul>
-				<li><a>aaaa</a></li>
+				<% for(var i in results['list25']['data']){%>
+					<li><a   data-value="<%= results['list25']['data'][i]['title']%>"><%= results['list25']['data'][i]['title']%></a></li>
+				<%}%>
+				
 			</ul>
 		</div>
 		<div class="fliter fliter2">
@@ -108,8 +111,18 @@
 						<%}%>
 					<%}%> 
 				<%}else{%>
-					<li><a class="active" data-value="">不限</a></li>
-				<%}%> 
+					<li><a class="active" data-value="">不限</a></li> 
+					<% for(var i in results['categorylist']['data']){%>		 
+						<%if( results['categorylist']['data'][i]['id']== results['ocid'] ){%> 
+							<%for(var j in results['categorylist']['data']){%>
+								<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['parentid'] ){%>
+									
+									<li><a   id="fliter3_<%=results['categorylist']['data'][j]['id']%>" data-value="<%=results['categorylist']['data'][j]['id']%>"><%=results['categorylist']['data'][j]['name']%></a></li>
+								<%}%>
+							<%}%>
+						<%}%>
+					<%}%> 
+				<%}%>  
 			</ul>
 		</div> 
 	</div>   
@@ -120,11 +133,27 @@
 			<div class="card-box" >   
 		 		<img style="height:100px;width:100px;background-color:red;"   src="<%= results['data'][i]['imageLarge'] %>">
 		 		<div class="content">
-		 			<span class="name"><%= results['data'][i]['nickname'] %></span></br>
+		 			<span class="name"><%= results['data'][i]['nickname'] %></span>
+		 			<%if(results['data'][i]['authenticationType'] & 1) {%>
+						<div class="vip1" title="个人"  style="width:24px;height:24px;position:relative;top:8px;display:inline-block;"></div>
+		 			<%}else if(results['data'][i]['authenticationType'] & 2){%>
+		 				<div class="vip2" title="企业" style="width:24px;height:24px;position:relative;top:8px;display:inline-block;"></div>
+		 			<%}%>
+		 			
+		 			</br>
 		 			<span class="span1"><%= (results['data'][i]['nickname'] ? results['data'][i]['nickname'] : "未填写") %></span></br></br>
 		 			<span style="width:400px;display:inline-block">联系方式：
-			 			<i class=" icon-envelope-alt" style="color:#98d859"> </i> 
-			 			<span class="span1"><%= (results['data'][i]['email'] ? results['data'][i]['email'] : "未填写") %></span>
+			 			
+			 			<%if(results['data'][i]['email']){%>
+			 				<i class="icon-phone"  title="<%= results['data'][i]['email']%>" style="color:#98d859;margin-right:20px;"> </i> 
+			 			<%}%>
+			 			<%if(results['data'][i]['phone']){%>
+			 				<i class=" icon-envelope-alt"  title="<%= results['data'][i]['phone']%>" style="color:#46b8da;margin-right:20px;"> </i> 
+			 			<%}%>
+			 			<%if(results['data'][i]['location']){%>
+			 				<i class=" icon-map-marker"  title="<%= results['data'][i]['location']%>" style="color:#fca75b;margin-right:20px;"> </i> 
+			 			<%}%>
+			 			
 			 		</span>
 			 		<span>认证类型：</span> 
 			 		<%if(results['data'][i]['authenticationType'] & 1){%>
@@ -133,14 +162,22 @@
 			 			<span  class="span1">企业认证</span>
 			 		<%}if(results['data'][i]['authenticationType'] & 4){%>
 			 			<span  class="span1">交易认证</span>
+			 		<%} else{%>
+			 			<span  class="span1">未认证</span>
 			 		<%}%>
 			 	</div> 
 		 		<div> 
 				 	<span style="font-weight:800">技能标签：</span> 
 				 	<p class="span1" style="display:inline-block">
-						<% for(var j in results['data'][i]['categorys']['data']){%>
-							<%= results['data'][i]['categorys']['data'][j]['name']%>
-						<%}%>
+
+				 		<% if( results['data'][i]['categorys']['data'].length>0){%>
+							<% for(var j in results['data'][i]['categorys']['data']){%>
+								<%= results['data'][i]['categorys']['data'][j]['name']%>
+							<%}%>
+				 		<%}else{%>
+							未添加
+				 		<%}%>
+						
 				 	</p>
 				</div>
 				<a class="btn" href="/userDetail?userid=<%= results['data'][i]['id'] %>" style="border:0px;right:40px;top:50px;position:absolute"> 更多详情 </a>
@@ -176,8 +213,7 @@
 <script   type="text/javascript"> 
 // //http://10.0.1.122/trade/teamhall.html?page=1&keyword=&kind=&authentype=0&orderby=0&desc=0&li1_color=0&li2_color=0&li3_color=0&cid=0&parkind=2 
 $(function(){
-	$('.categorys-sons a').each(function(){
-		console.log($(this))
+	$('.categorys-sons a').each(function(){ 
 		var href=$(this).attr('href').replace("projectlist","userlist")
 		$(this).attr("href",href)
 	})
@@ -200,10 +236,21 @@ function changePage(){
 	url='/userlist/'+$(this).attr('data-pageid')+url; 
 	location =url 
 	
-} 
-
-
-
+}  
+//技能标签筛选
+$('.fliter1>ul a').click(function(){  
+	var tag=$(this).attr("data-value");
+	var url=location.search.toString();
+	if(tag){
+		url=removeParameter(url,'otag');
+		url=replaceParamVal(url,'tag',tag)  
+		url='/projectlist/1'+url; 
+	}else{ 
+		url=replaceParamVal(url,'otag',getUrlParameter('tag'))
+		url='/projectlist/1'+removeParameter(url,'tag');
+	} 
+	location = url 
+}) 
 //状态筛选
 $('.fliter2>ul a').click(function(){ 
 	var authentype=$(this).attr("data-value"); 
@@ -223,12 +270,23 @@ $('.fliter3>ul a').click(function(){
 	var cid=$(this).attr("data-value");
 	var url=location.search.toString();
 	if(cid){ 
+		url=removeParameter(url,'ocid');
 		url=replaceParamVal(url,'cid',cid)  
 		url='/userlist/1'+url; 
 	}else{ 
-		url='/userlist/1'+removeParameter(url,'cid');
+		url=replaceParamVal(url,'ocid',getUrlParameter('cid'))
+		url='/userlist/1'+removeParameter(url,'cid'); 
 		 
 	} 
+	location = url 
+}) 
+//搜索
+$('.search a').click(function(){
+	var keyword=$('.search input').val();
+	console.log(keyword);
+	var url=location.search.toString();
+	url=replaceParamVal(url,'keyword',keyword)  
+	url='/userlist/1'+url;
 	location = url 
 }) 
 </script> 

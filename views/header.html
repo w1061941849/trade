@@ -20,9 +20,9 @@
 									<li><%= results['categorylist']['data'][i]['name']%>
 										<ul class="drop-meanu"   > 
 											<%for(var j in results['categorylist']['data']){%>
-												<%if(results['categorylist']['data'][i]['id']==results['categorylist']['data'][j]['parentid']){%>
+												<%if(results['categorylist']['data'][i]['id']==results['categorylist']['data'][j]['parentid'] && results['categorylist']['data'][j]['parentid']!= results['categorylist']['data'][j]['id']  ){%>
 												<li>
-												<span><%= results['categorylist']['data'][j]['name']%></span>
+												<span><a style="color:#e8594b" href="/projectlist/1?cid=<%=results['categorylist']['data'][j]['id']%>"><%= results['categorylist']['data'][j]['name']%></a></span>
 												<div class="categorys-sons">
 													<ul >
 													<%for(var k in results['categorylist']['data']){%>

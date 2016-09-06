@@ -4,7 +4,7 @@ var appConfig=require('../appConfig.js');
 var URL = require('url');
 exports.showHtml = function (req, res, next) {    
     var workid = URL.parse(req.url, true).query.workid; 
-	var resultData={};
+	var resultData={}; 
 	async.waterfall([
 	    function (done) {
 	    	var options={
@@ -45,6 +45,30 @@ exports.showHtml = function (req, res, next) {
 				            callback(err, null);
 				        }else{ 
 				        	resultData['tags']= result;
+				            callback(null, result);
+				        }  
+				    }) 
+			    },function(callback){ 
+			        var options={
+				        "path":"/30/recommenditemlist"
+				    }  
+				    httpUtil.get(options,function(result,err){  
+				        if(err){
+				            callback(err, null);
+				        }else{ 
+				        	resultData['list30']= result;
+				            callback(null, result);
+				        }  
+				    }) 
+			    },function(callback){ 
+			        var options={
+				        "path":"/31/recommenditemlist"
+				    }  
+				    httpUtil.get(options,function(result,err){  
+				        if(err){
+				            callback(err, null);
+				        }else{ 
+				        	resultData['list31']= result;
 				            callback(null, result);
 				        }  
 				    }) 

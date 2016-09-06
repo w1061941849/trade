@@ -7,6 +7,9 @@ exports.showHtml = function (req, res, next) {
     console.log(url)
 	var resultData={}; 
 	var cid=req.query.cid ? req.query.cid : ""
+	var ocid=req.query.ocid ? req.query.ocid : "" 
+	var parentCategory=""
+	var hasSonCategory=false
 
 	async.waterfall([
 	    function (done) {
@@ -73,7 +76,20 @@ exports.showHtml = function (req, res, next) {
 	    }  
 	],  
     function(err, results) {   
-    	resultData['activeCid']=cid; 
+    	 
+    	for(var i in resultData['categorylist']['data']){
+    		
+    		if(resultData['categorylist']['data'][i]['parentid']==cid){
+    			hasSonCategory=true;
+    			break;
+    		}
+    		if(resultData['categorylist']['data'][i]['id']==cid){
+    			parentCategory= resultData['categorylist']['data'][i]['parentid']
+    		}
+    	} 
+    	resultData['activeCid']=cid;    
+    	resultData['hasSonCategory']=hasSonCategory;    
+    	resultData['parentCategory']=parentCategory;    
     	console.log(resultData)
     	res.render('projectlist',{'results':resultData}) 	
     }); 

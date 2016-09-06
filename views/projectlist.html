@@ -115,24 +115,44 @@
 	<div class="fliters">
 		<div class="fliter fliter1"  data-activeCid="<%= results['activeCid']%>">
 			<span>行业分类：</span>
-			<ul>
-				<%if(results['activeCid']){%>
-					<li><a   data-value="">不限</a></li>
-					<% for(var i in results['categorylist']['data']){%>
-						<%if(results['categorylist']['data'][i]['id']== results['activeCid']){%>
-							<%for(var j in results['categorylist']['data']){%>
-								<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['parentid'] ){%>
-									
-									<li><a   id="fliter1_<%=results['categorylist']['data'][j]['id']%>" data-value="<%=results['categorylist']['data'][j]['id']%>"><%=results['categorylist']['data'][j]['name']%></a></li>
+			<ul>  
+				 
+				<%if(results['parentCategory']){%>
+					<%if(results['hasSonCategory']){%>
+						<li><a id="fliter1_<%=results['parentCategory']%>" class="active" data-value="<%= results['parentCategory']%>">不限</a></li> 
+						<% for(var i in results['categorylist']['data']){%>	 
+							<%if( results['categorylist']['data'][i]['id']== results['activeCid']){%>   
+								<%for(var j in results['categorylist']['data']){%>
+									<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['id']  && results['categorylist']['data'][j]['parentid']!=results['categorylist']['data'][j]['id']){%> 
+										<li><a   id="fliter1_<%=results['categorylist']['data'][j]['id']%>" data-value="<%=results['categorylist']['data'][j]['id']%>"><%=results['categorylist']['data'][j]['name']%></a></li>
+									<%}%>
+								<%}%>
+							<%}%>
+						<%}%>  
+					<%}else{%>
+						<li><a id="fliter1_<%=results['parentCategory']%>"  data-value="<%= results['parentCategory']%>">不限</a></li> 
+						<% for(var i in results['categorylist']['data']){%>	 
+							<%if( results['categorylist']['data'][i]['id']== results['activeCid']){%>   
+								<%for(var j in results['categorylist']['data']){%>
+									<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['parentid']  && results['categorylist']['data'][j]['parentid']!=results['categorylist']['data'][j]['id']){%> 
+										<li><a   id="fliter1_<%=results['categorylist']['data'][j]['id']%>" data-value="<%=results['categorylist']['data'][j]['id']%>"><%=results['categorylist']['data'][j]['name']%></a></li>
+									<%}%>
 								<%}%>
 							<%}%>
 						<%}%>
-					<%}%> 
-				<%}else{%>
-					<li><a class="active" data-value="">不限</a></li>
-				<%}%> 
+					<%}%>   
+				<%}else{%> 
+					<%if(results['hasSonCategory']){%> 
+						<% for(var i in results['categorylist']['data']){%>	  
+							<%if(results['categorylist']['data'][i]['parentid']==results['categorylist']['data'][i]['id']  ){%> 
+								<li><a   id="fliter1_<%=results['categorylist']['data'][i]['id']%>" data-value="<%=results['categorylist']['data'][i]['id']%>"><%=results['categorylist']['data'][i]['name']%></a></li>
+							<%}%> 
+						<%}%>  
+					<%}%>   
+				<%}%>
+				
 			</ul>
-		</div>  
+		</div>   
 		<div class="fliter fliter2" style="">
 			<span>项目状态：</span>
 			<ul>
@@ -221,17 +241,14 @@
 <% include footer.html %>
 <% include commonScript.html %> 
 <script   type="text/javascript">  
-$(function(){      
-	console.log(1);
+$(function(){       
 	$('#fliter3_'+(getUrlParameter('orderby') ? getUrlParameter('orderby') : "0")).find('a').addClass('active'); 
 	if(getUrlParameter('orderby')!=0){  
 		$('#fliter3_'+(getUrlParameter('orderby') ? getUrlParameter('orderby') : "0")).find('#i_'+getUrlParameter('desc')).addClass('active'); 
 		 
 	}
 	$('#fliter2_'+(getUrlParameter('status') ? getUrlParameter('status') : "")).addClass('active');
-	$('#fliter1_'+(getUrlParameter('cid') ? getUrlParameter('cid') : "")).addClass('active'); 
-
-
+	$('#fliter1_'+(getUrlParameter('cid') ? getUrlParameter('cid') : "")).addClass('active');  
 	var turnPageData={
 		has_next: $('.project-list').attr('data-hasnext'),
 		has_prev: $('.project-list').attr('data-hasprev'),
@@ -250,9 +267,8 @@ $('.fliter1>ul a').click(function(){
 	if(cid){ 
 		url=replaceParamVal(url,'cid',cid)  
 		url='/projectlist/1'+url; 
-	}else{ 
+	}else{  
 		url='/projectlist/1'+removeParameter(url,'cid');
-		 
 	} 
 	location = url 
 }) 

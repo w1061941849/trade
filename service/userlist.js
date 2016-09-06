@@ -7,6 +7,7 @@ exports.showHtml = function (req, res, next) {
     console.log(url)
 	var resultData={};  
 	var cid=req.query.cid ? req.query.cid : ""
+	var ocid=req.query.ocid ? req.query.ocid : ""
 	async.waterfall([
 	    function (done) {
 	    	var options={
@@ -35,6 +36,19 @@ exports.showHtml = function (req, res, next) {
 		    })  
 	    } , 
 	    function (onearg, done) {   
+	    	 var options={
+		        "path":"/25/recommenditemlist"
+		    }  
+		    httpUtil.get(options,function(result,err){  
+		        if(err){
+		            done(err, null);
+		        }else{   
+		        	resultData['list25']=result; 
+		            done(null, onearg);
+		        }  
+		    })  
+	    } , 
+	    function (onearg, done) {   
 	    	var arr=[]; 
 	    	async.each(onearg['data'], function(obj, callback) {  
 			    arr.push(function(callback) {
@@ -42,10 +56,7 @@ exports.showHtml = function (req, res, next) {
 					}) 
 			}, function(err) { 
 			     
-			}); 
-
-
-
+			});  
 	    	async.parallel(arr, 
 			function(err, results) { 
 				for(var i in resultData['data']){
@@ -57,6 +68,7 @@ exports.showHtml = function (req, res, next) {
 	],  
     function(err, results) {   
     	resultData['activeCid']=cid;  
+    	resultData['ocid']=ocid;  
     	console.log(resultData)
     	res.render('userlist',{'results':resultData}) 	
     });   

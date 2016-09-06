@@ -115,12 +115,12 @@ header .nav-head-items>li>a{
 .nav-head-items .afterLogin:hover ul{
 	display: block;
 }
-.afterLogin .vip1{ 
+.vip1{ 
 	right: -10px;
     bottom: 0px;
     background: url('/images/common/vip.png') no-repeat -116px -24px;
 }
-.afterLogin .vip2{ 
+.vip2{ 
     right: -10px;
     bottom: 0px;
     background: url('/images/common/vip.png') no-repeat -92px -24px;
