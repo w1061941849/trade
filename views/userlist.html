@@ -81,6 +81,7 @@
 		<div class="fliter fliter1">
 			<span>技能标签：</span>
 			<ul>
+				<li><a   data-value="">不限</a></li>
 				<% for(var i in results['list25']['data']){%>
 					<li><a   data-value="<%= results['list25']['data'][i]['title']%>"><%= results['list25']['data'][i]['title']%></a></li>
 				<%}%>
@@ -99,30 +100,46 @@
 		<div class="fliter fliter3" style="border:0px;">
 			<span>行业分类：</span>
 			<ul>
-				<%if(results['activeCid']){%>
-					<li><a   data-value="">不限</a></li>
-					<% for(var i in results['categorylist']['data']){%>
-						<%if(results['categorylist']['data'][i]['id']== results['activeCid']){%>
+				<% if( results['parentCategory'] && results['hasSonCategory']){%>
+					<li><a id="fliter3_<%=results['activeCid']%>" class="active" data-value="<%= results['activeCid']%>">不限</a></li> 
+					<% for(var i in results['categorylist']['data']){%>	 
+						<%if( results['categorylist']['data'][i]['id']== results['activeCid']){%>   
 							<%for(var j in results['categorylist']['data']){%>
-								<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['parentid'] ){%> 
+								<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['id']  && results['categorylist']['data'][j]['parentid']!=results['categorylist']['data'][j]['id']){%> 
 									<li><a   id="fliter3_<%=results['categorylist']['data'][j]['id']%>" data-value="<%=results['categorylist']['data'][j]['id']%>"><%=results['categorylist']['data'][j]['name']%></a></li>
 								<%}%>
 							<%}%>
 						<%}%>
 					<%}%> 
-				<%}else{%>
-					<li><a class="active" data-value="">不限</a></li> 
-					<% for(var i in results['categorylist']['data']){%>		 
-						<%if( results['categorylist']['data'][i]['id']== results['ocid'] ){%> 
+				<%} else if( results['parentCategory'] && !results['hasSonCategory']){%> 
+					<li><a id="fliter3_<%=results['parentCategory']%>"  data-value="<%= results['parentCategory']%>">不限</a></li> 
+					<% for(var i in results['categorylist']['data']){%>	 
+						<%if( results['categorylist']['data'][i]['id']== results['activeCid']){%>   
 							<%for(var j in results['categorylist']['data']){%>
-								<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['parentid'] ){%>
-									
+								<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['parentid']  && results['categorylist']['data'][j]['parentid']!=results['categorylist']['data'][j]['id']){%> 
 									<li><a   id="fliter3_<%=results['categorylist']['data'][j]['id']%>" data-value="<%=results['categorylist']['data'][j]['id']%>"><%=results['categorylist']['data'][j]['name']%></a></li>
 								<%}%>
 							<%}%>
 						<%}%>
+					<%}%>  
+				<%} else if( !results['activeCid']){%>
+					<% for(var i in results['categorylist']['data']){%>	   
+						<%if(results['categorylist']['data'][i]['id']==results['categorylist']['data'][i]['parentid']){%> 
+							<li><a   id="fliter3_<%=results['categorylist']['data'][i]['id']%>" data-value="<%=results['categorylist']['data'][i]['id']%>"><%=results['categorylist']['data'][i]['name']%></a></li>
+						<%}%> 
 					<%}%> 
-				<%}%>  
+				<%} else if( !results['parentCategory'] && results['hasSonCategory']){%> 
+					<li><a id="fliter3_"  class="active"  data-value="">不限</a></li> 
+					<% for(var i in results['categorylist']['data']){%>	 
+						<%if( results['categorylist']['data'][i]['id']== results['activeCid']){%>   
+							<%for(var j in results['categorylist']['data']){%>
+								<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['id']  && results['categorylist']['data'][j]['parentid']!=results['categorylist']['data'][j]['id']){%> 
+									<li><a   id="fliter3_<%=results['categorylist']['data'][j]['id']%>" data-value="<%=results['categorylist']['data'][j]['id']%>"><%=results['categorylist']['data'][j]['name']%></a></li>
+								<%}%>
+							<%}%>
+						<%}%>
+					<%}%>  
+				<%}%>   
 			</ul>
 		</div> 
 	</div>   
@@ -213,12 +230,17 @@
 <script   type="text/javascript"> 
 // //http://10.0.1.122/trade/teamhall.html?page=1&keyword=&kind=&authentype=0&orderby=0&desc=0&li1_color=0&li2_color=0&li3_color=0&cid=0&parkind=2 
 $(function(){
-	$('.categorys-sons a').each(function(){ 
+	$('.drop-meanu a').each(function(){ 
 		var href=$(this).attr('href').replace("projectlist","userlist")
 		$(this).attr("href",href)
-	})
+	});
+	 
+	getRequest()['tag'] ?  $('.fliter1 a[data-value='+getRequest()['tag'] +']').addClass('active')  : $('.fliter1 li:first-child a').addClass('active')   
+	 console.log($('.fliter1 a[data-value='+getRequest()['tag']+']'))
 	$('#fliter2_'+(getUrlParameter('authentype') ? getUrlParameter('authentype') : "")).addClass('active');
 	$('#fliter3_'+(getUrlParameter('cid') ? getUrlParameter('cid') : "")).addClass('active');
+
+	console.log()
 	var turnPageData={
 		has_next: $('.box-list').attr('data-hasnext'),
 		has_prev: $('.box-list').attr('data-hasprev'),
@@ -241,13 +263,11 @@ function changePage(){
 $('.fliter1>ul a').click(function(){  
 	var tag=$(this).attr("data-value");
 	var url=location.search.toString();
-	if(tag){
-		url=removeParameter(url,'otag');
+	if(tag){ 
 		url=replaceParamVal(url,'tag',tag)  
-		url='/projectlist/1'+url; 
-	}else{ 
-		url=replaceParamVal(url,'otag',getUrlParameter('tag'))
-		url='/projectlist/1'+removeParameter(url,'tag');
+		url='/userlist/1'+url; 
+	}else{  
+		url='/userlist/1'+removeParameter(url,'tag');
 	} 
 	location = url 
 }) 
@@ -270,15 +290,12 @@ $('.fliter3>ul a').click(function(){
 	var cid=$(this).attr("data-value");
 	var url=location.search.toString();
 	if(cid){ 
-		url=removeParameter(url,'ocid');
 		url=replaceParamVal(url,'cid',cid)  
 		url='/userlist/1'+url; 
-	}else{ 
-		url=replaceParamVal(url,'ocid',getUrlParameter('cid'))
-		url='/userlist/1'+removeParameter(url,'cid'); 
-		 
+	}else{  
+		url='/userlist/1'+removeParameter(url,'cid');
 	} 
-	location = url 
+	location = url
 }) 
 //搜索
 $('.search a').click(function(){
@@ -289,6 +306,23 @@ $('.search a').click(function(){
 	url='/userlist/1'+url;
 	location = url 
 }) 
+
+
+function getRequest() {   
+   var url = window.location.search; //获取url中"?"符后的字串   
+   var theRequest = new Object();   
+   if (url.indexOf("?") != -1) {   
+      var str = url.substr(1);   
+      strs = str.split("&");   
+      for(var i = 0; i < strs.length; i ++) {   
+          //就是这句的问题
+         theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]); 
+         //之前用了unescape()
+         //才会出现乱码  
+      }   
+   }   
+   return theRequest;   
+}
 </script> 
 </body>
 

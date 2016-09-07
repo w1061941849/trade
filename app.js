@@ -27,7 +27,7 @@ app.use(session({
   resave: true, // don't save session if unmodified
   saveUninitialized: false, // don't create session until something stored
   secret: 'love',
-  cookie: { maxAge: 300000 }
+  cookie: { maxAge:  1000*60*60 }
 }));
 
 routes(app);

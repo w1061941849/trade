@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+		<!DOCTYPE html>
 <html >
 <head> 
 <% include commonHead.html %> 
-<title>我发布的项目</title>
+<title>我参加的项目</title>  
+<style> 
  
-<style>  
 .versionTop{
 	position:relative;
 	background-color:white;
@@ -40,9 +40,10 @@
 	position:relative; 
 	margin-bottom:40px;
 }   
-table td{
-	text-align:center; 
-}   
+.time{
+	color:#999;
+	font-size:12px;
+}
 .status{
 	color:#ec6941;
 	font-size:12px;
@@ -53,53 +54,24 @@ table td{
 	padding:0px 4px 0px 4px;
 	border:1px solid #ec6941;
 	border-radius:10px;
-}
-.projectPage>ul{
-	text-align:center;
-}
-.projectPage>ul>li{
-	display:inline-block;
-}
-.projectPage>ul>li>a{
-	display:block;
-	border-radius:10px;
-	height:20px;
-	width:20px; 
-	text-align:center;
-	vertical-align:middle; 
-	margin:4px;
-	color:#999;
-}
-.projectPage .active{
-	background-color:#ec6941;  
-	color:white;
-}
-.projectPage i{
-	color:#999;
-	cursor:pointer;
 } 
+table td{
+	text-align: center;
+}
 .operationBtn{
 	display:inline-block;
 	border-radius:10px;
 	border:1px solid #ec6941;
 	padding:0 6px;
-} 
-option{
-	color:#a7a7a7;
-} 
-.endBtn i {
-	display:block;
-	color:#999;
-	font-size:16px;
-	cursor:pointer;
-} 
+}
+  
+
 </style>  
 </head>
 <body class="hold-transition skin-blue-light sidebar-mini">
 <div class="wrapper"> 
 <% include header.html %>
 <% include nav.html %>
-
 <div class="content-wrapper"  > 
     <div class="container-fluid">
 		<div class="row"  >
@@ -108,27 +80,53 @@ option{
 					<div class="panel panel-default">  
 						<div class="panel-heading">
 							<ul class="fliter">
-								<li><a  class="active" onclick="filterStatus('')" >全部</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-								<li><a onclick="filterStatus(1)">竞标中</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-								<li><a onclick="filterStatus(2)">进行中</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-								<li><a onclick="filterStatus(3)">已结束</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> 
+								<li><a id="fliter_"  data-value="">全部</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+								<li><a id="fliter_1" data-value="1" >竞标中</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+								<li><a id="fliter_2" data-value="2">进行中</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+								<li><a id="fliter_3" data-value="3">已结束</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>   
 							</ul>
+							<!--
+							<div class="input-group"   style="width:200px;    float: right;position: relative;top: -12px;"> 
+						      	<input type="text" class="form-control" placeholder="Search for...">
+						      	<span class="input-group-btn">
+						       	 	<button id="searchprojectInput" class="btn btn-primary" type="button"  >搜索</button>
+						      	</span>
+						    </div> 
+						    -->
 						</div>
 						<div class="panel-body" >   
 							<table class="table table-hover ">
 								<thead>
 									<tr>
 										<td>项目名</td>
-										<td>周期</td>
+										<td>周期</td>  
+										<td>金额</td>
 										<td>状态</td>
-										<td>金额</td> 
 										<td>操作区</td> 
 									</tr>
 								</thead>
-								<tbody > 
+								<tbody  data-hasnext="<%= results['has_next']%>"  data-hasprev="<%= results['has_prev']%>" data-nextnum="<%= results['next_num']%>" data-page="<%= results['page']%>" data-pages="<%= results['pages']%>" data-perpage="<%= results['per_page']%>"  data-prevnum="<%= results['prev_num']%>">  
+									<%  for (var i in results['data']){%> 
+										<tr id="<%= results['data'][i]['project']['id']%>">
+											<td><a href="/projectDetail?projectid=<%= results['data'][i]['project']['id']%>" style="color:#333"><%= results['data'][i]['project']['name']%></a> </td> 
+											<td><%= results['data'][i]['project']['timespan']%></td>
+											<td><%= results['data'][i]['project']['bonus']%></td>
+											<%   if(results['data'][i]['project']['status']==1){%>
+												<td>竞标中</td>
+												<td class="operation"></td>
+											<%}else if(results['data'][i]['project']['status']==2){%>
+												 <td>进行中</td>
+												 <td class="operation"><a  href="/versions?projectid=<%= results['data'][i]['project']['id']%>">version</a> <a  href="/suggections?projectid=<%= results['data'][i]['project']['id']%>"onclick="toSuggection(this)">意见</a></td>
+											<%}else if(results['data'][i]['project']['status']==3){%>
+												 <td>已结束</td>
+												 <td class="operation"><a  href="/versions?projectid=<%= results['data'][i]['project']['id']%>">version</a> <a  href="/suggections?projectid=<%= results['data'][i]['project']['id']%>"onclick="toSuggection(this)">意见</a></td>
+											<%}%>    
+											
+										</tr> 
+									<%}%> 
 								</tbody>
 							</table>  
-							<div class="projectPage">
+							<div id="turnPage">
 								<ul>
 									<!--
 									<li><i class="glyphicon glyphicon-menu-left"></i></li>
@@ -141,221 +139,45 @@ option{
 							</div>
 						</div>  
 					</div> 
-				</div> 
-					  
-				
+				</div>  
 			</div>
 		</div>
 	</div> 
-</div> 
-
-<% include commonScript.html %>   
-<script   type="text/javascript">  
-//全局变量
- var _status="",
- 	_keyword="";
-
-$(function () {   
-	$.ajax({
-		type:"get",   //请求方式
-		url:"/userParticipateProjects/1?",    //请求的url地址
-		dataType:"json",   //返回格式为json
-		contentType:"application/json;charset=utf-8", 
-		success:function(data){
-			var str="";
-			for(var i in data['data']){
-				str+=stringTask(data['data'][i]) 
-			} 
-			$('.list tbody').append(str)
-			projectPage(data);
-		},
-		error:function(){
-			alert("请求出错处理")
-		}
-	})  
-	
-});  
-//渲染分页
-function projectPage(data){
-	var $_projectPage=$('.projectPage'); 
-	$_projectPage.empty();
-	var string='<ul>'; 
-	if(data['total']!=0){
-		if(data['has_prev']){
-			string+='<li><i class="glyphicon glyphicon-menu-left" data-pageId="'+data['prev_num']+'" onclick="turnPage(this)"></i></li>'; 
-		}else{
-			string+='<li><i class="glyphicon glyphicon-menu-left" style="#f4f4f4"></i></li>'; 
-		} 	 
- 	 	if(data['pages']<=6) {
- 	 		for(var  i=1;i<=data['pages'];i++){ 
- 	 			if(data['page']==i){
-					string+='<li><a class="active" onclick="turnPage(this)" data-pageId="'+i+'">'+i+'</a></li>';
-				}else{
-					string+='<li><a class="" onclick="turnPage(this)" data-pageId="'+i+'">'+i+'</a></li>';
-				} 
- 	 		}
- 	 	}else if(data['pages']>6){
- 	 		if(data['page']<=6){ 
- 	 			for(var  i=1;i<=6;i++){ 
- 	 				if(data['page']==i){
-						string+='<li><a class="active" onclick="turnPage(this)" data-pageId="'+i+'">'+i+'</a></li>';
-					}else{
-						string+='<li><a class="" onclick="turnPage(this)" data-pageId="'+i+'">'+i+'</a></li>';
-					}  
- 	 			}
- 	 			string+='<li>...</li>';  
- 	 		}else if(data['page']>6)  {  
- 	 				if((data['page']+2)<data['pages']){
-						string+='<li><a   onclick="turnPage(this)" data-pageId="1">1</a></li>'+
- 	 						'<li>...</li>'+
-					        '<li><a   onclick="turnPage(this)" data-pageId="'+(data['page']-2)+'">'+(data['page']-2)+'</a></li>'+
-							'<li><a   onclick="turnPage(this)" data-pageId="'+(data['page']-1)+'">'+(data['page']-1)+'</a></li>'+
-							'<li><a class="active" onclick="turnPage(this)" data-pageId="'+data['page']+'">'+data['page']+'</a></li>'+
-							'<li><a   onclick="turnPage(this)" data-pageId="'+(data['page']+1)+'">'+(data['page']+1)+'</a></li>'+
-							'<li><a   onclick="turnPage(this)" data-pageId="'+(data['page']+2)+'">'+(data['page']+2)+'</a></li>'+ 
-							'<li>...</li>';   
-					}else{
-						string+='<li><a   onclick="turnPage(this)" data-pageId="1">1</a></li>'+
- 	 						'<li>...</li>'+
-					        '<li><a   onclick="turnPage(this)" data-pageId="'+(data['page']-2)+'">'+(data['page']-2)+'</a></li>'+
-							'<li><a   onclick="turnPage(this)" data-pageId="'+(data['page']-1)+'">'+(data['page']-1)+'</a></li>'+
-							'<li><a class="active" onclick="turnPage(this)" data-pageId="'+data['page']+'">'+data['page']+'</a></li>';
-						if((data['pages']-data['page'])>1){
-							string+='<li><a   onclick="turnPage(this)" data-pageId="'+(data['page']+1)+'">'+(data['page']+1)+'</a></li>'+
-								'<li><a   onclick="turnPage(this)" data-pageId="'+(data['page']+2)+'">'+(data['page']+2)+'</a></li>';
-						}else{
-							string+='<li><a   onclick="turnPage(this)" data-pageId="'+(data['page']+1)+'">'+(data['page']+1)+'</a></li>';
-						} 	
-					} 
- 	 		} 
- 	 	} 
-		if(data['has_next']){
-			string+='<li><i class="glyphicon glyphicon-menu-right" data-pageId="'+data['next_num']+'" onclick="turnPage(this)"></i></li>';
-		}else{
-			string+='<li><i class="glyphicon glyphicon-menu-right" style="#f4f4f4"></i></li>'; 
-		} 	 
+</div>    
+<% include commonScript.html %>  
+<script type="text/javascript" src="/js/underscore.min.js"></script>   
+<script   type="text/javascript">   
+$(function(){ 
+	$('#fliter_'+(getUrlParameter('status') ? getUrlParameter('status') : "")).addClass('active');
+	var turnPageData={
+		has_next: $('tbody').attr('data-hasnext'),
+		has_prev: $('tbody').attr('data-hasprev'),
+		next_num: $('.box-list').attr('data-nextnum'),
+		page: $('tbody').attr('data-page'),
+		pages: $('tbody').attr('data-pages'),
+		per_page: $('tbody').attr('data-perpage'),
+		prev_num: $('tbody').attr('data-prevnum'), 
+	}
+	$('#turnPage').myUtils('turnPage',turnPageData,changePage) 
+}); 
+$('.fliter a').click(function(){
+	var status=$(this).attr("data-value");
+	var url=location.search.toString();
+	if(status){ 
+		url=replaceParamVal(url,'status',status)  
+		url='/participateProjects/1'+url; 
+	}else{  
+		url='/participateProjects/1'+removeParameter(url,'status');
 	} 
-	string+='</ul>'; 
-	$_projectPage.append(string); 
-}
-//翻页
-function turnPage(e){ 
-	//console.log(page);
-	var params={
-		'page':$(e).attr('data-pageId'), 
-		'status':_status,
-		'keyword':_keyword
-	} 
-	findProjects(params); 
-}
-function filterStatus(status){
-	_status=status;
-	var params={
-		'page':1, 
-		'status':_status,
-		'keyword':_keyword
-	}  
-	findProjects(params); 
-} 
-
-$('#searchTaskInput').click(function(){
-	_keyword=$(this).parent().parent().find('input').val();
-	var params={
-		'page':1, 
-		'status':_status,
-		'keyword':_keyword
-	}  
-	findProjects(params);  
+	location = url  
 }) 
-//状态筛选
-function findProjects(params){ 
-	var url= "/userParticipateProjects/"+params['page']+"?userid="
-	if( !params['status']==""   ){
-		url+='&status='+params['status']
-	}if(!params['keyword']==""){
-		url+='&keyword='+params['keyword']
-	}
-	console.log(url) 
-	$.ajax({
-		type:"get",   //请求方式
-		url:url,    //请求的url地址
-		dataType:"json",   //返回格式为json
-
-		contentType:"application/json;charset=utf-8", 
-		success:function(data){
-			var str="";
-			for(var i in data['data']){
-				str+=stringTask(data['data'][i])
-
-			}
-
-			$('.list tbody').empty().append(str);
-			projectPage(data);
-		},
-		error:function(){
-			alert("请求出错处理")
-		}
-	})    
-}
- 
-//拼接任务字符串
-function stringTask(data){
-	console.log(data);
-	var string=""
-	var projectInfo=getProjectInfo(data['project'])
-	string+='<tr id="'+data['projectid']+'">'+
-					'<td><a onclick="toTaskDetail(this)" style="color:#333">'+projectInfo['name']+'</a> </td>'+
-					'<td><span>'+(projectInfo['timespan'] ? projectInfo['timespan'] : "未填写")+'</span></td>';
-
-	if(projectInfo['status']==1){ 
-			string+='<td class="status"> 竞标中</td>'+
-					'<td><span>'+(projectInfo['bonus'] ? projectInfo['bonus'] : "未填写")+'</span></td>'+
-					'<td class="operation"> </td>';
-	}else if(projectInfo['status']==2){
-			string+='<td class="status"> 进行中</td>'+
-					'<td><span>'+(projectInfo['bonus'] ? projectInfo['bonus'] : "未填写")+'</span></td>'+
-					'<td class="operation"><a href="/versions?projectid='+data['projectid']+'">version</a> <a href="/suggections?projectid='+data['projectid']+'">意见</a></td>';
-		 
-				 
-	}else if(projectInfo['status']==3){
-			string+='<td class="status" style="color:#999;"> 已结束</td>'+
-					'<td><span>'+projectInfo['bonus']+'</span></td>';
-		if(data['winner_id']==sessionStorage.customerId){
-			string+='<td class="operation"><a  href="/versions?projectid='+data['projectid']+'">version</a> <a  href="/suggections?projectid='+data['projectid']+'">意见</a></td>';
-		}else{
-			string+='<td class="operation"></td>';
-		}  
-				 
-	}else if(projectInfo['status']==5){
-		string+='<td class="status" style="color:#999;"> 中止</td>'+
-					'<td><span>'+(projectInfo['bonus'] ? projectInfo['bonus'] : "未填写")+'</span></td>'+
-					'<td class="operation"><a  href="/versions?projectid='+data['projectid']+'">version</a> <a  href="/suggections?projectid='+data['projectid']+'">意见</a></td>';
-
-	}
-	string+='</tr>';
-	return string; 
-}
+//翻页
+function changePage(){ 
+	var url=location.search.toString();
+	url='/participateProjects/'+$(this).attr('data-pageid')+url; 
+	location =url  
+}      
   
-function  getProjectInfo(url){
- 	var temp=""
- 	$.ajax({
-		type:"get",   //请求方式
-		url:url.replace("http://10.0.1.122/api/v1.0",""),    //请求的url地址
-		dataType:"json",   //返回格式为json
-		async: false,
-		contentType:"application/json;charset=utf-8", 
-		success:function(data){
-			temp=data;
-		},
-		error:function(){
-			alert("请求出错处理")
-		}
-	})
-	return temp;    
-
- }  
- 
-
 </script> 
 </body>
 

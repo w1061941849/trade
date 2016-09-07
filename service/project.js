@@ -1,31 +1,5 @@
 var httpUtil=require('../utils/http.js') 
-var async=require('async');
-exports.userPublishedProjects = function (req, res, next) {    
-    var options={
-        "path":"/userPublishedProjects/"+req.params.page+"?userid="+req.session.user.id+(req.query.status ? "&status="+req.query.status :"")+(req.query.keyword ? "&keyword="+req.query.keyword :"")
-    } 
-    console.log(options)
-    httpUtil.get(options,function(result,err){  
-        if(err){
-            res.send("statusCode is:"+err);
-        }else{
-            res.send(result); 
-        }  
-    })    
-}
-exports.userParticipateProjects = function (req, res, next) {    
-    var options={
-        "path":"/userParticipateProjects/"+req.params.page+"?userid="+req.session.user.id+(req.query.status ? "&status="+req.query.status :"")+(req.query.keyword ? "&keyword="+req.query.keyword :"")
-    } 
-    console.log(options)
-    httpUtil.get(options,function(result,err){  
-        if(err){
-            res.send("statusCode is:"+err);
-        }else{
-            res.send(result); 
-        }  
-    })    
-}
+var async=require('async'); 
 exports.projectDetail = function (req, res, next) {    
     var options={
         "path":"/project/"+req.params.projectid

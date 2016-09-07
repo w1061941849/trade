@@ -115,42 +115,30 @@
 	<div class="fliters">
 		<div class="fliter fliter1"  data-activeCid="<%= results['activeCid']%>">
 			<span>行业分类：</span>
-			<ul>  
-				 
-				<%if(results['parentCategory']){%>
-					<%if(results['hasSonCategory']){%>
-						<li><a id="fliter1_<%=results['parentCategory']%>" class="active" data-value="<%= results['parentCategory']%>">不限</a></li> 
-						<% for(var i in results['categorylist']['data']){%>	 
-							<%if( results['categorylist']['data'][i]['id']== results['activeCid']){%>   
-								<%for(var j in results['categorylist']['data']){%>
-									<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['id']  && results['categorylist']['data'][j]['parentid']!=results['categorylist']['data'][j]['id']){%> 
-										<li><a   id="fliter1_<%=results['categorylist']['data'][j]['id']%>" data-value="<%=results['categorylist']['data'][j]['id']%>"><%=results['categorylist']['data'][j]['name']%></a></li>
-									<%}%>
-								<%}%>
-							<%}%>
-						<%}%>  
-					<%}else{%>
-						<li><a id="fliter1_<%=results['parentCategory']%>"  data-value="<%= results['parentCategory']%>">不限</a></li> 
-						<% for(var i in results['categorylist']['data']){%>	 
-							<%if( results['categorylist']['data'][i]['id']== results['activeCid']){%>   
-								<%for(var j in results['categorylist']['data']){%>
-									<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['parentid']  && results['categorylist']['data'][j]['parentid']!=results['categorylist']['data'][j]['id']){%> 
-										<li><a   id="fliter1_<%=results['categorylist']['data'][j]['id']%>" data-value="<%=results['categorylist']['data'][j]['id']%>"><%=results['categorylist']['data'][j]['name']%></a></li>
-									<%}%>
+			<ul>   
+				<% if( results['parentCategory'] && results['hasSonCategory']){%>
+					<li><a id="fliter1_<%=results['activeCid']%>" class="active" data-value="<%= results['activeCid']%>">不限</a></li> 
+					<% for(var i in results['categorylist']['data']){%>	 
+						<%if( results['categorylist']['data'][i]['id']== results['activeCid']){%>   
+							<%for(var j in results['categorylist']['data']){%>
+								<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['id']  && results['categorylist']['data'][j]['parentid']!=results['categorylist']['data'][j]['id']){%> 
+									<li><a   id="fliter1_<%=results['categorylist']['data'][j]['id']%>" data-value="<%=results['categorylist']['data'][j]['id']%>"><%=results['categorylist']['data'][j]['name']%></a></li>
 								<%}%>
 							<%}%>
 						<%}%>
-					<%}%>   
-				<%}else{%> 
-					<%if(results['hasSonCategory']){%> 
-						<% for(var i in results['categorylist']['data']){%>	  
-							<%if(results['categorylist']['data'][i]['parentid']==results['categorylist']['data'][i]['id']  ){%> 
-								<li><a   id="fliter1_<%=results['categorylist']['data'][i]['id']%>" data-value="<%=results['categorylist']['data'][i]['id']%>"><%=results['categorylist']['data'][i]['name']%></a></li>
-							<%}%> 
-						<%}%>  
-					<%}%>   
-				<%}%>
-				
+					<%}%> 
+				<%} else if( results['parentCategory'] && !results['hasSonCategory']){%>
+					<li><a id="fliter1_<%=results['parentCategory']%>"  data-value="<%= results['parentCategory']%>">不限</a></li> 
+					<% for(var i in results['categorylist']['data']){%>	 
+						<%if( results['categorylist']['data'][i]['id']== results['activeCid']){%>   
+							<%for(var j in results['categorylist']['data']){%>
+								<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['parentid']  && results['categorylist']['data'][j]['parentid']!=results['categorylist']['data'][j]['id']){%> 
+									<li><a   id="fliter1_<%=results['categorylist']['data'][j]['id']%>" data-value="<%=results['categorylist']['data'][j]['id']%>"><%=results['categorylist']['data'][j]['name']%></a></li>
+								<%}%>
+							<%}%>
+						<%}%>
+					<%}%>  
+				<%}%> 
 			</ul>
 		</div>   
 		<div class="fliter fliter2" style="">

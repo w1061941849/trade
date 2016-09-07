@@ -20,19 +20,4 @@ exports.addVersion = function (req, res, next) {
             res.send(result); 
         }
    })  
-};
-exports.projectversions = function (req, res, next) {   
-   var projectid = URL.parse(req.url, true).query.projectid; 
-    var options={
-        'path':'/'+projectid+"/projectversions"
-
-    } 
-    console.log(options)
-    httpUtil.get(options,function(result,err){
-        if(err){ 
-            res.send("statusCode is:"+err);  
-        }else{  
-            res.send(result); 
-        }
-    })  
-} 
+}; 

@@ -198,7 +198,7 @@
 				<div class="row">
 					<div class="col-xs-12">  
 						<div class="versionTop" style="background-color:white;padding:20px 10px 20px 10px;border-radius:4px;    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">	
-							<span id="projectName">奇幻森林</span><span>奇幻森林</span>
+							<span id="projectName"></span><span></span>
 							<ul class="fliter">
 								<li><a class="active" href="./joinProjects_version.html">Version</a></li>
 								<li><a onclick="toSuggections()">意见</a></li>
@@ -209,7 +209,29 @@
 				</div> 
 				<div class="row">
 					<div class="col-xs-12   col-md-8   col-md-6 ">
-						<div class="lists">
+						<div class="lists"> 
+						<%for(var i in results){%>
+							<div class="list"> 
+								<% for(var j=0; j<results[i].length;j++){%> 
+									<%if(j==0){%>
+										<div class="time"><%= results[i][j]['publishDate']%> </div>
+									<%}%> 
+									<div class="versionInfo"  >
+										<div class="box box-widget "> 
+											<div class="box-body" > 
+												<div>
+													<img src="<%= results[i][j]['image']%>"  onclick="showModal(this)" data-toggle="modal" data-target="#myModal"> 
+													<div class="describe">
+														<span>sss</span></br>
+														<p><%= results[i][j]['description']%></p>
+													</div>
+												</div>
+											</div> 
+										</div>
+									</div> 
+								<%}%>
+							</div>  
+						<%}%> 
 							<!--
 							<div class="list">
 								<div class="time">2015/5/6 </div>
@@ -285,67 +307,7 @@
 	</div>
 </div> 
 <% include commonScript.html %>   
-<script   type="text/javascript">   
-$(function () {  
-	var url = location.search;  
-	var projectid="";
-	if (url.indexOf("?") != -1) {
-	    var str = url.substr(1);
-	    strs = str.split("&"); 
-	    projectid=strs[0].split("projectid=")[1]; 
-	}
-	 
-	$.ajax({
-		type: "get",
-		async: false,
-		//url: "/api/v1.0/"+sessionStorage.task_id+"/projectversions", 
-		url: "/projectversions?projectid="+projectid, 
-		contentType:"application/json",
-		dataType:'json', 
-		success: function(data){
-			console.log(data);
-			var dateFlag=todayDate().replace("/","").replace("/","");
-			$('.lists').append('<div class="list" id="'+dateFlag+'"><div class="time"></div></div>');  
-			for(var i in data['data']){
-				//判断是否同一天发布 
-				console.log(dateType(data['data'][i]['publishDate']))
-				var test=dateType(data['data'][i]['publishDate']).replace("/","").replace("/","")
-				console.log(test)
-				if(dateType(data['data'][i]['publishDate']).replace("/","").replace("/","")==dateFlag){
-					console.log(stringVersionInfo(data['data'][i]))
-					$('#'+dateFlag).append(stringVersionInfo(data['data'][i]));
-				}else{ 
-					var NewDataFlag=dateType(data['data'][i]['publishDate']).replace("/","").replace("/","");
-
-					$('.lists').append('<div class="list" id="'+NewDataFlag+'"><div class="time">'+dateType(data['data'][i]['publishDate'])+'</div></div>');  
-					console.log(stringVersionInfo(data['data'][i]))
-					$('#'+NewDataFlag).append(stringVersionInfo(data['data'][i]));
-				} 
-			}
-		},
-		error: function(){
-			alert('fail');
-		}
-	});
-	//判断任务包状态
-	$.ajax({
-		type: "get",
-		async: false,
-		url: "/project/"+projectid, 
-		contentType:"application/json",
-		dataType:'json', 
-		success: function(data){
-			if(data['status']==5){
-				$('.versionTop .btn').attr('disabled','disabled');   
-			} 
-		},
-		error: function(){
-			alert('fail');
-		}
-	});
-	 
-}); 
-
+<script   type="text/javascript">    
 //全局变量
 var versionImg="";  
 var url = location.search;  
@@ -415,10 +377,7 @@ function addVersion(){
 			success: function(data){ 
 				alert("添加Version成功");
 				console.log(data);
-				$('#myModal2 input').val(""); 
-				$("#uploadImg").attr('src',"") ;
-				$('.list:first').find('.time').after(stringVersionInfo(data));
-				$('#myModal2').modal('hide'); 
+				location=location
 				
 			},
 			error: function(){
@@ -426,41 +385,12 @@ function addVersion(){
 			}
 		}); 
 	}    
-} 
-//拼接VersionInfo字符串
-function stringVersionInfo(data){
-	var string=""; 
-	string+='<div class="versionInfo"  >'+
-				'<div class="box box-widget "> '+
-					'<div class="box-body" > '+
-						'<div>'+
-							'<img src="'+data['image']+'" data-toggle="modal" data-target="#myModal" onclick="showModal(this)"> '+
-							'<div class="describe">'+
-								'<span>'+data['title']+'</span></br>'+
-								'<p>'+data['description']+'</p>'+
-							'</div>'+
-						'</div>'+
-					'</div>' +
-				'</div>'+
-			'</div>'; 
-	return string;
-} 
+}  
 //查看大图
 function showModal(e){
 	var imgUrl=$(e).attr('src');
-	$('#modalImg').attr('src',imgUrl);
-	
-}
-//获取当日日期
-function todayDate(){
-	var myDate = new Date();
-	return myDate.getFullYear()+"/"+(myDate.getMonth()+1)+"/"+myDate.getDate()
-}
-//日期格式转换
-function dateType(date){
-	var date=new Date(date);
-	return date.toLocaleDateString();
-}
+	$('#modalImg').attr('src',imgUrl); 
+} 
 function toSuggections(){  
 	window.location.href='/suggections?projectid='+projectid; 
 }

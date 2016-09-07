@@ -23,6 +23,11 @@ var userlist=require('./service/userlist.js')
 var userDetail=require('./service/userDetail.js') 
 var workDetail=require('./service/workDetail.js') 
 
+
+var publishedProjects =require('./service/userCenter/publishedProjects.js') 
+var participateProjects =require('./service/userCenter/participateProjects.js') 
+var versions =require('./service/userCenter/versions.js') 
+var suggections =require('./service/userCenter/suggections.js') 
 var bidding=require('./service/bidding.js')  
 module.exports = function (app) { 
 app.get("*",function(req,res,next){
@@ -32,15 +37,15 @@ app.get("*",function(req,res,next){
 
     }else{
         res.locals.session=""
-       req.session.user={
-              "authenticationType": 0, 
+   /*     req.session.user={
+              "authenticationType": 1, 
                 "bankAuthentication": "http://139.196.183.6/api/v1.0/userauthen?userid=15&type=4", 
                 "categorys": "http://139.196.183.6/api/v1.0/15/usercategorys", 
                 "companyAuthentication": "http://139.196.183.6/api/v1.0/userauthen?userid=15&type=2", 
                 "defaultImage": "2.jpg", 
                 "description": null, 
                 "email": "bob143@qq.com", 
-                "id": 45, 
+                "id": 64, 
                 "imageLarge": "http://139.196.183.6/static/default/img/2.jpg", 
                 "imageMedium": "http://139.196.183.6/static/default/img/2.jpg", 
                 "imageSmall": "http://139.196.183.6/static/default/img/2.jpg", 
@@ -55,7 +60,7 @@ app.get("*",function(req,res,next){
                 "status": null, 
                 "tags": "http://139.196.183.6/api/v1.0/15/usertags", 
                 "works": "http://139.196.183.6/api/v1.0/15/userworks/1"
-        }  
+        }  */
  
     }
     next();
@@ -67,11 +72,8 @@ app.get('/mhall',mhall.showHtml);
 app.get('/userlist/:page',userlist.showHtml);  
 app.get('/projectDetail',projectDetail.showHtml); 
 app.get('/userDetail',userDetail.showHtml); 
-app.get('/workDetail',workDetail.showHtml); 
-
-
-app.get('/projectlist/:page',projectlist.showHtml); 
- 
+app.get('/workDetail',workDetail.showHtml);  
+app.get('/projectlist/:page',projectlist.showHtml);  
 app.get('/toolhall', function(req, res, next) {   
     res.render('toolhall') 
 });
@@ -88,15 +90,10 @@ app.get('/logout',user.logout);
 //project
 app.post('/project',project.create); 
 app.put('/project',project.modify);  
-app.get('/project/:projectid',project.projectDetail);
-app.get('/userPublishedProjects/:page',project.userPublishedProjects); 
-app.get('/userParticipateProjects/:page',project.userParticipateProjects);
-
+app.get('/project/:projectid',project.projectDetail);  
 //category
 app.get('/categorylist',category.categorylist); 
 app.get('/usercategorys',category.usercategorys); 
-
-
 //usertag
 app.get('/usertags',usertag.usertags);
 app.post('/usertag',usertag.add);
@@ -106,7 +103,6 @@ app.get('/search/usertaglist/:keyword',usertag.usertaglist);
 app.post('/work',work.create);
 app.delete('/work',work.delete);
 app.get('/userworks/:page',work.userworks);
-
 //worktag
 app.post('/worktag',worktag.create);
 app.get('/:worktagsId/worktags',worktag.worktags);
@@ -123,8 +119,7 @@ app.put('/bankauthen', authen.modifyBankAuthen)
 app.delete('/bankauthen', authen.delBankAuthen)  
 app.post('/manualthen', authen.manualthen) 
 //version
-app.post('/version', version.addVersion) 
-app.get('/projectversions', version.projectversions) 
+app.post('/version', version.addVersion)  
 //note
 app.post('/note', note.addNote) 
 app.get('/:projectid/projectnotes', note.projectnotes) 
@@ -137,17 +132,19 @@ app.put('/bid',bid.put);
 app.post('/bid',bid.bid);
 
 /*--------------个人中心---start---------*/
+
+app.get('/publishedProjects/:page',publishedProjects.showHtml);
+app.get('/participateProjects/:page',participateProjects.showHtml); 
 app.get('/bidding',bidding.showHtml); 
+app.get('/versions',versions.showHtml); 
+app.get('/suggections',suggections.showHtml); 
+ 
+ 
+
 
 app.get('/makeProject', function(req, res, next) {   
     res.render('userCenter/makeProject.html') 
-});
-app.get('/publishedProjects', function(req, res, next) {   
-    res.render('userCenter/publishedProjects.html') 
 }); 
-app.get('/participateProjects', function(req, res, next) {   
-    res.render('userCenter/participateProjects.html') 
-});   
 app.get('/makeWork', function(req, res, next) {  
     res.render('userCenter/makeWork.html') 
 });  
@@ -184,23 +181,13 @@ app.get('/authenManual', function(req, res, next) {
 app.get('/domain', function(req, res, next) {  
     res.render('userCenter/domain.html') 
 });  
-app.get('/versions', function(req, res, next) {  
-    res.render('userCenter/versions.html') 
-});  
-app.get('/suggections', function(req, res, next) {  
-    res.render('userCenter/suggections.html') 
-});   
- 
+
+
  
 /*--------------other---end---------*/
 
 
 
 
-
-
-
-app.get('/test', function(req, res, next) {  
-    res.render('userCenter/test.html') 
-}); 
+ 
 }
