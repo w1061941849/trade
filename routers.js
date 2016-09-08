@@ -24,11 +24,13 @@ var userDetail=require('./service/userDetail.js')
 var workDetail=require('./service/workDetail.js') 
 
 
+
 var publishedProjects =require('./service/userCenter/publishedProjects.js') 
 var participateProjects =require('./service/userCenter/participateProjects.js') 
 var versions =require('./service/userCenter/versions.js') 
 var suggections =require('./service/userCenter/suggections.js') 
 var bidding=require('./service/bidding.js')  
+var authentication =require('./service/userCenter/authentication.js') 
 module.exports = function (app) { 
 app.get("*",function(req,res,next){
     if(req.session.user){ 
@@ -37,30 +39,30 @@ app.get("*",function(req,res,next){
 
     }else{
         res.locals.session=""
-   /*     req.session.user={
-              "authenticationType": 1, 
-                "bankAuthentication": "http://139.196.183.6/api/v1.0/userauthen?userid=15&type=4", 
-                "categorys": "http://139.196.183.6/api/v1.0/15/usercategorys", 
-                "companyAuthentication": "http://139.196.183.6/api/v1.0/userauthen?userid=15&type=2", 
-                "defaultImage": "2.jpg", 
-                "description": null, 
-                "email": "bob143@qq.com", 
-                "id": 64, 
-                "imageLarge": "http://139.196.183.6/static/default/img/2.jpg", 
-                "imageMedium": "http://139.196.183.6/static/default/img/2.jpg", 
-                "imageSmall": "http://139.196.183.6/static/default/img/2.jpg", 
-                "location": null, 
-                "manualAuthentication": "http://139.196.183.6/api/v1.0/userauthen?userid=15&type=8", 
-                "nickname": "bob143", 
-                "participateProjects": "http://139.196.183.6/api/v1.0/userParticipateProjects/1?userid=15", 
-                "phone": null, 
-                "privateAuthentication": "http://139.196.183.6/api/v1.0/userauthen?userid=15&type=1", 
-                "publishedProjects": "http://139.196.183.6/api/v1.0/userPublishedProjects/1?userid=15", 
-                "registDate": "2016-08-31T15:54:04", 
-                "status": null, 
-                "tags": "http://139.196.183.6/api/v1.0/15/usertags", 
-                "works": "http://139.196.183.6/api/v1.0/15/userworks/1"
-        }  */
+        req.session.user={
+               "authenticationType": 0, 
+  "bankAuthentication": "http://10.0.1.122:8080/api/v1.0/userauthen?userid=41&type=4", 
+  "categorys": "http://10.0.1.122:8080/api/v1.0/41/usercategorys", 
+  "companyAuthentication": "http://10.0.1.122:8080/api/v1.0/userauthen?userid=41&type=2", 
+  "defaultImage": "6.jpg", 
+  "description": "  asd", 
+  "email": "jun1jun11110@qq.com", 
+  "id": 41, 
+  "imageLarge": "http://10.0.1.122:8080/static/default/img/6.jpg", 
+  "imageMedium": "http://10.0.1.122:8080/static/default/img/6.jpg", 
+  "imageSmall": "http://10.0.1.122:8080/static/default/img/6.jpg", 
+  "location": "asd", 
+  "manualAuthentication": "http://10.0.1.122:8080/api/v1.0/userauthen?userid=41&type=8", 
+  "nickname": "jun1jun11110", 
+  "participateProjects": "http://10.0.1.122:8080/api/v1.0/userParticipateProjects/1?userid=41", 
+  "phone": "asdasda", 
+  "privateAuthentication": "http://10.0.1.122:8080/api/v1.0/userauthen?userid=41&type=1", 
+  "publishedProjects": "http://10.0.1.122:8080/api/v1.0/userPublishedProjects/1?userid=41", 
+  "registDate": "2016-09-01T14:48:19", 
+  "status": null, 
+  "tags": "http://10.0.1.122:8080/api/v1.0/41/usertags", 
+  "works": "http://10.0.1.122:8080/api/v1.0/41/userworks/1"
+        }  
  
     }
     next();
@@ -131,17 +133,22 @@ app.get('/:projectid/bidcount',bid.bidcount);
 app.put('/bid',bid.put);
 app.post('/bid',bid.bid);
 
-/*--------------个人中心---start---------*/
-
+/*--------------个人中心---start---------*/ 
 app.get('/publishedProjects/:page',publishedProjects.showHtml);
 app.get('/participateProjects/:page',participateProjects.showHtml); 
 app.get('/bidding',bidding.showHtml); 
 app.get('/versions',versions.showHtml); 
-app.get('/suggections',suggections.showHtml); 
- 
- 
+app.get('/suggections',suggections.showHtml);  
+app.get('/authentication',authentication.showHtml); 
 
 
+
+
+
+
+app.get('/authenPerson', function(req, res, next) {  
+    res.render('userCenter/authenPerson.html') 
+});   
 app.get('/makeProject', function(req, res, next) {   
     res.render('userCenter/makeProject.html') 
 }); 
@@ -166,9 +173,7 @@ app.get('/skillTags', function(req, res, next) {
 app.get('/authentication', function(req, res, next) {  
     res.render('userCenter/authentication.html') 
 });  
-app.get('/authenPerson', function(req, res, next) {  
-    res.render('userCenter/authenPerson.html') 
-});  
+
 app.get('/authenCompany', function(req, res, next) {  
     res.render('userCenter/authenCompany.html') 
 });  

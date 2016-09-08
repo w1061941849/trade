@@ -138,6 +138,23 @@
 							<%}%>
 						<%}%>
 					<%}%>  
+				<%}else if( !results['parentCategory'] && results['hasSonCategory']){%>
+					<li><a id="fliter1_<%=results['parentCategory']%>"  class="active" data-value="<%= results['parentCategory']%>">不限</a></li> 
+					<% for(var i in results['categorylist']['data']){%>	 
+						<%if( results['categorylist']['data'][i]['id']== results['activeCid']){%>   
+							<%for(var j in results['categorylist']['data']){%>
+								<%if(results['categorylist']['data'][j]['parentid']==results['categorylist']['data'][i]['parentid']  && results['categorylist']['data'][j]['parentid']!=results['categorylist']['data'][j]['id']){%> 
+									<li><a   id="fliter1_<%=results['categorylist']['data'][j]['id']%>" data-value="<%=results['categorylist']['data'][j]['id']%>"><%=results['categorylist']['data'][j]['name']%></a></li>
+								<%}%>
+							<%}%>
+						<%}%>
+					<%}%>  
+				<%}else if(results['activeCid']==""){%>
+					<% for(var i in results['categorylist']['data']){%>	    
+						<%if(results['categorylist']['data'][i]['parentid']==results['categorylist']['data'][i]['id']  ){%> 
+							<li><a   id="fliter1_<%=results['categorylist']['data'][i]['id']%>" data-value="<%=results['categorylist']['data'][i]['id']%>"><%=results['categorylist']['data'][i]['name']%></a></li>
+						<%}%>  
+					<%}%>   
 				<%}%> 
 			</ul>
 		</div>   
@@ -173,7 +190,7 @@
 	<div class="project-list"  data-hasnext="<%= results['has_next']%>"  data-hasprev="<%= results['has_prev']%>" data-nextnum="<%= results['next_num']%>" data-page="<%= results['page']%>" data-pages="<%= results['pages']%>" data-perpage="<%= results['per_page']%>"  data-prevnum="<%= results['prev_num']%>"> 
 		<%for(var i in results['data']){%>
 			<div class="project-detail">
-				<h3><%= results['data'][i]['name']%></h3>
+				<h3><a  href="/projectDetail?projectid=<%= results['data'][i]['id']%>"><%= results['data'][i]['name']%></a></h3>
 				<span class="subtitle"><%= results['data'][i]['owner']['nickname']%></span>
 				</br> </br>
 				<ul>
@@ -296,13 +313,12 @@ $('.fliter3>ul a').click(function(){
 //搜索
 $('.search a').click(function(){
 	var keyword=$('.search input').val();
-	console.log(keyword);
+	/*console.log(keyword);
 	var url=location.search.toString();
-	url=replaceParamVal(url,'keyword',keyword)  
-	url='/projectlist/1'+url;
+	url=replaceParamVal(url,'keyword',keyword)  */
+	url='/projectlist/1?keyword='+keyword;
 	location = url 
-}) 
-
+})  
 //翻页
 function changePage(){ 
 	var url=location.search.toString();

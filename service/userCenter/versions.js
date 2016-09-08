@@ -27,8 +27,7 @@ exports.showHtml = function (req, res, next) {
 		    }) 
 	    } 
 	],  
-    function(err, results) {    
-    	console.log("asdasd11111111111")
+    function(err, results) {     
     	console.log(results)
     	res.render('userCenter/versions.html',{'results':results}) 	
     });  

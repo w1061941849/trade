@@ -47,7 +47,7 @@ exports.showHtml = function (req, res, next) {
 			}, function(err) { 
 			     
 			}); 
-	    	async.parallel(arr, 
+	    	async.series(arr, 
 			function(err, results) { 
 				for(var i in resultData['data']){
 					resultData['data'][i]['owner']=results[i]
@@ -66,7 +66,7 @@ exports.showHtml = function (req, res, next) {
 			     
 			}); 
 
-	    	async.parallel(arr, 
+	    	async.series(arr, 
 			function(err, results) { 
 				for(var i in resultData['data']){
 					resultData['data'][i]['categorys']=results[i]

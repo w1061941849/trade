@@ -58,11 +58,7 @@
 	font-size:18px;
 	font-weight:800;
 	color:#666;
-} 
-.authenicationInfo, .authentication{
-	 display: none;
-
-}
+}  
 </style>  
 </head>
 <body class="hold-transition skin-blue-light sidebar-mini">
@@ -72,7 +68,8 @@
 <div class="content-wrapper"  > 
     <div class="container-fluid">
 		<div class="row"  >
-			<div  class="col-xs-12  col-lg-offset-1 col-lg-10">    
+			<div  class="col-xs-12  col-lg-offset-1 col-lg-10">   
+				<%if(results['authenticationType']==0){%> 
 				<div class="authentication">
 						<div class="top">
 							<span>认证管理</span> 
@@ -84,7 +81,16 @@
 								<p>需要身份证件扫描或数码照片，社和通常需要1-3个工作日。每张身份证仅支持3个账户使用，且认证通过后信息不能修改。</p>
 							</div>
 							<div class="col-xs-3 text-right">
-								<a  href="/authenPerson" ><button class="btn"  id="persionBtn">立即申请</button></a>
+								<% 	if(results['privateAuthentication'].length>0){%>
+									<%if(!results['privateAuthentication'][0]['status']){%>
+										<a  href="/authenPerson" ><button class="btn"  id="persionBtn" disabled>审核中</button></a>
+									<%}else{%>
+										<a  href="/authenPerson" ><button class="btn"  id="persionBtn" disabled>立即申请</button></a>
+									<%}%>
+								<%}else{%>
+									<a  href="/authenPerson" ><button class="btn"  id="persionBtn"  >立即申请</button></a>
+								<%}%>
+								
 							</div>
 						</div> </br>   
 						<div class="row"> 
@@ -93,123 +99,75 @@
 								<h3>企业认证</h3>
 								<p>需要企业相关证件扫描件或数码照片，审核通常需要1-3个工作日。每份证件仅支持3个账户使用，认证通过后营业执照将在店铺中进行展示且认证通过后信息不能修改。</p>
 							</div>
-							<div class="col-xs-3 text-right">
-								<a  href="/authenCompany"><button  class="btn"  id="companyBtn">立即申请</button></a>
+							<div class="col-xs-3 text-right"> 
+								<% 	if(results['companyAuthentication'].length>0){%>
+									<%if(!results['companyAuthentication'][0]['status']){%>
+										<a  href="/authenPerson" ><button class="btn"  id="companyBtn" disabled>审核中</button></a>
+									<%}else{%>
+										<a  href="/authenPerson" ><button class="btn"  id="companyBtn" disabled>立即申请</button></a>
+									<%}%>
+								<%}else{%>
+									<a  href="/authenPerson" ><button class="btn"  id="companyBtn"  >立即申请</button></a>
+								<%}%>
 							</div>
 						</div>  
 				</div>  
+				<%}%>
+				<%if(results['authenticationType'] & 1){%>
 				<div class="authenicationInfo_person  authenicationInfo"> 
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="top">
 								<span>认证详情</span> 
 							</div>
-							<span class="span">姓名：</span> <p id="name"> </p> </br></br>
-							<span class="span">身份号码：</span> <p id="identityID"></p> </br></br>
+							<span class="span">姓名：</span> <p id="name"><%= results['privateAuthentication']['data']['name']%></p> </br></br>
+							<span class="span">身份号码：</span> <p id="identityID"><%= results['privateAuthentication']['data']['identityID']%></p> </br></br>
 							<div>
 								<span class="span">手持身份证正面：</span>
-								<img id="identityFrontImage" src=""   style="width:200px; "> 
+								<img id="identityFrontImage" src="<%= results['privateAuthentication']['data']['identityBackImage']%>" style="width:200px; "> 
 							</div>
 							</br>
 							<div>
 								<span class="span">身份证反面：</span>
-								<img id="identityBackImage" src=""   style="width:200px; "> 
+								<img id="identityBackImage" src="<%= results['privateAuthentication']['data']['identityFrontImage']%>"   style="width:200px; "> 
 							</div></br>
 							<a  style="margin-left:150px"><button  class="btn"   >修改认证</button></a>
 						</div> 
 					</div>
 				</div>
+				<%}%>
+
+				<%if(results['authenticationType'] & 2){%>
 				<div class="authenicationInfo_company authenicationInfo "> 
 					<div class="row">
 						<div class="col-xs-12 ">
 							<div class="top">
 								<span>认证详情</span> 
 							</div>
-							<span  class="span">企业名称：</span> <p id="companyName" ></p> </br></br>
-							<span class="span">经营范围：</span> <p  id="businessScope"></p> </br></br>
-							<span class="span">经营执照注册码：</span> <p id="licenseID" ></p> </br></br>
+							<span  class="span">企业名称：</span> <p id="companyName" ><%= results['companyAuthentication']['data']['name']%></p> </br></br>
+							<span class="span">经营范围：</span> <p  id="businessScope"><%= results['companyAuthentication']['data']['businessScope']%></p> </br></br>
+							<span class="span">经营执照注册码：</span> <p id="licenseID" ><%= results['companyAuthentication']['data']['licenseID']%></p> </br></br>
 							<div>
 								<span class="span">营业执照照片：</span>
-								<img id="licenseImage" src=""   style="width:200px; "> 
+								<img id="licenseImage" src="<%= results['companyAuthentication']['data']['licenseImage']%>"   style="width:200px; "> 
 							</div>
 							</br>
 							<div>
 								<span  class="span">联系人名片：</span>
-								<img id="contactImage" src=""   style="width:200px; "> 
+								<img id="contactImage" src="<%= results['companyAuthentication']['data']['contactImage']%>"  style="width:200px; "> 
 							</div></br>
 							<a  style="margin-left:150px"><button  class="btn"  >修改认证</button></a>
 						</div> 
 					</div>
-				</div>
+				</div> 
+				<%}%> 
 			</div>
 		</div>
 	</div> 
 </div>    
 <% include commonScript.html %> 
 <script   type="text/javascript">  
-$(function () {   
-	$.ajax({
-		type: "get",
-		async: false,
-		url: "/user", 
-		contentType:"application/json",  
-		dataType:'json',
-		success: function(data){  
-			var personInfo=getAuthenicationInfo(data['privateAuthentication']);	
-			 var companyInfo=getAuthenicationInfo(data['companyAuthentication']);	
-			 console.log(personInfo)
-			if(data['authenticationType'] == 0){ 
-				$('.authentication').css('display','block');
-				
-			 	if(personInfo['data'].length>0){
-			 		if(!personInfo['data'][0]['status']){
-			 			$('#persionBtn').html('审核中').attr('disabled','disabled');  
-			 			$('#companyBtn').attr('disabled','disabled');   
-			 		} 
-			 	}
-			 	if(companyInfo['data'].length>0){
-			 		if(!companyInfo['data'][0]['status']){
-			 			$('#persionBtn').attr('disabled','disabled');  
-			 			$('#companyBtn').html('审核中').attr('disabled','disabled');    
-			 		} 
-			 	} 
-			 }else if(data['authenticationType'] & 1){ 
-			 	$('.authenicationInfo_person').css('display','block'); 
-			 	$('#name').html(personInfo['data'][0]['name'])
-			 	$('#identityID').html(personInfo['data'][0]['identityID'])
-			 	$('#identityBackImage').attr('src',personInfo['data'][0]['identityBackImage'])
-			 	$('#identityFrontImage').attr('src',personInfo['data'][0]['identityFrontImage']) 
-			 }else if(data['authenticationType'] & 2){  
-			 	$('.authenicationInfo_company').css('display','block'); 
-			 	$('#companyName').html(companyInfo['data'][0]['name']);
-			 	$('#businessScope').html(companyInfo['data'][0]['businessScope']);
-			 	$('#licenseID').html(companyInfo['data'][0]['licenseID']);
-			 	$('#licenseImage').attr('src',companyInfo['data'][0]['licenseImage']);
-			 	$('#contactImage').attr('src',companyInfo['data'][0]['contactImage']); 
-			 }
-		},
-		error: function(){ 
-		}
-	});   
-});  
-
-function getAuthenicationInfo(url){
-	var info="";
-	$.ajax({
-			type: "get",
-			async: false, 
-			url: url.replace("http://10.0.1.122:8080/api/v1.0",""), 
-			contentType:"application/json",  
-			dataType:'json',
-			success: function(data){  
-				info=data
-			},
-			error: function(){ 
-
-			}
-		}); 
-	return info; 
-}  
+ 
 $('.authenicationInfo_person .btn').click(function(){
 	if(confirm('点击更改认证后，之前认证将失效，确认修改?')){
 		var params={ 
