@@ -4,7 +4,9 @@
 <% include commonHead.html %>  
 <title>工具大厅</title>   
 <style type="text/css">
- 
+ header #toolhall{
+	color:#e8594b;
+}
 </style>
 </head> 
 <body style="overflow-x:hidden;">
@@ -18,6 +20,15 @@
 </div>
 <% include footer.html %>
 </body> 
+<script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script> 
 <script> 
+$('.search a').click(function(){
+	var keyword=$('.search input').val();
+	/*console.log(keyword);
+	var url=location.search.toString();
+	url=replaceParamVal(url,'keyword',keyword)  */
+	url='/projectlist/1?keyword='+keyword;
+	location = url 
+}) 
 </script>
 </html>

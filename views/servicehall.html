@@ -4,7 +4,9 @@
 <% include commonHead.html %>  
 <title>服务大厅</title>  
 <style type="text/css">
- 
+ header #servicehall{
+    color:#e8594b;
+}
 </style>
 </head> 
 <body style="overflow-x:hidden;">
@@ -38,7 +40,15 @@
 <script type="text/javascript" src="/js/jquery.fullPage.min.js"></script> 
 <script> 
 $(function(){
-    $('#dowebok').fullpage();
+    //$('#dowebok').fullpage();
 });
+$('.search a').click(function(){
+    var keyword=$('.search input').val();
+    /*console.log(keyword);
+    var url=location.search.toString();
+    url=replaceParamVal(url,'keyword',keyword)  */
+    url='/projectlist/1?keyword='+keyword;
+    location = url 
+}) 
 </script>
 </html>

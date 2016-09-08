@@ -12,11 +12,9 @@ ul{
 	display:inline-block;
  	margin:0px; 
  	padding:0px;
+ 	list-style:none;
 } 
-ul li{
-	font-size: 14px;
-
-}
+ 
 .input{
 	display: block; 
     width: 100%;
@@ -146,12 +144,15 @@ header .nav-head-items>li>a{
 	display:  block; 
 	color:white;
 	text-align: center; 
+	font-size: 14px;
+
 }
 .categorys>li>ul { 
 	display: none; 
 	background-color: white;
 	text-align: left;
 	border:1px solid #e8594b;
+	border-left:0px;
 	width:950px;
 }
 .categorys>li>ul>li{
@@ -177,6 +178,10 @@ header .nav-head-items>li>a{
 	display: inline-block;
 	padding:0 4px 4px 0;
 	font-size: 14px;
+}
+.categorys>li:hover{
+	background-color: white;
+	color:#999;
 }
 .categorys>li:hover .drop-meanu{ 
 	display: block;

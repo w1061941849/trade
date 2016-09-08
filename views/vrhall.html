@@ -14,7 +14,7 @@ header .search a,header .btn,.nav-head-items>li:first-child{
 .categorys,.categorys>li>ul {  
 	 height: 400px !important;
 }
-.categorys>li>ul span {
+.categorys>li>ul span,header #vrhall {
 	color: #46b8da !important;
 }
 /**重置颜色高度 end**/
@@ -195,6 +195,14 @@ section>h2{
 <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>   
 <script   type="text/javascript">  
  $(".slideBox").slide({mainCell:".bd ul",autoPlay:true});
+ $('.search a').click(function(){
+	var keyword=$('.search input').val();
+	/*console.log(keyword);
+	var url=location.search.toString();
+	url=replaceParamVal(url,'keyword',keyword)  */
+	url='/projectlist/1?keyword='+keyword;
+	location = url 
+}) 
 </script> 
 </body>
 
