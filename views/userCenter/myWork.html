@@ -4,6 +4,7 @@
 <% include commonHead.html %> 
 <title>我的作品</title> 
 <style>
+
 .myWork{
 	margin-top:12px;
 }
@@ -49,16 +50,19 @@
     margin-top: 10px;
     overflow: hidden;
     width: 100%;
+
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 .workInfo .detail{
 	padding:10px 6px  0px 6px;
 }
-.workInfo .img{
-	width:100%;
-	height:200px;
+.workInfo .img{ 
+	  max-width: 200px;
 	overflow:hidden;
+}
+.workInfo img{ 
+	width:100%;
 }
 .workInfo .operation{
 	margin-top:10px;
@@ -99,57 +103,62 @@
 }
 </style>  
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
+<body >
  <% include header.html %>
-<% include nav.html %>
-<div class="content-wrapper" > 
-    <div class="container-fluid"> 
-		<div class="row"  >
-			<div  class="col-xs-12  col-lg-offset-1 col-lg-10">    
-				<div class="myWork">
-					<div class="top">
-						<span>作品</span> 
-					</div>
-					<div class="list"> 
-						<div class="row">
-							<!--
-							
-							<div class="col-xs-12 col-sm-6 col-md-3">
-								<div class="workInfo">
-									<img src="../../images/index/254982166624103026.jpg">
-									<div class="detail">
-										<span class="workName">作品名称</span>
-										<span class="time">2016/15/6</span></br>
-										<span class="workType">作品类型</span>
-										<p>作品介绍：作品介绍：作品介绍：作品介绍：作品介绍：</p>
-										<div class="operation">
-											<a >删除</a>
-										</div>
-									</div>
+<div class="location">
+	<div class="w">
+		<span>当前位置：</span><a href="/">首页 ></a><a>用户中心 ></a><a href="/makeWork">我的作品 ></a><a href="/myWork">作品中心</a>
+	</div>
+</div>
+<div class="w" > 
+	<% include nav.html %>
+    <div class="content">
+    	<div class="myWork">
+			<div class="top">
+				<span>作品</span> 
+			</div>
+			<div class="list"> 
+				<div class="row">
+					<!--
+					
+					<div class="col-xs-12 col-sm-6 col-md-3">
+						<div class="workInfo">
+							<img src="../../images/index/254982166624103026.jpg">
+							<div class="detail">
+								<span class="workName">作品名称</span>
+								<span class="time">2016/15/6</span></br>
+								<span class="workType">作品类型</span>
+								<p>作品介绍：作品介绍：作品介绍：作品介绍：作品介绍：</p>
+								<div class="operation">
+									<a >删除</a>
 								</div>
-							</div>  
-							-->
-						</div> 
-					</div>
-					<div class="projectPage">
-						<ul>
-							<!--
-							<li><i class="glyphicon glyphicon-menu-left"></i></li>
-							<li><a class="active">1</a></li>
-							<li><a>2</a></li>
-							<li><a>3</a></li>
-							<li><i class="glyphicon glyphicon-menu-right"></i></li> 
-							-->
-						</ul>  
-					</div>
-				</div>
+							</div>
+						</div>
+					</div>  
+					-->
+				</div> 
+			</div>
+			<div class="projectPage">
+				<ul>
+					<!--
+					<li><i class="glyphicon glyphicon-menu-left"></i></li>
+					<li><a class="active">1</a></li>
+					<li><a>2</a></li>
+					<li><a>3</a></li>
+					<li><i class="glyphicon glyphicon-menu-right"></i></li> 
+					-->
+				</ul>  
 			</div>
 		</div>
-	</div>
+    	
+    </div>
+	
+			
 </div>  
 <% include commonScript.html %>    
 <script   type="text/javascript">  
-$(function () {    
+$(function () {   
+	$('#myWorkList_2').addClass("active"); 
 	$.ajax({
 		type:"get",   //请求方式
 		url:"/userworks/1",    //请求的url地址

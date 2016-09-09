@@ -5,8 +5,7 @@
 <title>企业认证</title>  
 <style>   
 .personAuthentication{ 
-	font-size:16px;
-	margin-bottom:100px;
+	font-size:16px; 
 	padding-bottom:50px;  
 	min-height:600px; 
 }
@@ -49,102 +48,103 @@
 .form-control{
 	width:33.3333%;
 } 
-.btn {
+.content .btn {
 	border:1px solid #e87165;
 	color:white;
 	width:150px;
 	background-color:#e87165;
 }
-.btn :hover{
+.content .btn :hover{
 	color:#e87165 !important;
 	background-color#e87165 !important;
 }
 </style>  
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
-<div class="wrapper"> 
+<body > 
 <% include header.html %>
-<% include nav.html %>
-<div class="content-wrapper"  > 
-    <div class="container-fluid">
-		<div class="row"  >
-			<div  class="col-xs-12  col-lg-offset-1 col-lg-10">     
-						<div class="row">
-							<div class="col-xs-12  col-lg-offset-2 col-lg-10">  
-								<div class="personAuthentication">
-									<h2>企业认证</h2>
-									<div class="row line">
-										<div class="col-xs-12 ">
-											<span><font style="color:red;">*</font>企业名称：</span>
-											<input class="form-control" placeholder="请输入您的企业名称"  name="name">
-											<p>请填写与营业执照上一致的名称。</p>
-										</div> 
-									</div>
-									<div class="row line">
-										<div class="col-xs-12">
-											<span  ><font style="color:red;">*</font>经营范围：</span>
-											<input class="form-control"  name="businessScope" > 
-										</div> 
-									</div>
-									<div class="row line">
-										<div class="col-xs-12">
-											<span  ><font style="color:red;">*</font>经营执照注册码：</span>
-											<input class="form-control" name="businessLicenseID"> 
-										</div> 
-									</div>
-									<div class="row line">
-										<div class="col-xs-12">
-											<span ><font style="color:#e87165;">*</font>营业执照照片：</span>
-											<div style="width:60%;display:inline-block;">
-												<img id="companyLienceImg" src="../../images/common/idfront.png" style="margin-bottom:30px;width:100px;height:97px;"> 
-												<div style="position:absolute;top:0px;width:100px;height:97px;overflow:hidden;cursor:pointer">
-													<form id="uploadForm1">
-														<input id="companyLience" type="file"  name="file" style="padding:200px;position:relative;left:-2px;top:-2px;"> 
-													</form>
-												</div> 
-												<p>证件要求：</p>
-												<p>请上传由中国工商局颁发的，在有效期内且年检章齐全（当年成立的公司可无年检章）的证件图片。</p>
-												<p>请提供清晰、完整的<font style="color:#e87165">彩色</font>原件扫描件或数码照，<font style="color:#e87165">仅支持.jpg.bmp.png.gif的图片格式，图片大小不超过3M。</font></p>
-											</div>
-										</div> 
-									</div>
-									<div class="row line">
-										<div class="col-xs-12">
-											<span>联系人名片：</span>
-											<div style="width:60%;display:inline-block;">
-												<div style="position:relative;margin-bottom:30px;">
-													<img id="companyContactCardImg" src="../../images/common/idback.png" style="width:100px;height:97px;"> 
-													<div style="position:absolute;top:0px;width:100px;height:97px;overflow:hidden;cursor:pointer">
-														<form id="uploadForm2">
-															<input  id="companyContactCard" type="file" name="file" style="padding:200px;position:relative;left:-2px;top:-2px;"> 
-														</form>
-													</div> 
-												</div> 
-												<p>证件要求：</p>
-												<p>必须为清晰、完整的<font style="color:#e87165">彩色</font>原件扫描件或数码照，仅支持.jpg.bmp.png.gif的图片格式。</p>
-												<p><font style="color:#e87165">图片大小不超过3M。</font></p>
-											</div>  
-										</div>
-										
-									</div>   
-									<div class="row line"  >
-										<div class="col-xs-12">
-											<a class="btn"   id="authenticationBtn"  onclick="authentication()" style="margin:20px 0 0 120px;">立即认证</a>
-										</div>
-										
-									</div>
-								</div>  
-							</div>
-						</div> 
-					 
-				 
+<div class="location">
+	<div class="w">
+		<span>当前位置：</span><a href="/">首页 ></a><a>用户中心 ></a><a href="/authentication">在线认证 ></a><a href="/authenCompany">企业认证	</a>
+	</div>
+</div>
+
+<div class="w"  > 
+	<% include nav.html %> 
+	<div class="content">  
+		<div class="personAuthentication">
+			<h2>企业认证</h2>
+			<div class="row line">
+				<div class="col-xs-12 ">
+					<span><font style="color:red;">*</font>企业名称：</span>
+					<input class="form-control" placeholder="请输入您的企业名称"  name="name">
+					<p>请填写与营业执照上一致的名称。</p>
+				</div> 
 			</div>
-		</div>
+			<div class="row line">
+				<div class="col-xs-12">
+					<span  ><font style="color:red;">*</font>经营范围：</span>
+					<input class="form-control"  name="businessScope" > 
+				</div> 
+			</div>
+			<div class="row line">
+				<div class="col-xs-12">
+					<span  ><font style="color:red;">*</font>经营执照注册码：</span>
+					<input class="form-control" name="businessLicenseID"> 
+				</div> 
+			</div>
+			<div class="row line">
+				<div class="col-xs-12">
+					<span ><font style="color:#e87165;">*</font>营业执照照片：</span>
+					<div style="width:60%;display:inline-block;">
+						<img id="companyLienceImg" src="../../images/common/idfront.png" style="margin-bottom:30px;width:100px;height:97px;"> 
+						<div style="position:absolute;top:0px;width:100px;height:97px;overflow:hidden;cursor:pointer">
+							<form id="uploadForm1">
+								<input id="companyLience" type="file"  name="file" style="padding:200px;position:relative;left:-2px;top:-2px;"> 
+							</form>
+						</div> 
+						<p>证件要求：</p>
+						<p>请上传由中国工商局颁发的，在有效期内且年检章齐全（当年成立的公司可无年检章）的证件图片。</p>
+						<p>请提供清晰、完整的<font style="color:#e87165">彩色</font>原件扫描件或数码照，<font style="color:#e87165">仅支持.jpg.bmp.png.gif的图片格式，图片大小不超过3M。</font></p>
+					</div>
+				</div> 
+			</div>
+			<div class="row line">
+				<div class="col-xs-12">
+					<span>联系人名片：</span>
+					<div style="width:60%;display:inline-block;">
+						<div style="position:relative;margin-bottom:30px;">
+							<img id="companyContactCardImg" src="../../images/common/idback.png" style="width:100px;height:97px;"> 
+							<div style="position:absolute;top:0px;width:100px;height:97px;overflow:hidden;cursor:pointer">
+								<form id="uploadForm2">
+									<input  id="companyContactCard" type="file" name="file" style="padding:200px;position:relative;left:-2px;top:-2px;"> 
+								</form>
+							</div> 
+						</div> 
+						<p>证件要求：</p>
+						<p>必须为清晰、完整的<font style="color:#e87165">彩色</font>原件扫描件或数码照，仅支持.jpg.bmp.png.gif的图片格式。</p>
+						<p><font style="color:#e87165">图片大小不超过3M。</font></p>
+					</div>  
+				</div>
+				
+			</div>   
+			<div class="row line"  >
+				<div class="col-xs-12">
+					<a class="btn"   id="authenticationBtn"  onclick="authentication()" style="margin:20px 0 0 120px;">立即认证</a>
+				</div>
+				
+			</div>
+		</div>  
+		 
 	</div> 
+					 
+				
 </div>   
 <% include commonScript.html %> 
 <script   type="text/javascript">  
- 
+  $(function(){
+
+ 	$('#onlineAuthen_1').addClass('active')
+ })
 //全局变量
 var companyLience="";//营业执照照片
 var companyContactCard =""; //联系人名片

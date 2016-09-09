@@ -18,7 +18,7 @@
 	color:white;
 	float:right;
 }  
-.btn { 
+.content .btn { 
 	border:1px solid #e8594b;
 	color:white;
 	background-color:#e8594b ; 
@@ -123,41 +123,45 @@
 }
 </style>  
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
+<body >
 <% include header.html %>
-<% include nav.html %>
-<div class="content-wrapper" > 
-    <div class="container-fluid"> 
-		<div class="row"  >
-			<div  class="col-xs-12  col-lg-offset-1 col-lg-10">   
-				<div class="top">
-					<span>行业分类</span> 
-				</div>
-				<ul class="myDomain"> 
-				</ul>
-				</br>
-				</br> 
-				<div class="selectedCatalog">
-					<span style="width:200px;display:inline-block;text-align:right;line-height:40px;color:white;">您选择了：</span>
-					<ul style="display:inline-block">
-					 
-					</ul>
-				</div>  
-				<div class="catalog">
-					<ul > 
-					</ul> 
-				</div> 
-				</br> 
-				<button class="btn" style="margin: 0 auto;display:block"   onclick="addDomain()">确认</button>
-				</br> 
-			</div>
-		</div>
+<div class="location">
+	<div class="w">
+		<span>当前位置：</span><a href="/">首页 ></a><a>用户中心 ></a><a href="/basicInfo">资料完善 ></a><a href="/domain">行业分类</a>
 	</div>
+</div>
+<div class="w" > 
+	<% include nav.html %>
+     
+	<div  class="content">   
+		<div class="top">
+			<span>行业分类</span> 
+		</div>
+		<ul class="myDomain"> 
+		</ul>
+		</br>
+		</br> 
+		<div class="selectedCatalog">
+			<span style="width:200px;display:inline-block;text-align:right;line-height:40px;color:white;">您选择了：</span>
+			<ul style="display:inline-block">
+			 
+			</ul>
+		</div>  
+		<div class="catalog">
+			<ul > 
+			</ul> 
+		</div> 
+		</br> 
+		<button class="btn" style="margin: 0 auto;display:block"   onclick="addDomain()">确认</button>
+		</br> 
+	</div>
+		 
 </div>   
 <% include commonScript.html %> 
 <script type="text/javascript" src="../../js/underscore.min.js"></script>   
 <script   type="text/javascript">  
-$(function () { 
+$(function () {
+	$('#userInformation_5').addClass("active"); 
 	var data=getCategorylist();
 	var str=""
 	for(var i in data['data']){

@@ -2,8 +2,7 @@
 <html >
 <head>  
 <% include commonHead.html %>
-<title>头像设置</title>      
-
+<title>头像设置</title>     
 <link href="/stylesheets/jquery.Jcrop.min.css" rel="stylesheet"/>    
 <link href="/stylesheets/cropper.min.css" rel="stylesheet"/> 
 <style> 
@@ -62,58 +61,60 @@
 
 </style>  
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
+<body >
 <% include header.html %>
-<% include nav.html %>
-<div class="content-wrapper" > 
-    <div class="container-fluid"> 
-		<div class="row"  >
-			<div  class="col-xs-12  col-lg-offset-1 col-lg-10">     
-				<div class="top">
-					<span>头像设置</span> 
-				</div>
-				<div>选择默认头像</div></br>
-				<ul class="defaultHeadIcon">
-					<li><a><img data-imageId="1.jpg" src="http://10.0.1.122/static/default/img/1.jpg"></a></li>
-					<li><a><img data-imageId="2.jpg" src="http://10.0.1.122/static/default/img/2.jpg"></a></li>
-					<li><a><img data-imageId="3.jpg" src="http://10.0.1.122/static/default/img/3.jpg"></a></li>
-					<li><a><img data-imageId="4.jpg" src="http://10.0.1.122/static/default/img/4.jpg"></a></li>
-					<li><a><img data-imageId="5.jpg" src="http://10.0.1.122/static/default/img/5.jpg"></a></li>
-					<li><a><img data-imageId="6.jpg" src="http://10.0.1.122/static/default/img/6.jpg"></a></li>
-					<li><a><img data-imageId="7.jpg" src="http://10.0.1.122/static/default/img/7.jpg"></a></li>
-					<li><a><img data-imageId="8.jpg" src="http://10.0.1.122/static/default/img/8.jpg"></a></li>
-					<li><a><img data-imageId="9.jpg" src="http://10.0.1.122/static/default/img/9.jpg"></a></li>
-					<li><a><img data-imageId="10.jpg" src="http://10.0.1.122/static/default/img/10.jpg"></a></li>
-				
-				</ul>
-				</br>
-				<div class="">  
-					<div>自定义头像</div></br>
-					
-					<div class="left" style="display:inline-block;margin-right:50px;overflow:hidden;width:400px;height:400px; ">
-						<img  id="image"  src="../../images/common/headIcon.png"  style="width:100%"    > 
-					</div>
-
-					<div class="right" style="display:inline-block;vertical-align:top;">
-						<p style="color:#e8594b;font-size:10px;">您上传的图片自动生成三种尺寸，请注意中小只存的图片是否清晰</p></br>
-						<div class="docs-preview clearfix">
-						  <div class="img-preview preview-lg"></div>
-						  <div class="img-preview preview-md"></div>
-						  <div class="img-preview preview-sm"></div> 
-						</div>
-					</div> 
-					<p style="font-size:10px;color:#999;">仅支持JPG,PNG图片</p></br>
-					<form id="uploadForm"  style="position:relative;top:12px;background-color:#e0e0e0; border:1px solid #cccccc;cursor:pointer;overflow:hidden;display:inline-block;margin-right:20px;">
-							<a  style="color:black;line-height:31px;margin:0 10px">上传头像</a>
-							<input type="file" class="avatar-input" id="iconfile" style="position:absolute;top:0px;width:0px;padding:16px  80px;">  
-					</form> 
-					<div style="margin-top:20px;display:inline-block">
-						<a id="save" style="background-color:red;padding:6px 20px;color:black;border:1px solid #cccccc;background-color:#e0e0e0">保存</a>
-					</div> 
-				</div>
+<div class="location">
+	<div class="w">
+		<span>当前位置：</span><a href="/">首页 ></a><a>用户中心 ></a><a href="/basicInfo">资料完善 ></a><a href="/headIcon">头像设置</a>
+	</div>
+</div>
+<div class="w" > 
+	<% include nav.html %> 
+	<div  class="content">     
+		<div class="top">
+			<span>头像设置</span> 
+		</div>
+		<div>选择默认头像</div></br>
+		<ul class="defaultHeadIcon">
+			<li><a><img data-imageId="1.jpg" src="http://10.0.1.122/static/default/img/1.jpg"></a></li>
+			<li><a><img data-imageId="2.jpg" src="http://10.0.1.122/static/default/img/2.jpg"></a></li>
+			<li><a><img data-imageId="3.jpg" src="http://10.0.1.122/static/default/img/3.jpg"></a></li>
+			<li><a><img data-imageId="4.jpg" src="http://10.0.1.122/static/default/img/4.jpg"></a></li>
+			<li><a><img data-imageId="5.jpg" src="http://10.0.1.122/static/default/img/5.jpg"></a></li>
+			<li><a><img data-imageId="6.jpg" src="http://10.0.1.122/static/default/img/6.jpg"></a></li>
+			<li><a><img data-imageId="7.jpg" src="http://10.0.1.122/static/default/img/7.jpg"></a></li>
+			<li><a><img data-imageId="8.jpg" src="http://10.0.1.122/static/default/img/8.jpg"></a></li>
+			<li><a><img data-imageId="9.jpg" src="http://10.0.1.122/static/default/img/9.jpg"></a></li>
+			<li><a><img data-imageId="10.jpg" src="http://10.0.1.122/static/default/img/10.jpg"></a></li>
+		
+		</ul>
+		</br>
+		<div class="">  
+			<div>自定义头像</div></br>
+			
+			<div class="left" style="display:inline-block;margin-right:50px;overflow:hidden;width:400px;height:400px; ">
+				<img  id="image"  src="../../images/common/headIcon.png"  style="width:100%"    > 
 			</div>
+
+			<div class="right" style="display:inline-block;vertical-align:top;">
+				<p style="color:#e8594b;font-size:10px;">您上传的图片自动生成三种尺寸，请注意中小只存的图片是否清晰</p></br>
+				<div class="docs-preview clearfix">
+				  <div class="img-preview preview-lg"></div>
+				  <div class="img-preview preview-md"></div>
+				  <div class="img-preview preview-sm"></div> 
+				</div>
+			</div> 
+			<p style="font-size:10px;color:#999;">仅支持JPG,PNG图片</p></br>
+			<form id="uploadForm"  style="position:relative;top:12px;background-color:#e0e0e0; border:1px solid #cccccc;cursor:pointer;overflow:hidden;display:inline-block;margin-right:20px;">
+					<a  style="color:black;line-height:31px;margin:0 10px">上传头像</a>
+					<input type="file" class="avatar-input" id="iconfile" style="position:absolute;top:0px;width:0px;padding:16px  80px;">  
+			</form> 
+			<div style="margin-top:20px;display:inline-block">
+				<a id="save" style="background-color:red;padding:6px 20px;color:black;border:1px solid #cccccc;background-color:#e0e0e0">保存</a>
+			</div> 
 		</div>
 	</div>
+		 
 </div>  
 <script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>  
@@ -122,7 +123,8 @@
 <script type="text/javascript" src="/js/jquery.color.js"></script>    
 <script   type="text/javascript">  
 
-$(function () {  
+$(function () { 
+	$('#userInformation_4').addClass("active"); 
 	$('#image').cropper({
 	  aspectRatio: 1 / 1,
 	  preview: '.img-preview',

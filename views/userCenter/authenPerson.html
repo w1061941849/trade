@@ -6,8 +6,7 @@
 <style>   
 
 .personAuthentication{ 
-	font-size:16px;
-	margin-bottom:100px;
+	font-size:16px; 
 	padding-bottom:50px;  
 	min-height:600px; 
 }
@@ -49,7 +48,7 @@
 .form-control{
 	width:33.3333%;
 } 
-.btn {
+.content .btn {
 	border:1px solid #e87165;
 	color:white;
 	width:150px;
@@ -61,102 +60,105 @@
 }
 </style>  
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
-<div class="wrapper"> 
-<% include header.html %>
-<% include nav.html %>
-<div class="content-wrapper"  > 
-    <div class="container-fluid">
-		<div class="row"  >	 
-			<div  class="col-xs-12  col-lg-offset-1 col-lg-10">    
-						<div class="row">
-							<div class="col-xs-12  col-lg-offset-2 col-lg-10">  
-								<div class="personAuthentication">
-									<h2>个人认证</h2>
-									<div class="row line">
-										<div class="col-xs-12">
-											<span   ><font style="color:red;">*</font>姓名：</span>
-											<input class="form-control"   name="name" >
-											<p>为保障您的资金安全，实名认证姓名和省份证号须和您体现的银行账号的户名保持一致。</p>
-										</div> 
-									</div>
-									<div class="row line">
-										<div class="col-xs-12">
-											<span   ><font style="color:red;">*</font>身份号码：</span>
-											<input class="form-control"   name="identityID"   maxlength="18">
-											<p>身份证号码前后不能有空格，年龄不足18岁，不能认证。</p>
-										</div> 
-									</div>
-									<div class="row line">
-										<div class="col-xs-12">
-											<span ><font style="color:red;">*手持</font>身份证正面照：</span>
-											<div style="width:60%;display:inline-block;">
-												<img id="authorityPrivateFrontImg" src="../../images/common/idfront.png" style="margin-bottom:10px;width:100px;height:97px;"> 
-												<div style="position:absolute;top:0px;width:100px;height:97px;overflow:hidden;cursor:pointer">
-													<form id="uploadForm1">
-														<input  type="file" id="authorityPrivateFront"  name="file" style="padding:200px;position:relative;left:-2px;top:-2px;"> 
-													</form>
-												</div>  
-											</div>
-											<div class="example">  
-												<div class="row">
-													<div class="col-xs-12"> 
-														<span>示例：</span>
-														<img src="../../images/common/id-front-small.jpg">  
-														<div style="width:500px;padding-left:120px;display:inline-block;">
-															<p>1.请上传本人手持身份证正面头部照片和上半身照片</p>
-															<p>2.照片为免冠、未化妆的数码照片原始图片，请勿用任何软件编辑修改</p>
-															<p>3.必须看清证件信息，且证件信息不能被遮挡，持证人五官清晰可见</p>
-															<p>4.仅支持.jpg. bmp. png. gif的图片格式。建议图片大小不超过3M</p>
-															<p>5.您提供的照片信息聚形云将予以保护，不会用于其他用途。</p>
-														</div>
-													</div> 
-												</div> 
-											</div> 
-										</div>  
-									</div>
-									<div class="row line">
-										<div class="col-xs-12">
-											<span>身份证反面照：</span>
-											<div style="width:60%;display:inline-block;">
-												<img id="authorityPrivateBackImg" src="../../images/common/idback.png" style="margin-bottom:10px;width:100px;height:97px;"> 
-												<div style="position:absolute;top:0px;width:100px;height:97px;overflow:hidden;cursor:pointer">
-													<form id="uploadForm2"> 
-														<input  id="authorityPrivateBack"  type="file" name="file" style="padding:200px;position:relative;left:-2px;top:-2px;"> 
-													</form>
-												</div> 
-											</div> 
-											<div class="example">  
-												<div class="row">
-													<div class="col-xs-12">
-														<span>示例：</span>
-														<img src="../../images/common/id-back-small.jpg"> 
-														<div style="width:500px;padding-left:120px;display:inline-block;">
-															<p>1.必须看清证件信息，且证件信息不能被遮挡</p>
-															<p>2.仅支持.jpg .bmp .png .gif的图片格式，图片大小不超过3M</p>
-															<p>3.您提供的照片信息聚形云将予以保护，不会用于其他用途。</p>
-														</div>
-													</div> 
-													
-												</div> 
-											</div>  
-										</div>   
-									</div>
-									<div class="row line">
-										<div class="col-xs-12">
-											<a class="btn" onclick="authentication()" style="margin:20px 0 0 120px;">立即认证</a>
-										</div> 
-									</div>
-								</div> 
-							</div>
-						</div> 
-			</div> 
-		</div>
+<body >
+ 
+<% include header.html %> 
+<div class="location">
+	<div class="w">
+		<span>当前位置：</span><a href="/">首页 ></a><a>用户中心 ></a><a href="/authentication">在线认证 ></a><a href="/authenPerson">个人认证</a>
 	</div>
+</div>
+<div class="w"  > 
+	<% include nav.html %>
+        
+	<div class="content">  
+		<div class="personAuthentication">
+			<h2>个人认证</h2>
+			<div class="row line">
+				<div class="col-xs-12">
+					<span   ><font style="color:red;">*</font>姓名：</span>
+					<input class="form-control"   name="name" >
+					<p>为保障您的资金安全，实名认证姓名和省份证号须和您体现的银行账号的户名保持一致。</p>
+				</div> 
+			</div>
+			<div class="row line">
+				<div class="col-xs-12">
+					<span   ><font style="color:red;">*</font>身份号码：</span>
+					<input class="form-control"   name="identityID"   maxlength="18">
+					<p>身份证号码前后不能有空格，年龄不足18岁，不能认证。</p>
+				</div> 
+			</div>
+			<div class="row line">
+				<div class="col-xs-12">
+					<span ><font style="color:red;">*手持</font>身份证正面照：</span>
+					<div style="width:60%;display:inline-block;">
+						<img id="authorityPrivateFrontImg" src="../../images/common/idfront.png" style="margin-bottom:10px;width:100px;height:97px;"> 
+						<div style="position:absolute;top:0px;width:100px;height:97px;overflow:hidden;cursor:pointer">
+							<form id="uploadForm1">
+								<input  type="file" id="authorityPrivateFront"  name="file" style="padding:200px;position:relative;left:-2px;top:-2px;"> 
+							</form>
+						</div>  
+					</div>
+					<div class="example">  
+						<div class="row">
+							<div class="col-xs-12"> 
+								<span>示例：</span>
+								<img src="../../images/common/id-front-small.jpg">  
+								<div style="width:500px;padding-left:120px;display:inline-block;">
+									<p>1.请上传本人手持身份证正面头部照片和上半身照片</p>
+									<p>2.照片为免冠、未化妆的数码照片原始图片，请勿用任何软件编辑修改</p>
+									<p>3.必须看清证件信息，且证件信息不能被遮挡，持证人五官清晰可见</p>
+									<p>4.仅支持.jpg. bmp. png. gif的图片格式。建议图片大小不超过3M</p>
+									<p>5.您提供的照片信息聚形云将予以保护，不会用于其他用途。</p>
+								</div>
+							</div> 
+						</div> 
+					</div> 
+				</div>  
+			</div>
+			<div class="row line">
+				<div class="col-xs-12">
+					<span>身份证反面照：</span>
+					<div style="width:60%;display:inline-block;">
+						<img id="authorityPrivateBackImg" src="../../images/common/idback.png" style="margin-bottom:10px;width:100px;height:97px;"> 
+						<div style="position:absolute;top:0px;width:100px;height:97px;overflow:hidden;cursor:pointer">
+							<form id="uploadForm2"> 
+								<input  id="authorityPrivateBack"  type="file" name="file" style="padding:200px;position:relative;left:-2px;top:-2px;"> 
+							</form>
+						</div> 
+					</div> 
+					<div class="example">  
+						<div class="row">
+							<div class="col-xs-12">
+								<span>示例：</span>
+								<img src="../../images/common/id-back-small.jpg"> 
+								<div style="width:500px;padding-left:120px;display:inline-block;">
+									<p>1.必须看清证件信息，且证件信息不能被遮挡</p>
+									<p>2.仅支持.jpg .bmp .png .gif的图片格式，图片大小不超过3M</p>
+									<p>3.您提供的照片信息聚形云将予以保护，不会用于其他用途。</p>
+								</div>
+							</div> 
+							
+						</div> 
+					</div>  
+				</div>   
+			</div>
+			<div class="row line">
+				<div class="col-xs-12">
+					<a class="btn" onclick="authentication()" style="margin:20px 0 0 120px;">立即认证</a>
+				</div> 
+			</div>
+		</div> 
+		 
+	</div> 
+		 
 </div>   
 <% include commonScript.html %> 
 <script   type="text/javascript">  
-  
+ $(function(){
+
+ 	$('#onlineAuthen_1').addClass('active')
+ })
 //认证
 function authentication(){ 
 	var flag=true;

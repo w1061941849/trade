@@ -188,74 +188,66 @@
 } 
 </style>  
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
-<% include header.html %>
-<% include nav.html %>
-<div class="content-wrapper"  > 
-    <div class="container-fluid">
-		<div class="row"  >
-			<div  class="col-xs-12  col-lg-offset-1 col-lg-10">  
-				<div class="row">
-					<div class="col-xs-12">  
-						<div class="versionTop" style="background-color:white;padding:20px 10px 20px 10px;border-radius:4px;    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">	
-							<span id="projectName"></span><span></span>
-							<ul class="fliter">
-								<li><a class="active" href="./joinProjects_version.html">Version</a></li>
-								<li><a onclick="toSuggections()">意见</a></li>
-							</ul> 
-							<a    data-toggle="modal" data-target="#myModal2"><button  class="btn"   >添加Version</button></a>
-						</div>
-					</div> 
-				</div> 
-				<div class="row">
-					<div class="col-xs-12   col-md-8   col-md-6 ">
-						<div class="lists"> 
-						<%for(var i in results){%>
-							<div class="list"> 
-								<% for(var j=0; j<results[i].length;j++){%> 
-									<%if(j==0){%>
-										<div class="time"><%= results[i][j]['publishDate']%> </div>
-									<%}%> 
-									<div class="versionInfo"  >
-										<div class="box box-widget "> 
-											<div class="box-body" > 
-												<div>
-													<img src="<%= results[i][j]['image']%>"  onclick="showModal(this)" data-toggle="modal" data-target="#myModal"> 
-													<div class="describe">
-														<span>sss</span></br>
-														<p><%= results[i][j]['description']%></p>
-													</div>
-												</div>
-											</div> 
-										</div>
-									</div> 
-								<%}%>
-							</div>  
-						<%}%> 
-							<!--
-							<div class="list">
-								<div class="time">2015/5/6 </div>
-								<div class="versionInfo" id="1">
-									<div class="box box-widget "> 
-										<div class="box-body" > 
-											<div>
-												<img src="../../images/index/index_bg.jpg"  onclick="showModal(this)" data-toggle="modal" data-target="#myModal"> 
-												<div class="describe">
-													<span>sss</span></br>
-													<p>按时大大说的</p>
-												</div>
-											</div>
-										</div> 
+<body >
+<% include header.html %> 
+<div class="location">
+	<div class="w">
+		<span>当前位置：</span><a href="/">首页 ></a><a>用户中心 ></a><a href="#">Version</a>
+	</div>
+</div>
+<div class="w"  > 
+	<% include nav.html %>
+    <div class="content">   
+		<div class="versionTop" style="background-color:white;padding:20px 10px 20px 10px;border-radius:4px;    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">	
+			<span id="projectName"></span><span></span>
+			<ul class="fliter">
+				<li><a class="active" href="./joinProjects_version.html">Version</a></li>
+				<li><a onclick="toSuggections()">意见</a></li>
+			</ul> 
+			<a    data-toggle="modal" data-target="#myModal2"><button  class="btn"   >添加Version</button></a>
+		</div> 
+		<div class="lists"> 
+		<%for(var i in results){%>
+			<div class="list"> 
+				<% for(var j=0; j<results[i].length;j++){%> 
+					<%if(j==0){%>
+						<div class="time"><%= results[i][j]['publishDate']%> </div>
+					<%}%> 
+					<div class="versionInfo"  >
+						<div class="box box-widget "> 
+							<div class="box-body" > 
+								<div>
+									<img src="<%= results[i][j]['image']%>"  onclick="showModal(this)" data-toggle="modal" data-target="#myModal"> 
+									<div class="describe">
+										<span>sss</span></br>
+										<p><%= results[i][j]['description']%></p>
 									</div>
 								</div>
+							</div> 
+						</div>
+					</div> 
+				<%}%>
+			</div>  
+		<%}%> 
+			<!--
+			<div class="list">
+				<div class="time">2015/5/6 </div>
+				<div class="versionInfo" id="1">
+					<div class="box box-widget "> 
+						<div class="box-body" > 
+							<div>
+								<img src="../../images/index/index_bg.jpg"  onclick="showModal(this)" data-toggle="modal" data-target="#myModal"> 
+								<div class="describe">
+									<span>sss</span></br>
+									<p>按时大大说的</p>
+								</div>
 							</div>
-							-->
 						</div> 
 					</div>
 				</div>
-				
 			</div>
-		</div>
+			-->
+		</div>   
 	</div> 
 </div>    
 <!--VERSION查看 -->

@@ -19,7 +19,7 @@
 	font-weight:800;
 	color:#666;
 }
-.btn{
+.content .btn{
 	background-color:#e8594b;
 	color:white;
 	margin-left:100px;
@@ -28,41 +28,46 @@
 }  
 </style>  
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
-<div class="wrapper"> 
+<body > 
 <% include header.html %>
-<% include nav.html %>
-<div class="content-wrapper"  > 
-    <div class="container-fluid"> 
-		<div class="row"  >
-			<div  class="col-xs-12  col-lg-offset-1 col-lg-10">     
-				<div class="top">
-					<span>账户安全</span> 
-				</div>
-				<div class="input-group">
-					<span class="input-group-addon"   >邮箱：</span>
-					<input class="form-control" name="email" type="text" value="<%= session['email']%>" readonly>
-				</div> 
-				
-				<div class="input-group">
-					<span class="input-group-addon"   >原密码：</span>
-					<input class="form-control" name="oldPassword" type="password" value="" maxlength="12">
-				</div>  
-				<div class="input-group">
-					<span class="input-group-addon"   >密码：</span>
-					<input class="form-control" name="password" type="password" value="" maxlength="12">
-				</div>  
-				<div class="input-group">
-					<span class="input-group-addon"   >密码确认：</span>
-					<input class="form-control" name="password_" type="password" value="" maxlength="12">
-				</div>   	 
-				<button class="btn" onclick="modify()" style="width:150px;">修改</button> 
-			</div>   
+<div class="location">
+	<div class="w">
+		<span>当前位置：</span><a href="/">首页 ></a><a>用户中心 ></a><a href="/basicInfo">资料完善 ></a><a href="/countSafe">账户安全</a>
+	</div>
+</div>
+<div class="w"  > 
+	<% include nav.html %>
+    <div class="content">  
+		<div class="top">
+			<span>账户安全</span> 
 		</div>
+		<div class="input-group">
+			<span class="input-group-addon"   >邮箱：</span>
+			<input class="form-control" name="email" type="text" value="<%= session['email']%>" readonly>
+		</div> 
+		
+		<div class="input-group">
+			<span class="input-group-addon"   >原密码：</span>
+			<input class="form-control" name="oldPassword" type="password" value="" maxlength="12">
+		</div>  
+		<div class="input-group">
+			<span class="input-group-addon"   >密码：</span>
+			<input class="form-control" name="password" type="password" value="" maxlength="12">
+		</div>  
+		<div class="input-group">
+			<span class="input-group-addon"   >密码确认：</span>
+			<input class="form-control" name="password_" type="password" value="" maxlength="12">
+		</div>   	 
+		<button class="btn" onclick="modify()" style="width:150px;">修改</button> 
+			 
 	</div> 
 </div>    
 <% include commonScript.html %>
 <script   type="text/javascript">   
+$(function () {   
+  
+	$('#userInformation_2').addClass("active");
+});  
 // 修改
 function modify(){
 	var params={

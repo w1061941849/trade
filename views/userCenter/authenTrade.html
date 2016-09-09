@@ -4,7 +4,9 @@
 <% include commonHead.html %>
 <title>交易认证</title> 
 <style>    
- 
+ #onlineAuthen_2{
+	background-color: #ffdad6;
+}
 .top{
 	padding-top:12px;
 	padding-bottom:20px;
@@ -33,88 +35,92 @@ thead td{
 }
 </style>  
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
+<body >
 <% include header.html %>
-<% include nav.html %>
-<div class="content-wrapper" > 
-    <div class="container-fluid"> 
-		<div class="row"  >
-			<div  class="col-xs-12  col-lg-offset-1 col-lg-10">     
-					<div class="step stepOne"> 
-						<div class="top">
-							<span>交易认证</span> 
-						</div>
-						<div class="alert alert-warning" role="alert"> 
-							必须先通过身份认证才能进行银行卡认证。
-						</div>
-					</div>
-					<div class="step stepTwo"  style="max-width:500px;">
-						<div class="top">
-							<span>交易认证</span> 
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon" >户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</span>
-							<input class="form-control" name="name" type="text" placeholder="户名">
-						</div>  
-						<div class="input-group">
-							<span class="input-group-addon">对&nbsp;&nbsp;&nbsp;公&nbsp;&nbsp;账&nbsp;&nbsp;户：</span>
-							<input class="form-control" name="bankAccount" type="text"  placeholder="对公账户">
-						</div>   
-						<div class="input-group">
-							<span class="input-group-addon" >确认对公账户： </span>
-							<input class="form-control" name="bankAccount_repeat" type="text" placeholder="再次确认对公账户">
-						</div> 
-						<div class="input-group">
-							<span class="input-group-addon" >开&nbsp;&nbsp;户&nbsp;&nbsp;银&nbsp;&nbsp;行&nbsp;：</span>
-							<input type="text" class="form-control" name="bankName"  placeholder="如：中国银行"  >    
-						</div> 
-						<div class="input-group">
-							<span class="input-group-addon" >开户银行地点：</span>
-							<input class="form-control" placeholder="如：张江路支行"  name="bankLocation" type="text" value="">
-						</div> 
-						<button class="btn  btn-default" style="background-color:#e87165;color:white;width:150px;margin:0 auto;display:block;">立即认证</button>
-					</div>
-					<div class="step stepThree" style="max-width:500px;"> 
-						<div class="top">
-							<span>交易认证</span> 
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">请填写收到的金额</span>
-							<input class="form-control" placeholder="如：0.25"  name="checkMoney" type="text" >
-						</div> 
-						<p style="font-size:12px;color:red">您只有一次输入验证的机会,一旦输入错误，您将重新开始银行账户验证</p></br>
-						<button class="btn  btn-default" style="background-color:#e87165;color:white;width:150px;margin:0 auto;display:block;">立即认证</button>
-					</div>
-					<div class="step stepFour">  
-						<div class="top">
-							<span>现有银行卡</span> 
-						</div>
-						<span>银行卡名称：</span><span id="bankName"></span></br></br>
-						<span>卡号：</span><span id="bankAccount"></span></br></br>
-						<span>开户地址：</span><span id="bankLocation"></span></br></br>
-						<button type="button" class="btn btn-info btn-md "  >更换 </button>
-						<!-- <table class="table table-bordered"> 
-							<thead>
-								<tr>
-									<td >银行卡名称</td>
-									<td>卡号</td> 
-									<td>开户地址</td> 
-									<td>操作</td> 
-								</tr> 
-							</thead>
-							<tbody>
-								<tr>
-									<td id="bankName"></td>
-									<td id="bankAccount"></td> 
-									<td id="bankLocation"></td> 
-									<td ><button type="button" class="btn btn-info btn-xs "  >更换 </button></td> 
-								</tr>
-							
-							</tbody>
-						</table> -->
-					</div> 
+
+<div class="location">
+	<div class="w">
+		<span>当前位置：</span><a href="/">首页 ></a><a>用户中心 ></a><a href="/authentication">在线认证 ></a><a href="/authentication">身份认证</a>
+	</div>
+</div>
+<div class="w" > 
+	<% include nav.html %>
+    <div class="content" style="height:500px;"> 
+		     
+		<div class="step stepOne"> 
+			<div class="top">
+				<span>交易认证</span> 
+			</div>
+			<div class="alert alert-warning" role="alert"> 
+				必须先通过身份认证才能进行银行卡认证。
 			</div>
 		</div>
+		<div class="step stepTwo"  style="max-width:500px;">
+			<div class="top">
+				<span>交易认证</span> 
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon" >户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</span>
+				<input class="form-control" name="name" type="text" placeholder="户名">
+			</div>  
+			<div class="input-group">
+				<span class="input-group-addon">对&nbsp;&nbsp;&nbsp;公&nbsp;&nbsp;账&nbsp;&nbsp;户：</span>
+				<input class="form-control" name="bankAccount" type="text"  placeholder="对公账户">
+			</div>   
+			<div class="input-group">
+				<span class="input-group-addon" >确认对公账户： </span>
+				<input class="form-control" name="bankAccount_repeat" type="text" placeholder="再次确认对公账户">
+			</div> 
+			<div class="input-group">
+				<span class="input-group-addon" >开&nbsp;&nbsp;户&nbsp;&nbsp;银&nbsp;&nbsp;行&nbsp;：</span>
+				<input type="text" class="form-control" name="bankName"  placeholder="如：中国银行"  >    
+			</div> 
+			<div class="input-group">
+				<span class="input-group-addon" >开户银行地点：</span>
+				<input class="form-control" placeholder="如：张江路支行"  name="bankLocation" type="text" value="">
+			</div> 
+			<button class="btn  btn-default" style="background-color:#e87165;color:white;width:150px;margin:0 auto;display:block;">立即认证</button>
+		</div>
+		<div class="step stepThree" style="max-width:500px;"> 
+			<div class="top">
+				<span>交易认证</span> 
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon">请填写收到的金额</span>
+				<input class="form-control" placeholder="如：0.25"  name="checkMoney" type="text" >
+			</div> 
+			<p style="font-size:12px;color:red">您只有一次输入验证的机会,一旦输入错误，您将重新开始银行账户验证</p></br>
+			<button class="btn  btn-default" style="background-color:#e87165;color:white;width:150px;margin:0 auto;display:block;">立即认证</button>
+		</div>
+		<div class="step stepFour">  
+			<div class="top">
+				<span>现有银行卡</span> 
+			</div>
+			<span>银行卡名称：</span><span id="bankName"></span></br></br>
+			<span>卡号：</span><span id="bankAccount"></span></br></br>
+			<span>开户地址：</span><span id="bankLocation"></span></br></br>
+			<button type="button" class="btn btn-info btn-md "  >更换 </button>
+			<!-- <table class="table table-bordered"> 
+				<thead>
+					<tr>
+						<td >银行卡名称</td>
+						<td>卡号</td> 
+						<td>开户地址</td> 
+						<td>操作</td> 
+					</tr> 
+				</thead>
+				<tbody>
+					<tr>
+						<td id="bankName"></td>
+						<td id="bankAccount"></td> 
+						<td id="bankLocation"></td> 
+						<td ><button type="button" class="btn btn-info btn-xs "  >更换 </button></td> 
+					</tr>
+				
+				</tbody>
+			</table> -->
+		</div> 
+			 
 	</div>
 </div>  
 <% include commonScript.html %>  

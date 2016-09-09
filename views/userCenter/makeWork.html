@@ -51,80 +51,84 @@ font{
 }
 </style>  
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
+<body >
 <% include header.html %>
-<% include nav.html %>
-<div class="content-wrapper" > 
-    <div class="container-fluid"> 
-		<div class="row"  >
-			<div  class="col-xs-12  col-lg-offset-1 col-lg-10">   
-				<div class="makeWork">  
-					<div class="top">
-						<span>发布作品</span> 
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon" >作品名称<font >*</font>：</span>
-						<input class="form-control" name="title" type="text" placeholder="请输入作品名称" >
-					</div>  
-					<div class="input-group">
-						<span class="input-group-addon"   >作品简介<font >*</font>：</span>
-						<textarea class="form-control"  id="description" placeholder="准确输入作品简介与作品说明"></textarea>
-					</div>   
-					<div class="input-group">
-						<span class="input-group-addon"   >图片<font >*</font>：</span>
-						<form id="uploadForm" >
-							<input id="imgFile"  type="file" name="file">
-						</form>
-					</div>  
-					<div class="input-group">
-						<span class="input-group-addon">附件：</span>
-						<form id="compressfileForm">
-							<input id="compressfile" type="file"   name="file">
-							
-						</form>
-					</div>   
-					
-					<div class="input-group">
-						<span class="input-group-addon"   >版权<font >*</font>：</span>
-						<select class="form-control  copyright">
-							<option id="" selected>请选择版权类型</option>
-							<option id="1">不能使用原创授权</option>
-							<option id="2">署名</option>
-							<option id="3">署名-非商业性使用</option>
-							<option id="4">署名-禁止演绎</option>
-							<option id="5">署名-形同方式共享</option>
-							<option id="6">署名-非商业性使用-禁止演绎</option>
-							<option id="7">署名-非商业性使用-相同方式共享</option>
-						</select>
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon"   >作品标签<font >*</font>：</span>
-						<input class="form-control" id="tagInput" type="text" placeholder="请输入作品类型"   oninput="thinkSearch(this)" >
-						<span class="input-group-addon"  style="padding:0px;"><a class="btn"   style="float:right;"  onclick="addTag()">添加</a> </span>
-						<div style="position:absolute;padding:0 100px;width:100%;left:0px;margin-top:34px;z-index:100;">
-							<ul class="tagList">  
-							</ul> 
-						</div>
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon"   > </span>
-							<div class="tags">  
-							</div>
-						<span class="input-group-addon"   > </span>
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon"   > </span>
-						<a class="btn" onclick="setWork()" style="width:150px;">确认</a> 
-					</div>
-					
-				</div>  
- 			</div>
-		</div>
+<div class="location">
+	<div class="w">
+		<span>当前位置：</span><a href="/">首页 ></a><a>用户中心 ></a><a href="/makeWork">我的作品 ></a><a href="/makeWork">发布作品</a>
 	</div>
+</div>
+<div class="w" > 
+	<% include nav.html %> 
+	<div  class="content">   
+		<div class="makeWork">  
+			<div class="top">
+				<span>发布作品</span> 
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon" >作品名称<font >*</font>：</span>
+				<input class="form-control" name="title" type="text" placeholder="请输入作品名称" >
+			</div>  
+			<div class="input-group">
+				<span class="input-group-addon"   >作品简介<font >*</font>：</span>
+				<textarea class="form-control"  id="description" placeholder="准确输入作品简介与作品说明"></textarea>
+			</div>   
+			<div class="input-group">
+				<span class="input-group-addon"   >图片<font >*</font>：</span>
+				<form id="uploadForm" >
+					<input id="imgFile"  type="file" name="file">
+				</form>
+			</div>  
+			<div class="input-group">
+				<span class="input-group-addon">附件：</span>
+				<form id="compressfileForm">
+					<input id="compressfile" type="file"   name="file">
+					
+				</form>
+			</div>   
+			
+			<div class="input-group">
+				<span class="input-group-addon"   >版权<font >*</font>：</span>
+				<select class="form-control  copyright">
+					<option id="" selected>请选择版权类型</option>
+					<option id="1">不能使用原创授权</option>
+					<option id="2">署名</option>
+					<option id="3">署名-非商业性使用</option>
+					<option id="4">署名-禁止演绎</option>
+					<option id="5">署名-形同方式共享</option>
+					<option id="6">署名-非商业性使用-禁止演绎</option>
+					<option id="7">署名-非商业性使用-相同方式共享</option>
+				</select>
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon"   >作品标签<font >*</font>：</span>
+				<input class="form-control" id="tagInput" type="text" placeholder="请输入作品类型"   oninput="thinkSearch(this)" >
+				<span class="input-group-addon"  style="padding:0px;"><a class="btn"   style="float:right;"  onclick="addTag()">添加</a> </span>
+				<div style="position:absolute;padding:0 100px;width:100%;left:0px;margin-top:34px;z-index:100;">
+					<ul class="tagList">  
+					</ul> 
+				</div>
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon"   > </span>
+					<div class="tags">  
+					</div>
+				<span class="input-group-addon"   > </span>
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon"   > </span>
+				<a class="btn" onclick="setWork()" style="width:150px;">确认</a> 
+			</div>
+			
+		</div>  
+	</div>
+	 
 </div> 
 <% include commonScript.html %>   
 <script   type="text/javascript">  
- 
+ $(function(){
+ 	$('#myWorkList_1').addClass("active");
+ })
 //全局变量
 var workImg="";
 var compressfile="";

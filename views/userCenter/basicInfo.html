@@ -4,7 +4,7 @@
 <% include commonHead.html %>
 <title>基本资料</title> 
 <style>   
-.btn{
+.content .btn{
 	background-color:#e8594b;
 	color:white;
 	display:block;
@@ -25,47 +25,53 @@
 } 
 </style>  
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">  
-<div class="wrapper">   
+<body >      
 <% include header.html %>
-<% include nav.html %>
-<div class="content-wrapper"  > 
-    <div class="container-fluid"> 
-		<div class="row"  >
-			<div class="col-xs-12 col-lg-offset-1 col-lg-9">  
-				<div class="top">
-					<span>基本资料</span> 
-				</div>
-				<div class="row">
-					<div class="col-xs-12 col-md-7 ">
-						<div style="max-width:500px;">
-							<div class="input-group">
-								<span class="input-group-addon" id="basic-addon1">昵称： </span>
-								<input class="form-control" name="nickName" type="text" value="<%= session['nickname']%>"   maxlength="20">
-							</div>  
-							<div class="input-group">
-								<span class="input-group-addon" id="basic-addon1">联系方式： </span>
-								<input class="form-control" name="phone" type="text" value="<%= session['phone']%>" maxlength="20">
-							</div>   
-							<div class="input-group">
-								<span class="input-group-addon" id="basic-addon1">所在地址： </span>
-								<input class="form-control" name="location" type="text" value="<%= session['location']%>">
-							</div> 
-							<div class="input-group">
-								<span class="input-group-addon" id="basic-addon1">简介： </span>
-								<textarea class="form-control" id="description" type="text" style="resize:none;height:150px;"> <%= session['description']%> </textarea>
-							</div> 
-						</div>
+
+<div class="location">
+	<div class="w">
+		<span>当前位置：</span><a href="/">首页 ></a><a>用户中心 ></a><a href="/basicInfo">资料完善 ></a><a href="/basicInfo">基本资料</a>
+	</div>
+</div>
+<div class="w"  > 
+	<% include nav.html %>
+    <div class="content"> 
+		  
+		<div class="top">
+			<span>基本资料</span> 
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-7 ">
+				<div style="max-width:500px;">
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1">昵称： </span>
+						<input class="form-control" name="nickName" type="text" value="<%= session['nickname']%>"   maxlength="20">
 					</div>  
-				</div> 
-				<button class="btn  " onclick="save()" style="width:150px;">保存</button>  
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1">联系方式： </span>
+						<input class="form-control" name="phone" type="text" value="<%= session['phone']%>" maxlength="20">
+					</div>   
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1">所在地址： </span>
+						<input class="form-control" name="location" type="text" value="<%= session['location']%>">
+					</div> 
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1">简介： </span>
+						<textarea class="form-control" id="description" type="text" style="resize:none;height:150px;"> <%= session['description']%> </textarea>
+					</div> 
+				</div>
+			</div>  
+		</div> 
+		<button class="btn  " onclick="save()" style="width:150px;">保存</button>  
 				 
-			</div> 
-		</div>  
+			 
 	</div> 
 </div>    
 <% include commonScript.html %>
 <script   type="text/javascript">   
+$(function(){
+	$('#userInformation_3').addClass("active");
+})
 //保存修改
 function save(){
 	var params={ 

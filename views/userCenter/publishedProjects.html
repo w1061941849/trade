@@ -4,7 +4,9 @@
 <% include commonHead.html %> 
 <title>我发布的项目</title>  
 <style> 
- 
+#projectManager_2{
+	background-color: #ffdad6;
+}
 .versionTop{
 	position:relative;
 	background-color:white;
@@ -66,89 +68,89 @@ table td{
 } 
 </style>  
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
-<div class="wrapper"> 
+<body > 
 <% include header.html %>
-<% include nav.html %>
-<div class="content-wrapper"  > 
-    <div class="container-fluid">
-		<div class="row"  >
-			<div  class="col-xs-12  col-lg-offset-1 col-lg-10">   
-				<div class="list">   
-					<div class="panel panel-default">  
-						<div class="panel-heading">
-							<ul class="fliter">
-								<li><a id="fliter_"  data-value="">全部</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-								<li><a id="fliter_1" data-value="1" >竞标中</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-								<li><a id="fliter_2" data-value="2">进行中</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-								<li><a id="fliter_3" data-value="3">已结束</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-								<li><a id="fliter_4" data-value="4">审核中</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-								<li><a id="fliter_5" data-value="5">中止</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-								<li><a id="fliter_6" data-value="6">未通过</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-							</ul>
-							<!--
-							<div class="input-group"   style="width:200px;    float: right;position: relative;top: -12px;"> 
-						      	<input type="text" class="form-control" placeholder="Search for...">
-						      	<span class="input-group-btn">
-						       	 	<button id="searchprojectInput" class="btn btn-primary" type="button"  >搜索</button>
-						      	</span>
-						    </div> 
-						    -->
-						</div>
-						<div class="panel-body" >   
-							<table class="table table-hover ">
-								<thead>
-									<tr>
-										<td>项目名</td>
-										<td>状态</td>
-										<td>发布时间</td>
-										<td>竞标数</td>
-										<td>操作区</td> 
-									</tr>
-								</thead>
-								<tbody  data-hasnext="<%= results['has_next']%>"  data-hasprev="<%= results['has_prev']%>" data-nextnum="<%= results['next_num']%>" data-page="<%= results['page']%>" data-pages="<%= results['pages']%>" data-perpage="<%= results['per_page']%>"  data-prevnum="<%= results['prev_num']%>">  
-									<%  for (var i in results['data']){%> 
-										<tr id="<%= results['data'][i]['id']%>">
-											<td><a href="/projectDetail?projectid=<%= results['data'][i]['id']%>" style="color:#333"><%= results['data'][i]['name']%></a> </td> 
-											<% if(results['data'][i]['status']==1){%>
-												<td class="status"> 竞标中</td>
-											<%}else if(results['data'][i]['status']==2){%>
-												<td class="status"> 进行中</td>
-											<%}else if(results['data'][i]['status']==3){%>
-												<td class="status"> 已结束</td>
-											<%} else if(results['data'][i]['status']==4){%>
-												<td class="status"> 审核中</td>
-											<%}else if(results['data'][i]['status']==5){%>
-												<td class="status"> 中止</td>
-											<%}else if(results['data'][i]['status']==6){%>
-												<td class="status"> 未通过</td>
-											<%} %>
-											<td><span class="time"><%= results['data'][i]['publishDate']%></span></td> 
-											<td><span style="color:#999;"><%= results['data'][i]['bidCount']%></span></td> 
-											<%   if(results['data'][i]['status']==1){%>
-												<td class="operation"><a  href="/bidding?projectid=<%= results['data'][i]['id']%>">竞标管理</a><a onclick="toEndStatus(this)">关闭</a></td>
-											<%}else if(results['data'][i]['status']==2){%>
-												<td class="operation"><a href="/versions?projectid=<%= results['data'][i]['id']%>">version</a> <a href="/suggections?projectid=<%= results['data'][i]['id']%>">意见</a><a onclick="toEndStatus(this)">关闭</a></td>
-											<%}else if(results['data'][i]['status']==3){%>
-												<td class="operation"><a href="/versions?projectid=<%= results['data'][i]['id']%>">version</a> <a href="/suggections?projectid=<%= results['data'][i]['id']%>">意见</a></td>
-											<%} else if(results['data'][i]['status']==4){%>
-												<td class="operation"><a onclick="toEndStatus(this)">关闭</a></td>
-											<%}else if(results['data'][i]['status']==5){%>
-												<td class="operation"></td>
-											<%}else if(results['data'][i]['status']==6){%>
-												<td class="operation">未通过</td>
-											<%} %> 
-										</tr> 
-									<%}%> 
-								</tbody>
-							</table>  
-							<div id="turnPage"></div>
-						</div>  
-					</div> 
-				</div>  
+<div class="location">
+	<div class="w">
+		<span>当前位置：</span><a href="/">首页 ></a><a>用户中心 ></a><a href="/makeProject">项目管理 ></a><a href="/publishedProjects/1">发布的项目</a>
+	</div>
+</div>
+<div class="w"  > 
+    <% include nav.html %> 
+	<div class="content" style="background-color:transparent;padding:0px;border:0px">
+		<div class="panel panel-default">  
+			<div class="panel-heading">
+				<ul class="fliter">
+					<li><a id="fliter_"  data-value="">全部</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+					<li><a id="fliter_1" data-value="1" >竞标中</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+					<li><a id="fliter_2" data-value="2">进行中</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+					<li><a id="fliter_3" data-value="3">已结束</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+					<li><a id="fliter_4" data-value="4">审核中</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+					<li><a id="fliter_5" data-value="5">中止</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+					<li><a id="fliter_6" data-value="6">未通过</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+				</ul>
+				<!--
+				<div class="input-group"   style="width:200px;    float: right;position: relative;top: -12px;"> 
+			      	<input type="text" class="form-control" placeholder="Search for...">
+			      	<span class="input-group-btn">
+			       	 	<button id="searchprojectInput" class="btn btn-primary" type="button"  >搜索</button>
+			      	</span>
+			    </div> 
+			    -->
 			</div>
-		</div>
-	</div> 
+			<div class="panel-body" >   
+				<table class="table table-hover ">
+					<thead>
+						<tr>
+							<td>项目名</td>
+							<td>状态</td>
+							<td>发布时间</td>
+							<td>竞标数</td>
+							<td>操作区</td> 
+						</tr>
+					</thead>
+					<tbody  data-hasnext="<%= results['has_next']%>"  data-hasprev="<%= results['has_prev']%>" data-nextnum="<%= results['next_num']%>" data-page="<%= results['page']%>" data-pages="<%= results['pages']%>" data-perpage="<%= results['per_page']%>"  data-prevnum="<%= results['prev_num']%>">  
+						<%  for (var i in results['data']){%> 
+							<tr id="<%= results['data'][i]['id']%>">
+								<td><a href="/projectDetail?projectid=<%= results['data'][i]['id']%>" style="color:#333"><%= results['data'][i]['name']%></a> </td> 
+								<% if(results['data'][i]['status']==1){%>
+									<td class="status"> 竞标中</td>
+								<%}else if(results['data'][i]['status']==2){%>
+									<td class="status"> 进行中</td>
+								<%}else if(results['data'][i]['status']==3){%>
+									<td class="status"> 已结束</td>
+								<%} else if(results['data'][i]['status']==4){%>
+									<td class="status"> 审核中</td>
+								<%}else if(results['data'][i]['status']==5){%>
+									<td class="status"> 中止</td>
+								<%}else if(results['data'][i]['status']==6){%>
+									<td class="status"> 未通过</td>
+								<%} %>
+								<td><span class="time"><%= results['data'][i]['publishDate']%></span></td> 
+								<td><span style="color:#999;"><%= results['data'][i]['bidCount']%></span></td> 
+								<%   if(results['data'][i]['status']==1){%>
+									<td class="operation"><a  href="/bidding?projectid=<%= results['data'][i]['id']%>">竞标管理</a><a onclick="toEndStatus(this)">关闭</a></td>
+								<%}else if(results['data'][i]['status']==2){%>
+									<td class="operation"><a href="/versions?projectid=<%= results['data'][i]['id']%>">version</a> <a href="/suggections?projectid=<%= results['data'][i]['id']%>">意见</a><a onclick="toEndStatus(this)">关闭</a></td>
+								<%}else if(results['data'][i]['status']==3){%>
+									<td class="operation"><a href="/versions?projectid=<%= results['data'][i]['id']%>">version</a> <a href="/suggections?projectid=<%= results['data'][i]['id']%>">意见</a></td>
+								<%} else if(results['data'][i]['status']==4){%>
+									<td class="operation"><a onclick="toEndStatus(this)">关闭</a></td>
+								<%}else if(results['data'][i]['status']==5){%>
+									<td class="operation"></td>
+								<%}else if(results['data'][i]['status']==6){%>
+									<td class="operation">未通过</td>
+								<%} %> 
+							</tr> 
+						<%}%> 
+					</tbody>
+				</table>  
+				<div id="turnPage"></div>
+			</div>  
+		</div>  
+	</div>    
+	   
+	<div style="clear:both;"></div>  
 </div>    
 <% include commonScript.html %>  
 <script type="text/javascript" src="/js/underscore.min.js"></script>   

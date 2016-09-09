@@ -1,5 +1,6 @@
 body *{
 	font-family: '微软雅黑',YaHei,tahoma,arial,"Hiragino Sans GB";  
+	
 } 
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td 
 { margin:0; padding:0;border:0px; }  
@@ -13,8 +14,7 @@ ul{
  	margin:0px; 
  	padding:0px;
  	list-style:none;
-} 
- 
+}  
 .input{
 	display: block; 
     width: 100%;
@@ -84,8 +84,7 @@ header .nav-head-items>li>a{
 	float:right;text-align:left;width:200px;position:relative; 
 }
 .nav-head-items .afterLogin img{ 
-	width:38px;height:38px;border-radius:100%;display:inline-block;
-
+	width:38px;height:38px;border-radius:100%;display:inline-block; 
 }
 .nav-head-items .afterLogin>ul{ 
 	display: none;
@@ -129,8 +128,7 @@ header .nav-head-items>li>a{
 	
 }
 /**header   end**/ 
-/**category**/
-
+/**category**/ 
 .categorys{
   	height:550px;width:250px;
   	background-color:rgba(0,0,0,0.8);
@@ -144,8 +142,7 @@ header .nav-head-items>li>a{
 	display:  block; 
 	color:white;
 	text-align: center; 
-	font-size: 14px;
-
+	font-size: 14px; 
 }
 .categorys>li>ul { 
 	display: none; 
