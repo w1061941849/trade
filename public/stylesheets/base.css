@@ -141,8 +141,9 @@ header .nav-head-items>li>a{
 	padding:10px 0;
 	display:  block; 
 	color:white;
-	text-align: center; 
-	font-size: 14px; 
+	text-align: left; 
+	padding-left: 86px;
+	font-size: 14px;  
 }
 .categorys>li>ul { 
 	display: none; 
@@ -151,6 +152,7 @@ header .nav-head-items>li>a{
 	border:1px solid #e8594b;
 	border-left:0px;
 	width:950px;
+	min-height: 280px;
 }
 .categorys>li>ul>li{
 	padding:4px 0;
