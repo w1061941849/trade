@@ -125,19 +125,29 @@
 		</dl>
 		<div style="text-align:center">
 			<%if(results['project']['status']==1){%>
-				<%if(results['owner']['id']==session.id){%>
-					<button  class="btn" disabled> 竞标</button>
-				<%}else if(results['bids']['data'].length>0 ){%> 
-					<% for(var i in results['bids']['data']){%>
-						<%if(results['bids']['data'][i]['userid']==session.id){%>
-							<button  class="btn" disabled> 已投标</a></button>
-						<%}else{%> 
+
+				<%if(session.id){%>
+					<%if(results['bids']['data'].length>0 ){%> 
+						<%var flag=false%>
+						<% for(var i in results['bids']['data']){%> 
+							<%if(results['bids']['data'][i]['userid']==session.id){%>
+								<button  class="btn" disabled> 已投标</a></button>
+								<%var flag=true%>
+							<%}%>
+						<%}%> 
+						<%if(!flag){%> 
 							<button  class="btn"> 竞标</a></button>
 						<%}%>
-					<%}%> 
+					<%}else{%>
+						<button  class="btn"> 竞标</a></button>
+					<%}%>  
 				<%}else{%>
-					<button  class="btn"> 竞标</a></button>
-				<%}%> 
+					<button  class="btn"    disabled> 未登录</button>
+				<%}%>
+				
+
+
+				
 			<%}else if(results['project']['status']==2){%>
 				<button  class="btn"    disabled> 进行中</button>
 			<%}else if(results['project']['status']==3){%>

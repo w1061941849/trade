@@ -37,27 +37,19 @@
 	display: inline-block; 
 }
 
-
-.works {
-	-webkit-column-count: 4;
-	-moz-column-count: 4;
-	column-count: 4;
-	-moz-column-gap:20px;
-	-webkit-column-gap:20px;
-	column-gap:20px;
-	padding: 10px;
-}
+ 
 .works  .box {
-	padding: 15px;
-	border: solid 2px #eeeeee;
+	padding: 10px;
+	border: solid 1px #eeeeee;
 	border-radius: 4px;
-	margin-bottom: 15px;
-	cursor: pointer;
-	position: relative;
-	background-color: white
+	margin-bottom: 10px;
+	cursor: pointer; 
+	background-color: white;
+	float: left;
+	width: 262px;
 }
 .works  .box img {
-	width: 100%;
+	  max-width: 100%
 }
 .works  .box p {
 	position: absolute;
@@ -90,6 +82,33 @@
 	cursor: pointer;
 	color:#999999;
 }
+.recommends{ 
+	float: right;
+	padding:20px; 
+	width:100%;  
+	
+}
+.recommends .pic{
+	width:100%;   
+	width:200px;
+	display: inline-block;
+	cursor: pointer; 
+	position: relative;
+
+}
+.recommends .pic>p{
+	position: absolute;
+	display: none;
+	width: 100%;
+	color:white;
+	bottom: 0px;
+	padding: 10px 0;
+	background-color: rgba(0,0,0,0.8);
+}
+.recommends .pic:hover p{
+	display: block;
+}
+ 
 </style>
 </head> 
 <body style="overflow-x:hidden;  background:#f5f5f5">
@@ -174,11 +193,32 @@
 </div>
 <!--相关团队推荐-->
 <h2 style="text-align:center;color:#e8594b;margin-top:20px;padding:10px 0;background: #fafbfc;border-bottom: 1px solid #e5e5e6;border-top: 1px solid #e5e5e6;">相关团队推荐</h2>
-<div class="w"  style="text-align:center">  
-	 
+<div class="w"  style="text-align:center">   
+	<div class="recommends">
+ 	<% for(var i in results['list28']['data']){%>
+		<a  href="<%= results['list28']['data'][i]['url']%>" class="pic">
+			<img src="<%= results['list28']['data'][i]['image']%>"> 
+			<p><%= results['list28']['data'][i]['title']%></p>
+		</a> 
+	<%}%> 
+	</div>
+	<div style="clear:both"></div>
 </div>
 <% include footer.html %>
+
 </body> 
+<% include commonScript.html %>
+<script type="text/javascript" src="/js/masonry-docs.min.js"></script>  
 <script> 
+$(function() {
+    var $container = $('.works');
+    $container.imagesLoaded(function() {
+        $container.masonry({
+                itemSelector: '.box',
+                gutter: 20,
+                isAnimated: true,
+            });
+     });
+})
 </script>
 </html>

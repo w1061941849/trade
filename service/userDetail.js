@@ -90,6 +90,19 @@ exports.showHtml = function (req, res, next) {
 				            callback(null, result);
 				        }  
 				    }) 
+			    },
+			    list28:function(callback){  
+			        var options={
+				        "path":'/28/recommenditemlist'
+				    }  
+				    httpUtil.get(options,function(result,err){  
+				        if(err){
+				            callback(err, null);
+				        }else{ 
+				        	resultData['list28']= result;
+				            callback(null, result);
+				        }  
+				    }) 
 			    } 
 			},function(error,result){
 			    if(!error)
