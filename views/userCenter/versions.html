@@ -9,10 +9,10 @@
 	position:relative;
 }
 .versionTop>span{
-	font-size: 14px;
+	font-size: 16px;
     font-weight: 600;
-	display:inline-block;
-	margin-right:50px;
+	display:inline-block; 
+	margin-bottom: 20px;
 }
 .versionTop .btn{
 	position:absolute;
@@ -199,12 +199,20 @@
 	<% include nav.html %>
     <div class="content">   
 		<div class="versionTop" style="background-color:white;padding:20px 10px 20px 10px;border-radius:4px;    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);">	
-			<span id="projectName"></span><span></span>
+			<span id="projectName"><%= project['name']%></span> 
 			<ul class="fliter">
-				<li><a class="active" href="./joinProjects_version.html">Version</a></li>
+				<li><a class="active" href="#">Version</a></li>
 				<li><a onclick="toSuggections()">意见</a></li>
 			</ul> 
-			<a    data-toggle="modal" data-target="#myModal2"><button  class="btn"   >添加Version</button></a>
+			<a    data-toggle="modal" data-target="#myModal2">
+
+			<% if(project['status']==2) {%>
+				<button  class="btn"   >添加Version</button></a>
+			<%} else{%>
+				<button  class="btn"  disabled >添加Version</button></a>
+			<%}%>
+
+			
 		</div> 
 		<div class="lists"> 
 		<%for(var i in results){%>

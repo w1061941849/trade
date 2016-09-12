@@ -4,6 +4,9 @@ var appConfig=require('../../appConfig.js');
 var URL = require('url');
 var underscore=require('underscore');
 exports.showHtml = function (req, res, next) {   
+	if(!req.session.user){
+		return res.redirect('/login');  
+	}
 	var resultData={};     
 	async.waterfall([
 	    function (done) {
@@ -22,14 +25,29 @@ exports.showHtml = function (req, res, next) {
 		        	} 
 		        	var aaa=underscore.groupBy(result['data'],"publishDate")
 		        	var bbb=underscore.toArray(aaa) 
+		        	resultData['projectversions']=bbb
 		            done(null, bbb);
+		        }  
+		    }) 
+	    },
+	    function (onearg,done) {
+	    	var options={
+		        "path":'/project/'+req.query.projectid
+		    }   
+		    console.log(options)
+		    httpUtil.get(options,function(result,err){  
+		        if(err){
+		            done(err, null);
+		        }else{ 
+		        	resultData['project']=result;
+		            done(null, onearg);
 		        }  
 		    }) 
 	    } 
 	],  
     function(err, results) {     
-    	console.log(results)
-    	res.render('userCenter/versions.html',{'results':results}) 	
+    	console.log(resultData)
+    	res.render('userCenter/versions.html',{'results':results,"project":resultData['project']}) 	
     });  
    // res.render('userCenter/versions.html',{'results':resultData}) 	
 

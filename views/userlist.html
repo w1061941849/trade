@@ -153,7 +153,7 @@ header #userlist{
 			<div class="card-box" >   
 		 		<img style="height:100px;width:100px;background-color:red;"   src="<%= results['data'][i]['imageLarge'] %>">
 		 		<div class="content">
-		 			<span class="name"><%= results['data'][i]['nickname'] %></span>
+		 			<a class="name"   href="/userDetail?userid=<%= results['data'][i]['id']%>"><%= results['data'][i]['nickname'] %></a>
 		 			<%if(results['data'][i]['authenticationType'] & 1) {%>
 						<div class="vip1" title="个人"  style="width:24px;height:24px;position:relative;top:8px;display:inline-block;"></div>
 		 			<%}else if(results['data'][i]['authenticationType'] & 2){%>
@@ -164,11 +164,11 @@ header #userlist{
 		 			<span class="span1"><%= (results['data'][i]['nickname'] ? results['data'][i]['nickname'] : "未填写") %></span></br></br>
 		 			<span style="width:400px;display:inline-block">联系方式：
 			 			
-			 			<%if(results['data'][i]['email']){%>
-			 				<i class="icon-phone"  title="<%= results['data'][i]['email']%>" style="color:#98d859;margin-right:20px;"> </i> 
-			 			<%}%>
 			 			<%if(results['data'][i]['phone']){%>
-			 				<i class=" icon-envelope-alt"  title="<%= results['data'][i]['phone']%>" style="color:#46b8da;margin-right:20px;"> </i> 
+			 				<i class="icon-phone"  title="<%= results['data'][i]['phone']%>" style="color:#98d859;margin-right:20px;"> </i> 
+			 			<%}%>
+			 			<%if(results['data'][i]['email']){%>
+			 				<i class=" icon-envelope-alt"  title="<%= results['data'][i]['email']%>" style="color:#46b8da;margin-right:20px;"> </i> 
 			 			<%}%>
 			 			<%if(results['data'][i]['location']){%>
 			 				<i class=" icon-map-marker"  title="<%= results['data'][i]['location']%>" style="color:#fca75b;margin-right:20px;"> </i> 

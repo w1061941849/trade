@@ -33,6 +33,9 @@ header .nav-head-items{
 	width:100%;
 	height: 39px;
 }
+header .nav-head-items>li:hover{
+	background-color: #e82b1a
+}
 header .nav-head-items>li{
   	text-align: center;
   	width:100px;

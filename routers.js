@@ -35,11 +35,13 @@ module.exports = function (app) {
 app.get("*",function(req,res,next){
     if(req.session.user){ 
         //var session=req.session.user;    
-        res.locals.session =req.session.user;    
+        res.locals.session =req.session.user;  
+        console.log(req.session.user) 
+
 
     }else{
         res.locals.session=""
-        req.session.user={
+ /*     req.session.user={
                "authenticationType": 0, 
   "bankAuthentication": "http://10.0.1.122:8080/api/v1.0/userauthen?userid=41&type=4", 
   "categorys": "http://10.0.1.122:8080/api/v1.0/41/usercategorys", 
@@ -47,7 +49,7 @@ app.get("*",function(req,res,next){
   "defaultImage": "6.jpg", 
   "description": "  asd", 
   "email": "jun1jun11110@qq.com", 
-  "id": 70, 
+  "id": 69, 
   "imageLarge": "http://10.0.1.122:8080/static/default/img/6.jpg", 
   "imageMedium": "http://10.0.1.122:8080/static/default/img/6.jpg", 
   "imageSmall": "http://10.0.1.122:8080/static/default/img/6.jpg", 
@@ -62,7 +64,7 @@ app.get("*",function(req,res,next){
   "status": null, 
   "tags": "http://10.0.1.122:8080/api/v1.0/41/usertags", 
   "works": "http://10.0.1.122:8080/api/v1.0/41/userworks/1"
-        }  
+        } */  
  
     }
     next();
@@ -147,43 +149,82 @@ app.get('/authentication',authentication.showHtml);
 
 
 app.get('/authenPerson', function(req, res, next) {  
+    if(!req.session.user){
+      return res.redirect('/login');  
+    }
     res.render('userCenter/authenPerson.html') 
 });   
 app.get('/makeProject', function(req, res, next) {   
+    if(!req.session.user){
+      return res.redirect('/login');  
+    }
     res.render('userCenter/makeProject.html') 
 }); 
-app.get('/makeWork', function(req, res, next) {  
+app.get('/makeWork', function(req, res, next) { 
+    if(!req.session.user){
+      return res.redirect('/login');  
+    }
     res.render('userCenter/makeWork.html') 
 });  
-app.get('/myWork', function(req, res, next) {  
+app.get('/myWork', function(req, res, next) { 
+    if(!req.session.user){
+      return res.redirect('/login');  
+    }
     res.render('userCenter/myWork.html')  
 });   
 app.get('/basicInfo', function(req, res, next) {  
+    if(!req.session.user){
+      return res.redirect('/login');  
+    }
     res.render('userCenter/basicInfo.html') 
 }); 
-app.get('/countSafe', function(req, res, next) {  
+app.get('/countSafe', function(req, res, next) {
+    if(!req.session.user){
+      return res.redirect('/login');  
+    }  
     res.render('userCenter/countSafe.html') 
 }); 
-app.get('/headIcon', function(req, res, next) {  
+app.get('/headIcon', function(req, res, next) {
+    if(!req.session.user){
+      return res.redirect('/login');  
+    }  
     res.render('userCenter/headIcon.html') 
 });  
-app.get('/skillTags', function(req, res, next) {  
+app.get('/skillTags', function(req, res, next) { 
+    if(!req.session.user){
+      return res.redirect('/login');  
+    } 
     res.render('userCenter/skillTags.html') 
 }); 
-app.get('/authentication', function(req, res, next) {  
+app.get('/authentication', function(req, res, next) { 
+    if(!req.session.user){
+      return res.redirect('/login');  
+    } 
     res.render('userCenter/authentication.html') 
 });  
 
 app.get('/authenCompany', function(req, res, next) {  
+    if(!req.session.user){
+      return res.redirect('/login');  
+    }
     res.render('userCenter/authenCompany.html') 
 });  
-app.get('/authenTrade', function(req, res, next) {  
+app.get('/authenTrade', function(req, res, next) { 
+    if(!req.session.user){
+      return res.redirect('/login');  
+    } 
     res.render('userCenter/authenTrade.html') 
 });  
-app.get('/authenManual', function(req, res, next) {  
+app.get('/authenManual', function(req, res, next) { 
+    if(!req.session.user){
+      return res.redirect('/login');  
+    } 
     res.render('userCenter/authenManual.html') 
 });  
 app.get('/domain', function(req, res, next) {  
+    if(!req.session.user){
+      return res.redirect('/login');  
+    }
     res.render('userCenter/domain.html') 
 });  
 

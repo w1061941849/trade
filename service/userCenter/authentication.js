@@ -5,7 +5,9 @@ var URL = require('url');
 exports.showHtml = function (req, res, next) {   
 	var resultData={};    
 	var status=req.query.status ? req.query.status : "";
-
+	if(!req.session.user){
+		return res.redirect('/login');  
+	}
 	async.waterfall([
 	    function (done) {
 	    	var options={

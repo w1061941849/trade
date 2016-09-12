@@ -19,7 +19,7 @@
 }
 .projectDetail .summary>span{
 	display: inline-block;
-	width: 250px;
+	width: 200px;
 
 }
 .projectDetail dd,.projectDetail dt{
@@ -85,14 +85,16 @@
 </head> 
 <body style="overflow-x:hidden;  background:#f5f5f5">
 <% include header2.html %> 
-<div class="w" style="padding-top:100px;">
+<div class="w" style="padding-top:50px;">
+	<h2 style="color:#999">项目详情</h2></br>
 	<div class="projectDetail" data-projectid="<%= results['project']['id']%>">
 		<h2><%= results['project']['name']%></h2>
 		<a class="userName"  href="/userDetail?userid=<%= results['owner']['id']%>"><%= results['owner']['nickname']%></a>
 		</br></br>
 		<div class="summary">
-			<span>金额：<%= results['project']['bonus']%></span>
-			<span>资质要求：<%= results['project']['bidderQualifiRequire']%></span>
+			<span>金额：<%= results['project']['bonus']%>  人民币</span>
+			<span>资质要求：<%= results['project']['bidderQualifiRequire'] ? results['project']['bidderQualifiRequire'] : "不限" %></span>
+			<span>地域要求：<%= results['project']['bidderLocationRequire']  ? results['project']['bidderLocationRequire'] : "不限"%></span>
 			<span>周期：<%= results['project']['timespan']%></span>
 		</div>
 		</br></br>
@@ -124,7 +126,15 @@
 		<div style="text-align:center">
 			<%if(results['project']['status']==1){%>
 				<%if(results['owner']['id']==session.id){%>
-					<button  class="btn"    disabled> 自己的项目</button>
+					<button  class="btn" disabled> 竞标</button>
+				<%}else if(results['bids']['data'].length>0 ){%> 
+					<% for(var i in results['bids']['data']){%>
+						<%if(results['bids']['data'][i]['userid']==session.id){%>
+							<button  class="btn" disabled> 已投标</a></button>
+						<%}else{%> 
+							<button  class="btn"> 竞标</a></button>
+						<%}%>
+					<%}%> 
 				<%}else{%>
 					<button  class="btn"> 竞标</a></button>
 				<%}%> 
@@ -134,6 +144,10 @@
 				<button  class="btn"    disabled>  已结束</button>
 			<%}else if(results['project']['status']==4){%>
 				<button  class="btn"    disabled>审核中</button>
+			<%}else if(results['project']['status']==5){%>
+				<button  class="btn"    disabled>中止</button>
+			<%}else if(results['project']['status']==6){%>
+				<button  class="btn"    disabled>未通过</button>
 			<%}%>
 			
 		</div>
@@ -215,7 +229,8 @@ $('.submit').click(function(){
 			dataType:'json',
 			success: function(data){  
 				console.log(data); 
-				alert("出价成功") 
+				alert("竞标成功") 
+				location=location;
 				 
 			},
 			error: function(){

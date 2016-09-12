@@ -5,13 +5,13 @@
 		</div>
 		<div class="search" style="width:800px;vertical-align:top">
 			<input class="" placeholder="  请输入关键字" style="border-radius:4px;border:1px solid #e8594b;height:30px;width:600px;margin-left:50px;margin-top:30px;">
-			<a style="background-color:#e8594b;color:white;position:relative;left:-55px;display:inline-block;line-height:32px;width:50px;text-align:center;border-radius: 0 4px 4px 0px;">搜索</a>
+			<a style="background-color:#e8594b;color:white;position:relative;left:-89px;display:inline-block;line-height:32px;width:84px;text-align:center;border-radius: 0 4px 4px 0px;">搜索</a>
 		</div>
 		<a class="btn" style="margin-top:30px;float:right;">发布项目</a>
 	</div> 
 	<div class="w">
 		<ul class="nav-head-items" style="">
-			<li id="categorysMenua" style="width:250px;padding:0px;"><a style="color:white"> <i class=" icon-chevron-down"></i></a> 
+			<li id="categorysMenua" style="width:210px;padding:0px;"><a style="color:white"> <i class=" icon-chevron-down"></i></a> 
 			</li>
 			<li><a id="index" href="/">首页</a></li>
 			<li><a id="vrhall" href="/vrhall">VR/AR大厅</a></li>
@@ -30,7 +30,7 @@
 					<%}else {%> 
 					<%}%>
 				</div>  
-				<span style="vertical-align:top;margin-top:8px;display:inline-block"><%= session.nickname%></span>
+				<span style="vertical-align:top;margin-top:8px;display:inline-block;text-overflow:ellipsis;-o-text-overflow:ellipsis;white-space:nowrap;max-width: 100px;overflow: hidden;"><%= session.nickname%></span>
 				<ul >
 					<li><a href="/makeProject"><i class="icon-edit"></i>发布项目</a></li>
 					<li><a href="/publishedProjects/1"><i class=" icon-file-alt"></i>我发布的项目</a></li>

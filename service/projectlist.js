@@ -89,8 +89,11 @@ exports.showHtml = function (req, res, next) {
     	} 
     	resultData['activeCid']=cid;    
     	resultData['hasSonCategory']=hasSonCategory;    
-    	resultData['parentCategory']=parentCategory;    
-    	console.log(resultData)
+    	resultData['parentCategory']=parentCategory;     
+    	//处理时间格式
+    	for(var i in resultData['data']){
+    		resultData['data'][i]['publishDate']=dateType(resultData['data'][i]['publishDate'])
+    	} 
     	res.render('projectlist',{'results':resultData}) 	
     }); 
  
@@ -120,4 +123,8 @@ function getUserCategorys(params,callback){
             callback(null, result);
         }  
     })  
+}
+function dateType(date){
+	var date=new Date(date);
+	return date.toLocaleDateString();
 }

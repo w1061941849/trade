@@ -133,7 +133,7 @@ $(function () {
 
 	 if(userInfo['authenticationType']==0){
 	 	$('.stepOne').css('display','block'); 
-	 }else if(1 == userInfo['authenticationType']){ 
+	 }else if(1 == userInfo['authenticationType'] || 2 == userInfo['authenticationType']){ 
 	 		if(authen_bank.length >0  ){  
 				if( authen_private[0]['authenticateDate']  > authen_bank[0]['authenticateDate']){ 
 					$('.stepTwo').css('display','block'); 

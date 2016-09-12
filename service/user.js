@@ -5,8 +5,10 @@ exports.login = function (req, res, next) {
 
 }; 
 exports.logout = function (req, res, next) {  
-    res.locals.session="" ;
-    res.render('login');
+    req.session.destroy();
+    console.log(1);
+    res.locals.session=""; 
+    return res.redirect("/");
 }; 
 exports.create = function (req, res, next) {   
     
@@ -82,7 +84,8 @@ exports.modify = function (req, res, next) {
         'location': req.body.location ? req.body.location : req.session.user.location, 
         'description': req.body.description ? req.body.description : req.session.user.description, 
         "defaultImage":req.body.defaultImage ? req.body.defaultImage : req.session.user.defaultImage,
-        "cids":req.body.cids ? req.body.cids : req.session.user.cids
+        "cids":req.body.cids ? req.body.cids : req.session.user.cids,
+        "status":req.body.status ? req.body.status : req.session.user.status
     } 
     console.log(params);
     var options={
@@ -92,6 +95,8 @@ exports.modify = function (req, res, next) {
         if(err){
             res.send("statusCode is:"+err);
         }else{
+            req.session.user=result;
+            console.log(res.locals.session) 
             res.send(result);
         } 
     })

@@ -124,7 +124,10 @@ table td{
 									<%}else if(results['data'][i]['project']['status']==3){%>
 										 <td>已结束</td>
 										 <td class="operation"><a  href="/versions?projectid=<%= results['data'][i]['project']['id']%>">version</a> <a  href="/suggections?projectid=<%= results['data'][i]['project']['id']%>"onclick="toSuggection(this)">意见</a></td>
-									<%}%>    
+									<%} else if(results['data'][i]['project']['status']==5){%>
+										 <td>中止</td>
+										 <td class="operation"><a  href="/versions?projectid=<%= results['data'][i]['project']['id']%>">version</a> <a  href="/suggections?projectid=<%= results['data'][i]['project']['id']%>"onclick="toSuggection(this)">意见</a></td>
+									<%}%> %>    
 									
 								</tr> 
 							<%}%> 

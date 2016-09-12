@@ -32,6 +32,19 @@ exports.showHtml = function (req, res, next) {
 		        }  
 		    })  
 	    },
+	    function (onearg, done) {   
+	    	var options={
+		       "path":onearg['bids'].replace(appConfig.config.proxy.replace,"") 
+		    };  
+		    httpUtil.get(options,function(result,err){  
+		        if(err){
+		            done(err, null);
+		        }else{   
+		        	resultData['bids']=result; 
+		            done(null, onearg);
+		        }  
+		    })  
+	    },
 	    function (onearg, done) { 
 	    	var path=onearg['owner'].replace(appConfig.config.proxy.replace,"") 
 	        var options={

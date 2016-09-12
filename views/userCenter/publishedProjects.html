@@ -137,7 +137,7 @@ table td{
 								<%} else if(results['data'][i]['status']==4){%>
 									<td class="operation"><a onclick="toEndStatus(this)">关闭</a></td>
 								<%}else if(results['data'][i]['status']==5){%>
-									<td class="operation"></td>
+									<td class="operation"><a href="/versions?projectid=<%= results['data'][i]['id']%>">version</a> <a href="/suggections?projectid=<%= results['data'][i]['id']%>">意见</a></td>
 								<%}else if(results['data'][i]['status']==6){%>
 									<td class="operation">未通过</td>
 								<%} %> 

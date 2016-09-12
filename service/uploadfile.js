@@ -2,6 +2,12 @@ var httpUtil=require('../utils/http.js') ;
 var formidable = require('formidable');
 var fs = require('fs'); 
 exports.uploadfile = function (req, res, next) {      
+    
+
+
+
+
+
     var options={
         "path":"/uploadfile?type="+req.body.type+"&foldername="+req.session.user.id+(req.body.thumbnail ?  "&thumbnail="+req.body.thumbnail : "")
     } 
@@ -10,7 +16,10 @@ exports.uploadfile = function (req, res, next) {
         if(err){
             res.send("statusCode is:"+err);
         }else{
-            console.log(result)
+            console.log(result)  
+            if(req.body.type==11){ 
+              req.session.user=result['user']
+            }
             res.send(result);
         } 
     })   
