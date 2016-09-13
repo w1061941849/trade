@@ -5,17 +5,22 @@
 <title>团队详情</title> 
  
 <style type="text/css">
- 
+.title{ 
+	text-align:center;color:#e8594b;margin-top:20px;padding:10px 0;background: #fafbfc;border-bottom: 1px solid #e5e5e6;border-top: 1px solid #e5e5e6;
+	font-size:30px;font-weight:400;
+ }
 .userInfo{
 	position:relative;background:url('/images/common/userDetailBg.jpg');height:500px;
 	padding-top: 20px;
+	text-align: center;
 }
 .userInfo .userInfo_ i {
 	color:#e0e0e0;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 800;
-	display: inline-block;
-	width:100px;
+	display: inline-block; 
+	padding-right:10px;
+	color:#ffffff;
 
 }
 .userInfo img{
@@ -24,17 +29,15 @@
 	display: block;
 }
 .userInfo .userInfo_{ 
-	width:550px;margin:0 auto; 
+	width:1200px;margin:0 auto; 
 	padding-left:120px;
-}
-.userInfo .userInfo_ i{
-	width:100px;
-	display: inline-block;
-}
+} 
 .userInfo .userInfo_ span{
-	color:#e0e0e0;
-	width:150px;
+	color:#ffffff; 
 	display: inline-block; 
+	padding-right:20px;
+	font-size: 14px;
+
 }
 
  
@@ -49,7 +52,7 @@
 	width: 262px;
 }
 .works  .box img {
-	  max-width: 100%
+	  width: 100%
 }
 .works  .box p {
 	position: absolute;
@@ -67,10 +70,11 @@
 .tags a{
 	display: inline-block;
 	border-radius: 8px;
-	border:2px solid #e8594b;
+	border:1px solid #fca95f;
+	background-color:rgba(255,233,214,0.3);
 	color:white;
 	padding:4px;
-	font-size: 12px;
+	font-size: 14px;
 	margin-right: 10px;
 }
 .projectlist li{
@@ -114,36 +118,37 @@
 <body style="overflow-x:hidden;  background:#f5f5f5">
 <% include header2.html%>
 <section class="userInfo" style=""> 
-		<img src="<%=results['user']['imageLarge']%>"  >
-		<div class="userInfo_"  > 
-	 
-			<i class="icon-phone">&nbsp;电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</i><span><%=results['user']['phone']%></span> 
+		<img src="<%=results['user']['imageLarge']%>">
+		<h1 style="text-align:center;font-size:26px;color:#e8594b;margin:20px 0 20px 0;"><%= results['user']['nickname'] %></h1>	
+		</br>
+		<div class="userInfo_"  >  
+			<i class="icon-phone"></i><span>电话：<%=results['user']['phone']%></span> 
 			<%if(results['user']['authenticationType'] & 1 ){%>
-				<i class="icon-user">&nbsp;资质认证：</i><span>个人</span>
+				<i class="icon-user"></i><span>资质认证：个人</span>
 			<%}else if(results['user']['authenticationType'] & 2){%>
-				<i class="icon-user">&nbsp;资质认证：</i><span>企业</span>
+				<i class="icon-user"></i><span>资质认证：企业</span>
 			<%}else{%>
-				<i class="icon-user">&nbsp;资质认证：</i><span>未认证</span>
-			<%}%>    </br></br>
-			<i class=" icon-envelope-alt">&nbsp;邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</i><span><%=results['user']['email']%></span>  
-			<i class="icon-map-marker">&nbsp;&nbsp;联系地址：</i><span><%= (results['user']['location'] ? results['user']['location'] : "未填写")%></span></br></br>
+				<i class="icon-user">资质认证：</i><span>未认证</span>
+			<%}%>    
+			<i class=" icon-envelope-alt"></i><span>邮箱：<%=results['user']['email']%></span>  
+			<i class="icon-map-marker"></i><span>联系地址：<%= (results['user']['location'] ? results['user']['location'] : "未填写")%></span> 
 			<%if(results['user']['authenticationType'] & 4 ){%>
-				<i class="icon-credit-card">交易认证：</i><span>已认证</span>
+				<i class="icon-credit-card"></i><span>交易认证：已认证</span>
 			<%}else{%>
-				<i class="icon-credit-card">交易认证：</i><span>未认证</span>
+				<i class="icon-credit-card"></i><span>交易认证：未认证</span>
 			<%}%>
 			</br>
 		</div> 
-		</br>
-		<div style="width:800px;margin:0 auto;text-align:left;" >
-			<span style="color:#e0e0e0">技能标签：</span>
+		</br></br></br>
+		<div style="width:1000px;margin:0 auto;text-align:left;" >
+			<span style="color:#e0e0e0;font-size:16px;">技能标签：</span>
 			<div class="tags"  style="display:inline-block;    position: absolute;">
 				<%for(var i in results['tags']){%>
 					<a><%= results['tags'][i]['name']%></a>
 				<%}%> 
 			</div>
-			</br></br>
-			<span style="color:#e0e0e0">行业分类：</span>
+			</br></br></br>
+			<span style="color:#e0e0e0;font-size:16px;">行业分类：</span>
 			<div class="tags" style="display:inline-block;position: absolute;">
 				<%for(var i in results['categorys']['data']){%>
 					<a><%=  results['categorys']['data'][i]['name']%></a>
@@ -152,14 +157,15 @@
 		</div>
 	  
 </section>
-<h1 style="text-align:center;color:#e8594b;margin:20px 0 100px 0;"><%= results['user']['nickname'] %></h1>	
+<h1 style="text-align:center;color:#e8594b;margin-top:20px;font-size:30px;font-weight:400">简介</h1>	
+<div class="w">
+	<p style="color:#999999;"><%- results['user']['description']%></p>
 
+</div>
 <!--作品展示-->
 <div class="w"> 
-	<h2 style="text-align:center;color:#e8594b;margin-top:20px;">作品展示</h2>	 	
-	<div class="works">
-
- 
+	<h2    style="text-align:center;color:#e8594b;margin-top:20px;font-size:30px;font-weight:400" >作品展示</h2></br> 	
+	<div class="works"> 
 		<%for(var i in results['works']['data']){%>
 			<div class="box"> 
 				<a  href="/workDetail?workid=<%=  results['works']['data'][i]['workid']%>" style=" display:block;width:100%;height:100%;position:relative;overflow:hidden">
@@ -173,17 +179,16 @@
 	</div>
 </div>
 <!--参与的项目-->
-<h2 style="text-align:center;color:#e8594b;margin-top:20px;padding:10px 0;background: #fafbfc;border-bottom: 1px solid #e5e5e6;border-top: 1px solid #e5e5e6;">参与的项目</h2>
+<h2 class="title" >参与的项目</h2>
 <div class="w" style="text-align:center">  
 	<ul class="projectlist"> 
-		<%for( var i in results['participateProjects']['data']){%>
-			<%= results['participateProjects']['data'][i]%>
-			<li><a href="/projectDetail?projectid=<%= results['participateProjects']['data'][i]['projectid']%>"><%= results['participateProjects']['data'][i]['name']%></a></li>
+		<%for( var i in results['participateProjects']['data']){%> 
+			<li><a href="/projectDetail?projectid=<%= results['participateProjects']['data'][i]['project']['id']%>"><%= results['participateProjects']['data'][i]['project']['name']%></a></li>
 		<%}%>
 	</ul>
 </div>
 <!--发布的项目-->
-<h2 style="text-align:center;color:#e8594b;margin-top:20px;padding:10px 0;background: #fafbfc;border-bottom: 1px solid #e5e5e6;border-top: 1px solid #e5e5e6;">发布的项目</h2>
+<h2 class="title" >发布的项目</h2>
 <div class="w"  style="text-align:center">  
 	<ul class="projectlist" >  
 		<%for( var i in results['publishedProjects']['data']){%>
@@ -192,7 +197,7 @@
 	</ul>
 </div>
 <!--相关团队推荐-->
-<h2 style="text-align:center;color:#e8594b;margin-top:20px;padding:10px 0;background: #fafbfc;border-bottom: 1px solid #e5e5e6;border-top: 1px solid #e5e5e6;">相关团队推荐</h2>
+<h2  class="title">相关团队推荐</h2>
 <div class="w"  style="text-align:center">   
 	<div class="recommends">
  	<% for(var i in results['list28']['data']){%>

@@ -135,7 +135,7 @@ $(function () {
 	 	$('.stepOne').css('display','block'); 
 	 }else if(1 == userInfo['authenticationType'] || 2 == userInfo['authenticationType']){ 
 	 		if(authen_bank.length >0  ){  
-				if( authen_private[0]['authenticateDate']  > authen_bank[0]['authenticateDate']){ 
+				if(   (authen_private[0] && authen_private[0]['authenticateDate']  > authen_bank[0]['authenticateDate']) || (authen_company[0] && authen_company[0]['authenticateDate']  > authen_bank[0]['authenticateDate'])){ 
 					$('.stepTwo').css('display','block'); 
 				}else{ 
 					if(authen_bank[0]['status']==1 || authen_bank[0]['status']==2 ){

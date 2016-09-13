@@ -165,135 +165,140 @@
 			<div class="content">  
 				</br>
 				<ul class="pub-steps">
-					<li>
-						<span class="step-deco step-deco-1" style="background-color: #e8594b;"></span>
-						<span class="step-val">1</span>
-						<span class="step-title">选择分类</span>
-					</li>
-					<li>
-						<span class="step-deco step-deco-2 "></span>
-						<span class="step-val ">2</span>
-						<span class="step-title">描述需求</span>
-					</li>
-					<li>
-						<span class="step-deco step-deco-3"></span>
-						<span class="step-val">3</span>
-						<span class="step-title">完成发布</span>
-					</li> 
-				</ul> 
-				</br></br></br> 
+							<li>
+								<span class="step-deco step-deco-1" style="background-color: #e8594b;"></span>
+								<span class="step-val">1</span>
+								<span class="step-title">选择分类</span>
+							</li>
+							<li>
+								<span class="step-deco step-deco-2 "></span>
+								<span class="step-val ">2</span>
+								<span class="step-title">描述需求</span>
+							</li>
+							<li>
+								<span class="step-deco step-deco-3"></span>
+								<span class="step-val">3</span>
+								<span class="step-title">完成发布</span>
+							</li> 
+						</ul> 
+						</br></br></br> 
 
-				<div class="selectedCatalog">
-					<span style="width:200px;display:inline-block;text-align:right;line-height:40px;color:white;">您选择了：</span>
-					<ul style="display:inline-block">
-					 
-					</ul>
-				</div> 
-					<div class="step step-1" style="display:block;">   
-						<div class="catalog">
-							<ul >
-								<!-- <li><span>影视大厅  </span>
-																		<ul>
-																			<li><span>vr大厅  </span></li>
-																			<li><span>vr大厅  </span></li>
-																			<li><span>vr大厅  </span></li>
-																			<li><span>vr大厅  </span>
-																				<a>aaaaa</a>
-																				<a>aaaaa</a> 
-																			</li>
-																		</ul>
-								</li> 
-								<li><span>影视大厅  </span>
-																		<ul>
-																			<li><span>vr大厅asdasd</span></li>
-																			<li><span>vr大厅  </span></li> 
-																			<li><span>vr大厅  </span>
-																				<a>aaaaa</a>
-																				<a>aaaaa</a> 
-																			</li>
-																		</ul>
-								</li> -->
-							</ul> 
+						<div class="selectedCatalog">
+							<span style="width:200px;display:inline-block;text-align:right;line-height:40px;color:white;">您选择了：</span>
+							<ul style="display:inline-block">
+							 
+							</ul>
 						</div> 
-						</br>
-						</br>
-						<button class="btn" style="margin: 0 auto;display:block"   onclick="nextOrlast(2)">下一步</button>
-					</div>
-					<div class="step step-2"  >  
-					<div class="input-group">
-						<span class="input-group-addon"   ><font style="color:red">*</font>任务包名称：</span>
-						<input class="form-control" name="name"  >
-					</div>  
-					<div class="input-group">
-						<span class="input-group-addon"   ><font style="color:red">*</font>任务包周期：</span>
-						<input class="form-control" name="timespan" >
-					</div>  
-					<div class="input-group">
-						<span class="input-group-addon"   ><font style="color:red">*</font>任务包赏金：</span>
-						<input class="form-control" name="bonus"   >
-						<span class="input-group-addon"  style="color:#999999">请输入数字（单位：人民币）</span>
-
-					</div> 
-					<div class="input-group">
-						<span class="input-group-addon"   ><font style="color:red">*</font>任务包要求：</span>
-						<textarea class="form-control requirements"   style="resize:none;width:500px;height:100px;"></textarea>
-					</div> 
-					<div class="input-group">
-						<span class="input-group-addon"   >任务包介绍：</span>
-						<textarea class="form-control description"   style="resize:none;width:500px;height:100px;"></textarea>
-					</div>  
-					<div class="input-group">
-						<span class="input-group-addon"   >乙方资质要求：</span>
-						<input class="form-control" name="bidderQualifiRequire"  >
-					</div>  
-					<div class="input-group">
-						<span class="input-group-addon"   >乙方地域要求：</span>
-						<input class="form-control" name="bidderLocationRequire"  >
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon"   ><input type="checkbox" id="receipt" >发票：</span>
-						<textarea class="form-control receiptDes"    style="resize:none;width:500px;height:100px;"></textarea>
-					</div>
-					 
-					<button class="btn"   onclick="nextOrlast(1)" style="margin-left:130px;">上一步</button>
-					<button class="btn"  onclick="nextOrlast(3)">下一步</button> 
-					</div>	
-					<div class="step step-3"  >  
-					<div class="input-group">
-						<span class="input-group-addon"   ><font style="color:red">*</font>任务包名称：</span>
-						<p id="name"></p>
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon"   ><font style="color:red">*</font>任务包周期：</span>
-						<p id="timespan"></p>
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon"   ><font style="color:red">*</font>任务包赏金：</span>
-						<p id="bonus"></p>
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon"   ><font style="color:red">*</font>任务包要求：</span>
-						<p id="requirements"></p>
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon"   > 任务包介绍：</span>
-						<p id="description"></p>
-					</div> 
-					<div class="input-group">
-						<span class="input-group-addon"   > 乙方资质要求：</span>
-						<p id="bidderQualifiRequire"></p>
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon"   > 乙方地域要求：</span>
-						<p id="bidderLocationRequire"></p>
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon"   > 发票：</span>
-						<p id="receiptDes"></p>
-					</div>
-						<button class="btn"    onclick="nextOrlast(2)">上一步</button>
-					<button class="btn"     onclick="makeProject()" >发布</button>
-					</div>	
+ 						<div class="step step-1" style="display:block;">  
+							
+ 							
+ 							<div class="catalog">
+ 								<ul >
+	 								<!-- <li><span>影视大厅  </span>
+	 																		<ul>
+	 																			<li><span>vr大厅  </span></li>
+	 																			<li><span>vr大厅  </span></li>
+	 																			<li><span>vr大厅  </span></li>
+	 																			<li><span>vr大厅  </span>
+	 																				<a>aaaaa</a>
+	 																				<a>aaaaa</a> 
+	 																			</li>
+	 																		</ul>
+	 								</li> 
+	 								<li><span>影视大厅  </span>
+	 																		<ul>
+	 																			<li><span>vr大厅asdasd</span></li>
+	 																			<li><span>vr大厅  </span></li> 
+	 																			<li><span>vr大厅  </span>
+	 																				<a>aaaaa</a>
+	 																				<a>aaaaa</a> 
+	 																			</li>
+	 																		</ul>
+	 								</li> -->
+	 							</ul> 
+ 							</div> 
+ 							</br>
+ 							</br>
+ 							<button class="btn" style="margin: 0 auto;display:block"   onclick="nextOrlast(2)">下一步</button>
+ 						</div>
+ 						<div class="step step-2"  >  
+							<div class="input-group">
+								<span class="input-group-addon"   ><font style="color:red">*</font>项目名称：</span>
+								<input class="form-control" name="name"  >
+							</div>  
+							<div class="input-group">
+								<span class="input-group-addon"   ><font style="color:red">*</font>项目周期：</span>
+								<input class="form-control" name="timespan" >
+							</div>  
+							<div class="input-group">
+								<span class="input-group-addon"   ><font style="color:red">*</font>项目赏金：</span>
+								<input class="form-control" name="bonus"   >
+								<span class="input-group-addon"  style="color:#999999">请输入数字（单位：人民币）</span>
+	
+							</div> 
+							<div class="input-group">
+								<span class="input-group-addon"   ><font style="color:red">*</font>项目要求：</span>
+								<textarea class="form-control requirements"   style="resize:none;width:500px;height:100px;"></textarea>
+							</div>
+							 
+							
+							<div class="input-group">
+								<span class="input-group-addon"   >乙方资质要求：</span>
+								<input class="form-control" name="bidderQualifiRequire"  >
+							</div>  
+							<div class="input-group">
+								<span class="input-group-addon"   >乙方地域要求：</span>
+								<input class="form-control" name="bidderLocationRequire"  >
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon"   ><input type="checkbox" id="receipt" >发票：</span>
+								<input class="form-control receiptDes"   name="receiptDes"   > 
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon"   >项目介绍：</span>
+								<textarea class="form-control description"   style="resize:none;width:500px;height:100px;"></textarea>
+							</div>  
+							 
+							<button class="btn"   onclick="nextOrlast(1)" style="margin-left:130px;">上一步</button>
+							<button class="btn"  onclick="nextOrlast(3)">下一步</button> 
+ 						</div>	
+ 						<div class="step step-3"  >  
+							<div class="input-group">
+								<span class="input-group-addon"   ><font style="color:red">*</font>项目名称：</span>
+								<p id="name"></p>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon"   ><font style="color:red">*</font>项目周期：</span>
+								<p id="timespan"></p>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon"   ><font style="color:red">*</font>项目赏金：</span>
+								<p id="bonus"></p>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon"   ><font style="color:red">*</font>项目要求：</span>
+								<p id="requirements"></p>
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon"   > 乙方资质要求：</span>
+								<p id="bidderQualifiRequire"></p>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon"   > 乙方地域要求：</span>
+								<p id="bidderLocationRequire"></p>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon"   > 发票：</span>
+								<p id="receiptDes"></p>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon"   >项目介绍：</span>
+								<p id="description"></p>
+							</div> 
+ 							<button class="btn"    onclick="nextOrlast(2)">上一步</button>
+							<button class="btn"     onclick="makeProject()" >发布</button>
+ 						</div>
 			</div> 
 
 	 
@@ -396,6 +401,11 @@ function nextOrlast(step){
 		}   
 		$('.step').css('display','none'); 
 		$($('.step-'+step)[0]).css('display','block');  
+	}
+	if(step>1){
+		$('.selectedCatalog i').css('display',"none");
+	}else{ 
+		$('.selectedCatalog i').css('display',"inline-block");
 	}
 }
 

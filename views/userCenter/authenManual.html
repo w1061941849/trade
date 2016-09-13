@@ -156,10 +156,9 @@ $(function () {
 			var manualAuthentication=getAuthenicationInfo(data['manualAuthentication']);	
 			console.log(manualAuthentication)
 			if(  !manualAuthentication['data'][0]['status']){
-				$('.btn').html("正在上门").attr('disabled','disabled')
+				$('.authentication .btn').html("正在上门").attr('disabled','disabled')
 				console.log(1);
-			}	
-			 
+			}	 
 		},
 		error: function(){ 
 		} 

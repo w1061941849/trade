@@ -106,15 +106,46 @@ exports.showHtml = function (req, res, next) {
 			    } 
 			},function(error,result){
 			    if(!error)
-			        done(null,result);
+			        done(null,onearg);
 			    else
 			        done(error,null);
 			});
-	    } 
+	    },
+	    function (onearg, done) {   
+		    var arr=[]; 
+	    	async.each(resultData['participateProjects']['data'], function(obj, callback) {  
+			    arr.push(function(callback) {
+						getParticipateProjects(obj,callback)
+					}) 
+			}, function(err) { 
+			     
+			});  
+	    	async.series(arr,
+			function(err, results) { 
+				
+				for(var i in results){
+						console.log(results[i])
+					resultData['participateProjects']['data'][i]['project']=results[i]
+				}
+			    done(err, onearg) 
+			}); 
+	    }
 	],  
     function(err, results) {   
-    	console.log(resultData) 
+    	//console.log(resultData) 
     	res.render('userDetail',{"results":resultData}) 	
-    });
-    
-}; 
+    }); 
+};  
+function getParticipateProjects(params,callback){
+	var path=params['project'].replace(appConfig.config.proxy.replace,"") 
+    var options={
+        "path":path
+    }  
+    httpUtil.get(options,function(result,err){  
+        if(err){
+            callback(err, null);
+        }else{   
+            callback(null, result);
+        }  
+    })  
+}
