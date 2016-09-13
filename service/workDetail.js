@@ -18,23 +18,38 @@ exports.showHtml = function (req, res, next) {
 		            done(null, result);
 		        }  
 		    }) 
+	    },function (onearg,done) {
+	    	var path=onearg['owner'].replace(appConfig.config.proxy.replace,"") 
+	        var options={
+		        "path":path
+		    }  
+		    httpUtil.get(options,function(result,err){  
+		        if(err){
+		            done(err, null);
+		        }else{ 
+		        	resultData['owner']= result;
+		        	onearg['owner']=result
+		            done(null, onearg);
+		        }  
+		    }) 
+	    },
+	    function (onearg,done) {
+	    	var path=onearg['owner']['works'].replace(appConfig.config.proxy.replace,"") 
+	        var options={
+		        "path":path
+		    }  
+		    httpUtil.get(options,function(result,err){  
+		        if(err){
+		            done(err, null);
+		        }else{ 
+		        	resultData['works']= result;
+		            done(null, onearg);
+		        }  
+		    }) 
 	    },
 	    function (onearg, done) {  
 	    	async.parallel([
-			    function(callback){
-			        var path=onearg['owner'].replace(appConfig.config.proxy.replace,"") 
-			        var options={
-				        "path":path
-				    }  
-				    httpUtil.get(options,function(result,err){  
-				        if(err){
-				            callback(err, null);
-				        }else{ 
-				        	resultData['owner']= result;
-				            callback(null, result);
-				        }  
-				    }) 
-			    },
+			     
 			    function(callback){
 			        var path=onearg['tags'].replace(appConfig.config.proxy.replace,"") 
 			        var options={

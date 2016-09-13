@@ -7,7 +7,7 @@
 
 .projectDetail{
 	display: inline-block;
-	width: 900px;
+	width: 898px;
 	padding:20px;
 	background-color: white; 
 	border-radius: 8px;
@@ -27,18 +27,14 @@
 	vertical-align: top;
 }
 .projectDetail dd{ 
-	color:#999999;
+	color:#666666;
 	font-size: 14px;
 
 }
 .recommends{ 
 	float: right;
-	padding:20px;
-	width: 150px;
-	background-color: white; 
-	border-radius: 8px;
-    border: 1px solid rgba(0,0,0,.14);
-    box-shadow: 0 3px 8px -6px rgba(0,0,0,.1); 
+	padding:0 0px 20px 0px;
+	width: 240px; 
 	
 }
 .recommends .pic{
@@ -49,6 +45,10 @@
 	cursor: pointer;
 	display: block;
 
+}
+.recommends .pic img{
+	width:240px;
+	height:150px;
 }
 .recommends .pic>p{
 	position: absolute;
@@ -85,20 +85,19 @@
 </head> 
 <body style="overflow-x:hidden;  background:#f5f5f5">
 <% include header2.html %> 
-<div class="w" style="padding-top:50px;">
-	<h2 style="color:#999">项目详情</h2></br>
+<div class="w" style="padding-top:50px;"> 
 	<div class="projectDetail" data-projectid="<%= results['project']['id']%>">
-		<h2><%= results['project']['name']%></h2>
+		<h1 style="font-weight:400"><%= results['project']['name']%></h1>
 		<a class="userName"  href="/userDetail?userid=<%= results['owner']['id']%>"><%= results['owner']['nickname']%></a>
 		</br></br>
 		<div class="summary">
-			<span>金额：<%= results['project']['bonus']%>  人民币</span>
+			<span>金额：<%= results['project']['bonus']%>  元</span>
 			<span>资质要求：<%= results['project']['bidderQualifiRequire'] ? results['project']['bidderQualifiRequire'] : "不限" %></span>
 			<span>地域要求：<%= results['project']['bidderLocationRequire']  ? results['project']['bidderLocationRequire'] : "不限"%></span>
 			<span>周期：<%= results['project']['timespan']%></span>
 		</div>
 		</br></br>
-		<h3>项目详情</h3></br>
+		<h3 style="font-weight:400;font-size:24px;">项目详情</h3></br>
 		<dl>
 		   <dt>项目名称：</dt>
 		   <dd><%= results['project']['name']%></dd></br></br>
@@ -111,17 +110,17 @@
 		   <dt>项目周期：</dt>
 		   <dd><%= results['project']['timespan']%></dd></br></br>
 		   <dt>赏&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金：</dt>
-		   <dd><%- results['project']['bonus']%></dd></br></br>
+		   <dd><%- results['project']['bonus']%>元</dd></br></br>
 		   <dt>项目要求：</dt>
-		   <dd><%- results['project']['requirements']%></dd></br></br>
+		   <dd><%- (results['project']['requirements'] ? results['project']['requirements'] : "不限")%></dd></br></br>
 		   <dt>资质要求：</dt>
-		   <dd><%= results['project']['bidderQualifiRequire']%></dd></br></br>
+		   <dd><%= (results['project']['bidderQualifiRequire'] ? results['project']['bidderQualifiRequire'] : "不限")%></dd></br></br>
 		   <dt>地域要求：</dt>
-		   <dd><%- results['project']['bidderLocationRequire']%></dd></br></br>
+		   <dd><%- (results['project']['bidderLocationRequire'] ? results['project']['bidderLocationRequire'] : "不限")%></dd></br></br>
 		   <dt>发票要求：</dt>
 		   <dd><%- (results['project']['receiptDes'] ? results['project']['receiptDes'] : "无")%></dd></br></br>
 		   <dt>项目介绍：</dt>
-		   <dd><%= results['project']['description']%></dd></br></br>
+		   <dd><%- (results['project']['description'] ? results['project']['description'] : "无")%></dd></br></br>
 		</dl>
 		<div style="text-align:center">
 			<%if(results['project']['status']==1){%>
@@ -205,7 +204,8 @@ $('#uploadForm').change(function(){
 	   cache: false,  
 	   contentType:false,  
 	   processData: false,  
-	   success: function (returndata) {   
+	   success: function (returndata) {
+	   		$('#uploadForm').attr("data-fileName",returndata['fileName']),   
 			 console.log(returndata)
 	   },  
 	   error: function (returndata) {  
